@@ -1,0 +1,42 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/perfume-shop-app-db?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
+    username: ${DB_DEF_USER:root}
+    password: ${DB_DEF_PASS:12345}
+  sql:
+    init:
+      mode: never
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+#      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+        show_sql: true
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+logging:
+  level:
+    blog: WARN
+    org:
+      hibernate:
+        SQL: WARN
+        type:
+          descriptor: WARN
+      nodeValue: WARN
+server:
+  port: 8087
+#mail:
+#  host: "localhost"
+#  port: 1025
+#  username: "task-management-sytem@tms-group.bg"
+#  password: ""
+perfumeshop:
+#  default.admin.pass: ${DEFAULT_ADMIN_PASS:pass1234}
+  remember.me.key: ${REMEBER_ME_KEY:pass1234}
