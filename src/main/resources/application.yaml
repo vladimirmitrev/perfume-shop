@@ -38,5 +38,6 @@ server:
 #  username: "task-management-sytem@tms-group.bg"
 #  password: ""
 perfumeshop:
-#  default.admin.pass: ${DEFAULT_ADMIN_PASS:pass1234}
   remember.me.key: ${REMEBER_ME_KEY:pass1234}
+  default.admin.pass: ${DEFAULT_ADMIN_PASS:pass1234}
+  default.admin.phone: ${DEFAULT_ADMIN_PHONE:0888123456}

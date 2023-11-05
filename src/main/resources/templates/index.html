@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments/head}">
+</head>
+
+<body>
+<div>
+    <nav th:replace="~{fragments/navbar}">Navbar</nav>
+</div>
+
+<div class="container-fluid">
+    <h5 class="text-center text-black mt-5">
+        Welcome to Perfume Shop
+        <span sec:authorize="isAuthenticated()"
+              th:text="${#authentication.principal.fullName}">
+        </span>
+
+        <span sec:authorize="!isAuthenticated()">
+       Anonymous
+        </span>
+    </h5>
+</div>
+
+<div>
+    <footer></footer>
+</div>
+
+</body>
+</html>

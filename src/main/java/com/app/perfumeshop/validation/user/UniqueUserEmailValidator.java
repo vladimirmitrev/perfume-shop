@@ -14,10 +14,10 @@ public class UniqueUserEmailValidator implements ConstraintValidator<UniqueUserE
     }
 
     @Override
-    public boolean isValid(String username, ConstraintValidatorContext context) {
+    public boolean isValid(String email, ConstraintValidatorContext context) {
 
-        return this.userRepository.
-                findByEmail(username).
+        return this.userRepository
+                .findUserByEmail(email).
                 isEmpty();
     }
 }

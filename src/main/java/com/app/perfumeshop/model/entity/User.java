@@ -39,6 +39,9 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "customer")
     private List<Order> orders = new ArrayList<>();
 
+    @OneToOne(mappedBy = "customer")
+    private ShoppingCart cart;
+
     public String getFirstName() {
         return firstName;
     }
@@ -111,5 +114,17 @@ public class User extends BaseEntity {
         return this;
     }
 
+    public void addRole(UserRole role) {
+        this.userRoles.add(role);
+    }
 
+
+    public ShoppingCart getCart() {
+        return cart;
+    }
+
+    public User setCart(ShoppingCart cart) {
+        this.cart = cart;
+        return this;
+    }
 }
