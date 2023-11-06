@@ -54,8 +54,8 @@
                 </li>
                 <li class="nav-item" sec:authorize="isAuthenticated()">
                     <div class="form-inline my-2 my-lg-0 px-3">
-                        <div class="text-white" >Welcome,
-                            <th:block th:text="${#authentication.principal.fullName}">X</th:block>!</div>
+                        <div class="text-white" >
+                            <th:block th:text="#{navbar_welcome(${#authentication.principal.fullName})}">Welcome</th:block>!</div>
                         <form
                                 th:action="@{/users/logout}"
                                 th:method="post">
