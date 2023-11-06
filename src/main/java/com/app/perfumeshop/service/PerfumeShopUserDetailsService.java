@@ -25,7 +25,7 @@ public class PerfumeShopUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
         return userRepository
-                .findUserByUsername(email)
+                .findUserByEmail(email)
                 .map(this::mapUser)
                 .orElseThrow(() ->
                         new UsernameNotFoundException("User with email " + email + " was not found!"));

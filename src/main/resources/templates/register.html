@@ -16,7 +16,7 @@
             th:object="${userModel}"
             th:action="@{/users/register}"
             th:method="post"
-            class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+            class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center bg-gradient-primary">
         <div class="row">
             <div class="form-group col-md-6 mb-3">
                 <label for="firstName" class="text-white font-weight-bold">First Name</label>
@@ -80,7 +80,7 @@
                 </div>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label for="phoneNumber" class="text-white font-weight-bold">Username</label>
+                <label for="phoneNumber" class="text-white font-weight-bold">Phone number</label>
                 <input id="phoneNumber"
                        th:field="*{phoneNumber}"
                        th:errorclass="is-invalid"
@@ -111,7 +111,7 @@
                 </div>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label for="confirm-password" class="text-white font-weight-bold">Confirm Password</label>
+                <label for="confirm-password" class="text-white font-weight-bold">Confirm password</label>
                 <input id="confirm-password"
                        th:field="*{confirmPassword}"
                        th:errorclass="is-invalid"
@@ -129,7 +129,7 @@
         <div class="row">
             <div class="col col-md-4">
                 <div class="button-holder d-flex">
-                    <input type="submit" class="btn btn-info btn-lg" value="Register"/>
+                    <input type="submit" class="btn btn-info form-control" value="Register"/>
                 </div>
             </div>
         </div>

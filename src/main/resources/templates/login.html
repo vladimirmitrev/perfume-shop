@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{fragments/head}">
+</head>
+<body>
+<div>
+    <nav th:replace="~{fragments/navbar}"></nav>
+</div>
+<div class="container">
+    <h2 class="text-center text-white">Login</h2>
+    <form th:method="post"
+          th:action="@{/users/login}"
+          class="main-form mx-auto col-md-4 d-flex flex-column justify-content-center">
+        <div class="form-group">
+            <label for="email" class="text-white font-weight-bold">Email</label>
+            <input id="email"
+                   name="email"
+                   th:value="${email}"
+                   type="text"
+                   class="form-control"
+                   placeholder="Email"/>
+        </div>
+        <div class="form-group">
+            <label for="password" class="text-white font-weight-bold">Password</label>
+            <input id="password"
+                   name="password"
+                   type="password" min="2"
+                   max="20" class="form-control"
+                   placeholder="Password"/>
+        </div>
+        <div class="form-group">
+            <input id="rememberme"
+                   name="rememberme"
+                   type="checkbox"/>
+            <label for="rememberme" class="text-white font-weight-bold">Remember me</label>
+        </div>
+        <p th:if="${bad_credentials}" class="errors alert alert-danger small">
+            Invalid username or password.
+        </p>
+        <div class="row">
+            <div class="col col-md-4">
+                <div class="button-holder d-flex">
+                    <input type="submit" class="btn btn-info form-control" value="Login"/>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div>
+    <footer></footer>
+</div>
+</body>
+</html>
