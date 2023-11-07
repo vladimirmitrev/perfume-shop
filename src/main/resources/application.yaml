@@ -41,3 +41,7 @@ perfumeshop:
   remember.me.key: ${REMEBER_ME_KEY:pass1234}
   default.admin.pass: ${DEFAULT_ADMIN_PASS:pass1234}
   default.admin.phone: ${DEFAULT_ADMIN_PHONE:0888123456}
+cloudinary:
+  api.key: "463111485397821"
+  cloud.name: "dvj9qondf"
+  api.secret: ${CLOUDINARY_API_SECRET}
