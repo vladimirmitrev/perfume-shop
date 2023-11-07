@@ -3,6 +3,7 @@ package com.app.perfumeshop.model.entity;
 import com.app.perfumeshop.model.enums.CategoryNameEnum;
 import com.app.perfumeshop.model.enums.MillilitersNameEnum;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
 
@@ -19,15 +20,18 @@ public class Model extends BaseEntity {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private MillilitersNameEnum milliliters;
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private CategoryNameEnum category;
+    @ManyToOne
+    private Category category;
 
     @Column(nullable = false,columnDefinition = "TEXT")
     private String description;
 
+    @Column(nullable = false)
+    @Positive
+    private BigDecimal price;
     @ManyToOne
     private Brand brand;
+
 
     public String getName() {
         return name;
@@ -56,11 +60,11 @@ public class Model extends BaseEntity {
         return this;
     }
 
-    public CategoryNameEnum getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public Model setCategory(CategoryNameEnum category) {
+    public Model setCategory(Category category) {
         this.category = category;
         return this;
     }
@@ -84,4 +88,12 @@ public class Model extends BaseEntity {
     }
 
 
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public Model setPrice(BigDecimal price) {
+        this.price = price;
+        return this;
+    }
 }

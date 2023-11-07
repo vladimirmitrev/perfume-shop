@@ -9,7 +9,7 @@ spring:
       mode: never
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
 #      ddl-auto: update
     open-in-view: false
     properties:

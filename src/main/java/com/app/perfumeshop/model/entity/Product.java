@@ -11,20 +11,8 @@ import java.util.List;
 @Table(name = "products")
 public class Product extends BaseEntity {
 
-    @Column(nullable = false)
-    private BigDecimal price;
-
     @ManyToOne
     private Model model;
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public Product setPrice(BigDecimal price) {
-        this.price = price;
-        return this;
-    }
 
     public Model getModel() {
         return model;
@@ -34,6 +22,4 @@ public class Product extends BaseEntity {
         this.model = model;
         return this;
     }
-
-
 }
