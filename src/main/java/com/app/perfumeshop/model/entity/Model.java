@@ -20,7 +20,7 @@ public class Model extends BaseEntity {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private MillilitersNameEnum milliliters;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Category category;
 
     @Column(nullable = false,columnDefinition = "TEXT")
@@ -29,7 +29,7 @@ public class Model extends BaseEntity {
     @Column(nullable = false)
     @Positive
     private BigDecimal price;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Brand brand;
 
 

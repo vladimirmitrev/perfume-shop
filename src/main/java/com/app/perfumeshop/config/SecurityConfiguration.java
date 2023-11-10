@@ -1,5 +1,6 @@
 package com.app.perfumeshop.config;
 
+import com.app.perfumeshop.model.enums.UserRoleEnum;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -27,10 +28,12 @@ public class SecurityConfiguration {
                 authorizeRequests -> authorizeRequests
                         // All static resources which are situated in js, images, css are available for anyone
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .requestMatchers("/", "/users/login", "/users/register", "/users/login-error","/about", "/contactus").permitAll()
+                        .requestMatchers("/", "/users/login", "/users/register",
+                                "/users/login-error","/about",
+                                "/contactus","/maintenance","/error").permitAll()
                         .requestMatchers("/products/all").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/product/**").permitAll()
-                        .requestMatchers("/error").permitAll()
+                        .requestMatchers("/products/add").hasAnyRole(UserRoleEnum.ADMIN.name(), UserRoleEnum.EMPLOYEE.name())
+//                        .requestMatchers(HttpMethod.GET, "/product/**").permitAll()
 //                        .requestMatchers("/brands").hasRole(UserRoleEnum.ADMIN.name())
                         // all other requests are authenticated.
                         .anyRequest().authenticated()

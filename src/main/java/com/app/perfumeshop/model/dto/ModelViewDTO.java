@@ -13,50 +13,75 @@ import java.util.Objects;
  * DTO for {@link Model}
  */
 public class ModelViewDTO implements Serializable {
-    private final Long id;
-    private final String name;
-    private final String imageUrl;
-    private final Category category;
-    private final MillilitersNameEnum milliliters;
-    private final String description;
-    private final BigDecimal price;
-
-    public ModelViewDTO(Long id, String name, String imageUrl, Category category, MillilitersNameEnum milliliters, String description, BigDecimal price) {
-        this.id = id;
-        this.name = name;
-        this.imageUrl = imageUrl;
-        this.category = category;
-        this.milliliters = milliliters;
-        this.description = description;
-        this.price = price;
-    }
+    private  Long id;
+    private  String name;
+    private  String imageUrl;
+    private  Category category;
+    private  MillilitersNameEnum milliliters;
+    private  String description;
+    private  BigDecimal price;
 
     public Long getId() {
         return id;
+    }
+
+    public ModelViewDTO setId(Long id) {
+        this.id = id;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
+    public ModelViewDTO setName(String name) {
+        this.name = name;
+        return this;
+    }
+
     public String getImageUrl() {
         return imageUrl;
     }
 
-    public MillilitersNameEnum getMilliliters() {
-        return milliliters;
+    public ModelViewDTO setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+        return this;
     }
 
     public Category getCategory() {
         return category;
     }
 
+    public ModelViewDTO setCategory(Category category) {
+        this.category = category;
+        return this;
+    }
+
+    public MillilitersNameEnum getMilliliters() {
+        return milliliters;
+    }
+
+    public ModelViewDTO setMilliliters(MillilitersNameEnum milliliters) {
+        this.milliliters = milliliters;
+        return this;
+    }
+
     public String getDescription() {
         return description;
     }
 
+    public ModelViewDTO setDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
     public BigDecimal getPrice() {
         return price;
+    }
+
+    public ModelViewDTO setPrice(BigDecimal price) {
+        this.price = price;
+        return this;
     }
 
     @Override

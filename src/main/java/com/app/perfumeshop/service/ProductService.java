@@ -1,6 +1,11 @@
 package com.app.perfumeshop.service;
 
-import com.app.perfumeshop.model.dto.ProductViewDTO;
+import com.app.perfumeshop.model.dto.product.AddOrUpdateProductDTO;
+import com.app.perfumeshop.model.dto.product.ProductViewDTO;
+import com.app.perfumeshop.model.entity.*;
+import com.app.perfumeshop.model.user.PerfumeShopUserDetails;
+import com.app.perfumeshop.repository.BrandRepository;
+import com.app.perfumeshop.repository.CategoryRepository;
 import com.app.perfumeshop.repository.ProductRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -16,12 +21,18 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final CloudinaryService cloudinaryService;
     private final ModelMapper modelMapper;
+    private final BrandRepository brandRepository;
+    private final CategoryRepository categoryRepository;
 
     public ProductService(ProductRepository productRepository, CloudinaryService cloudinaryService,
-                          ModelMapper modelMapper) {
+                          ModelMapper modelMapper,
+                          BrandRepository brandRepository,
+                          CategoryRepository categoryRepository) {
         this.productRepository = productRepository;
         this.cloudinaryService = cloudinaryService;
         this.modelMapper = modelMapper;
+        this.brandRepository = brandRepository;
+        this.categoryRepository = categoryRepository;
     }
 
 
@@ -49,5 +60,27 @@ public class ProductService {
 
                     return productViewDTO;
                 }).collect(Collectors.toList());
+    }
+
+    public void addOrUpdateProduct(AddOrUpdateProductDTO addOrUpdateProductDTO, PerfumeShopUserDetails userDetails) {
+        Brand brand = brandRepository
+                .findByName(addOrUpdateProductDTO.getBrand());
+
+        Category category = categoryRepository
+                .findByName(addOrUpdateProductDTO.getCategory());
+
+        Model model = new Model();
+        model.setBrand(brand);
+        model.setName(addOrUpdateProductDTO.getModel())
+                .setCategory(category)
+                .setDescription(addOrUpdateProductDTO.getDescription())
+                .setMilliliters(addOrUpdateProductDTO.getMilliliters())
+                .setPrice(addOrUpdateProductDTO.getPrice())
+                .setImageUrl(addOrUpdateProductDTO.getImageUrl());
+
+        Product product = new Product();
+        product.setModel(model);
+
+        productRepository.save(product);
     }
 }

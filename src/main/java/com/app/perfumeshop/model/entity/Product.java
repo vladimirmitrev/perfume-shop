@@ -11,7 +11,7 @@ import java.util.List;
 @Table(name = "products")
 public class Product extends BaseEntity {
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Model model;
 
     public Model getModel() {

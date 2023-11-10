@@ -11,8 +11,11 @@ public class Brand extends BaseEntity {
 
     @Column(nullable = false, unique = true)
     private String name;
-    @OneToMany(mappedBy = "brand", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "brand", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<Model> models = new ArrayList<>();
+
+    public Brand() {
+    }
 
     public String getName() {
         return name;

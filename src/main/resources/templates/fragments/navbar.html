@@ -30,10 +30,10 @@
                        th:href="@{/offers/search}">Search</a>
                 </li>
                 <th:block>
-                <li class="nav-item" sec:authorize="isAuthenticated()">
+                <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'EMPLOYEE')">
                     <a class="nav-link"
                        th:text="#{navbar_add_product}"
-                       th:href="@{/offers/add}">Add Product</a>
+                       th:href="@{/products/add}">Add Product</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"

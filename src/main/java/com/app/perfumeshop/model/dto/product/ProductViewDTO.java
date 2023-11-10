@@ -1,6 +1,5 @@
-package com.app.perfumeshop.model.dto;
+package com.app.perfumeshop.model.dto.product;
 
-import com.app.perfumeshop.model.entity.Category;
 import com.app.perfumeshop.model.enums.MillilitersNameEnum;
 
 import java.math.BigDecimal;
