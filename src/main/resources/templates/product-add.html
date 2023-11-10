@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head}">
+</head>
+<body>
+<div>
+    <nav th:replace="~{fragments/navbar}">Navbar</nav>
+</div>
+<div class="container">
+    <h2 class="text-center text-white">Upload Product</h2>
+    <form th:action="@{/products/add}"
+          th:method="post"
+          th:object="${addProductModel}"
+          class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+        <div class="row">
+
+            <div class="form-group col-md-6 mb-3">
+                <label class="text-center text-white font-weight-bold" for="brand">Brand</label>
+                <select id="brand"
+                        name="brand"
+                        th:errorclass="is-invalid"
+                        class="form-control">
+                    <option value="">- Select a brand -</option>
+                        <option class="fw-bold" th:each="brand : ${brands}"
+                                th:text="${brand.name}"
+                                th:value="${brand.name}"
+                                th:selected="${brand.name} == *{brand}">Brand>
+                        </option>
+                </select>
+                <p class="invalid-feedback errors alert alert-danger">
+                    Perfume brand is required.
+                </p>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <label class="text-white font-weight-bold" for="model">Model</label>
+                <input id="model"
+                       name="model"
+                       th:field="*{model}"
+                       th:errorclass="is-invalid"
+                       type="text" class="form-control"
+                       placeholder="Model"></input>
+                <p class="invalid-feedback errors alert alert-danger">
+                    Model is required.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <label class="text-center text-white font-weight-bold" for="category">Category</label>
+                <select
+                        id="category"
+                        name="category"
+                        th:errorclass="is-invalid"
+                        class="form-control">
+                    <option value="">- Select category type -</option>
+                    <option th:each="c : ${T(com.app.perfumeshop.model.enums.CategoryNameEnum).values()}"
+                            th:text="${c}"
+                            th:value="${c}"
+                            th:selected="${c} == *{category}">
+                        Category type
+                    </option>
+                </select>
+                <p class="invalid-feedback errors alert alert-danger">
+                    Category type is required.
+                </p>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <label class="text-center text-white font-weight-bold" for="milliliters">Size</label>
+                <select id="milliliters"
+                        name="milliliters"
+                        th:errorclass="is-invalid"
+                        class="form-control">
+                    <option value="">- Select size -</option>
+                    <option th:each="m : ${T(com.app.perfumeshop.model.enums.MillilitersNameEnum).values()}"
+                            th:text="${m}"
+                            th:value="${m}"
+                            th:selected="${m} == *{milliliters}"> Size type
+                    </option>
+                </select>
+                <p class="invalid-feedback errors alert alert-danger">
+                    Perfume size is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <label for="price" class="text-white font-weight-bold">Price</label>
+            <input  th:field="*{price}"
+                    th:errorclass="is-invalid"
+                    id="price" type="number" class="form-control"
+                    placeholder="Suggested price"/>
+            <p  class="invalid-feedback errors alert alert-danger">
+                Price is required.
+            </p>
+        </div>
+        <div class="form-group">
+            <label class="text-white font-weight-bold" for="description">Description</label>
+            <textarea id="description"
+                      th:field="*{description}"
+                      th:errorclass="is-invalid"
+                      type="textarea" class="form-control" rows="3"
+                      placeholder="Description"></textarea>
+            <p class="invalid-feedback errors alert alert-danger">
+                Description is required.
+            </p>
+        </div>
+        <div class="form-group">
+            <label class="text-white font-weight-bold" for="imageUrl">Image URL</label>
+            <input id="imageUrl"
+                   th:field="*{imageUrl}"
+                   th:errorclass="is-invalid"
+                   type="url" class="form-control"
+                   placeholder="Put product image URL here">
+            <p class="invalid-feedback errors alert alert-danger">
+                Product image URL is required.
+            </p>
+        </div>
+
+        <div class="row">
+            <div class="col col-md-4">
+                <div class="button-holder d-flex">
+                    <input type="submit" class="btn btn-info btn-lg" value="Add product"/>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div>
+    <footer> </footer>
+</div>
+
+</body>
+</html>
