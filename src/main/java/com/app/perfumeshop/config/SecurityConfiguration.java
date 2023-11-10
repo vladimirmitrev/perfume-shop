@@ -32,7 +32,7 @@ public class SecurityConfiguration {
                                 "/users/login-error","/about",
                                 "/contactus","/maintenance","/error").permitAll()
                         .requestMatchers("/products/all").permitAll()
-                        .requestMatchers("/products/add").hasAnyRole(UserRoleEnum.ADMIN.name(), UserRoleEnum.EMPLOYEE.name())
+                        .requestMatchers("/products/add", "/products/edit").hasAnyRole(UserRoleEnum.ADMIN.name(), UserRoleEnum.EMPLOYEE.name())
 //                        .requestMatchers(HttpMethod.GET, "/product/**").permitAll()
 //                        .requestMatchers("/brands").hasRole(UserRoleEnum.ADMIN.name())
                         // all other requests are authenticated.

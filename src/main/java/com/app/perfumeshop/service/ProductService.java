@@ -6,6 +6,7 @@ import com.app.perfumeshop.model.entity.*;
 import com.app.perfumeshop.model.user.PerfumeShopUserDetails;
 import com.app.perfumeshop.repository.BrandRepository;
 import com.app.perfumeshop.repository.CategoryRepository;
+import com.app.perfumeshop.repository.ModelRepository;
 import com.app.perfumeshop.repository.ProductRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,16 +25,19 @@ public class ProductService {
     private final ModelMapper modelMapper;
     private final BrandRepository brandRepository;
     private final CategoryRepository categoryRepository;
+    private final ModelRepository modelRepository;
 
     public ProductService(ProductRepository productRepository, CloudinaryService cloudinaryService,
                           ModelMapper modelMapper,
                           BrandRepository brandRepository,
-                          CategoryRepository categoryRepository) {
+                          CategoryRepository categoryRepository,
+                          ModelRepository modelRepository) {
         this.productRepository = productRepository;
         this.cloudinaryService = cloudinaryService;
         this.modelMapper = modelMapper;
         this.brandRepository = brandRepository;
         this.categoryRepository = categoryRepository;
+        this.modelRepository = modelRepository;
     }
 
 
@@ -82,5 +87,27 @@ public class ProductService {
         product.setModel(model);
 
         productRepository.save(product);
+    }
+
+    public Optional<ProductViewDTO> findProductById(Long id) {
+        return modelRepository.findById(id)
+                .map(model -> {
+                    ProductViewDTO productViewDTO = new ProductViewDTO();
+                    productViewDTO
+                            .setBrand(model.getBrand().getName())
+                            .setModel(model.getName())
+                            .setCategory(model.getCategory().getName().toString())
+                            .setDescription(model.getDescription())
+                            .setPrice(model.getPrice())
+                            .setMilliliters(model.getMilliliters())
+                            .setImageUrl(model.getImageUrl());
+
+                    return productViewDTO;
+                });
+    }
+
+    public void deleteProductById(Long id) {
+        modelRepository.deleteById(id);
+        productRepository.deleteById(id);
     }
 }
