@@ -29,8 +29,8 @@
                     <li class="list-group-item">
                         <div class="card-text"><span>Description: <th:block th:text="${product.description}"></th:block></span></div>
                         <div class="card-text"><span>Price: <th:block th:text="${product.price}"></th:block></span></div>
-                        <div class="card-text"><span>Size: <th:block th:text="${product.milliliters}"></th:block></span></div>
-                        <div class="card-text"><span>Category: <th:block th:text="${product.category}"></th:block></span></div>
+                        <div class="card-text"><span>Size: <th:block th:text="${product.milliliters.value}"></th:block></span></div>
+                        <div class="card-text"><span>Category: <th:block th:text="${product.category.value}"></th:block></span></div>
                     </li>
                 </ul>
                 <div class="card-body">

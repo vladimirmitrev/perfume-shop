@@ -57,8 +57,8 @@ public class ProductService {
                     productViewDTO.setName(product.getName());
                     productViewDTO.setBrand(product.getBrand().getName());
                     productViewDTO.setId(product.getId());
-                    productViewDTO.setCategory(product.getCategory().getName().toString());
-                    productViewDTO.setMilliliters(product.getMilliliters().toString());
+                    productViewDTO.setCategory(product.getCategory().getName());
+                    productViewDTO.setMilliliters(product.getMilliliters());
                     productViewDTO.setImageUrl(product.getImageUrl());
                     productViewDTO.setDescription(product.getDescription());
                     productViewDTO.setPrice(product.getPrice());
@@ -99,10 +99,10 @@ public class ProductService {
                     productViewDTO
                             .setBrand(product.getBrand().getName())
                             .setName(product.getName())
-                            .setCategory(product.getCategory().getName().toString())
+                            .setCategory(product.getCategory().getName())
                             .setDescription(product.getDescription())
                             .setPrice(product.getPrice())
-                            .setMilliliters(product.getMilliliters().toString())
+                            .setMilliliters(product.getMilliliters())
                             .setImageUrl(product.getImageUrl());
 
                     return productViewDTO;

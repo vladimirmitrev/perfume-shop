@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments/head}">
+</head>
+
+<body>
+<div>
+    <nav th:replace="~{fragments/navbar}">Navbar</nav>
+</div>
+<div  th:object="${product}" class="container-fluid">
+    <h2 class="text-center text-white mt-5">Product details</h2>
+    <div class="offers row mx-auto d-flex justify-content-center">
+        <div class="product card col-sm-2 col-md-3  col-lg-4 m-1 p-0" >
+            <img th:src="*{imageUrl}" class="card-img-top" style="max-width: 250px"  alt="Product image">
+
+            <div class="card-body pb-1">
+                <h5 class="card-title" th:text="|${product.getBrand()} ${product.getName()}|">Brand and Model</h5>
+            </div>
+            <ul class="offer-details list-group list-group-flush">
+                <li class="list-group-item">
+                    <div class="card-text">• Category <span th:text="${product.getCategory().value}"></span></div>
+                    <div class="card-text">• Size <span th:text="${product.getMilliliters().value}"></span></div>
+                    <div class="card-text">• Description: <span th:text="*{description}"></span> </div>
+                    <div class="card-text fw-bold">• Price: <span th:text="*{price}"></span></div>
+                </li>
+            </ul>
+            <div class="card-body flex-row" >
+                <form
+                        th:action="@{/cart/add/{id}(id=${id})}"
+                        th:method="post">
+                    <input type="submit" class="btn-info" value="Аdd to cart">
+                </form>
+                <form
+                        th:action="@{/products/delete/{id}(id=${id})}"
+                        th:method="delete">
+                    <input type="submit" class="btn-danger" value="Delete">
+                </form>
+                <a class="btn-warning" th:href="@{/products/edit/{id}(id=${id})}">
+                    Edit product
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+             <footer> </footer>
+</div>
+
+</body>
+</html>
