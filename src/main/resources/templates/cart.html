@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments/head}"></head>
+
+<body>
+<div>
+    <nav th:replace="~{fragments/navbar}">Navbar</nav>
+</div>
+
+<div class="container px-3 my-5 clearfix">
+    <!-- Shopping cart table -->
+    <div class="card">
+        <div class="card-header">
+            <h2>Shopping Cart</h2>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered m-0 table-dark">
+                    <thead>
+                    <tr>
+                        <!-- Set columns width -->
+                        <th class="text-center py-3 px-4 fw-bold" style="min-width: 400px;">Product Name &amp; Details</th>
+                        <th class="text-right py-3 px-4" style="width: 100px;">Price</th>
+                        <th class="text-center py-3 px-4" style="width: 120px;">Quantity</th>
+                        <th class="text-right py-3 px-4" style="width: 100px;">Total</th>
+                        <th class="text-center align-middle py-3 px-0" style="width: 40px;"><a href="#" class="shop-tooltip float-none text-light" title="" data-original-title="Clear cart"><i class="ino ion-md-trash"></i></a></th>
+                    </tr>
+                    </thead>
+                    <tbody th:each="cartItem : ${shoppingCart.cartItems}">
+                    <tr>
+                        <td class="p-4">
+                            <div class="media align-items-center">
+                                <img th:src="${cartItem.product.imageUrl}" style="max-width: 100px" class="d-block ui-w-40 ui-bordered mr-4" alt="">
+                                <div class="media-body">
+                                    <a href="#" class="d-block text-dark" th:text="|${cartItem.product.brand.name} ${cartItem.product.name}|">Product 1</a>
+                                    <small>
+                                        <span class="text-muted" th:text="|Category: ${cartItem.product.category.name.value}|">Category:</span>
+                                        <span class="ui-product-color ui-product-color-sm align-text-bottom" style="background:#e81e2c;"></span> &nbsp;
+                                        <span class="text-muted"  th:text="|Size: ${cartItem.product.milliliters.value}|">Size: </span>&nbsp;
+                                    </small>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="text-right font-weight-semibold align-middle p-4" th:text="|€${cartItem.product.price}|"></td>
+                        <td class="align-middle p-4"><input type="text" class="form-control text-center" value="" th:value="${cartItem.quantity}"></td>
+                        <td class="text-right font-weight-semibold align-middle p-4" th:text="|€${cartItem.totalPrice}|"></td>
+                        <td class="text-center align-middle px-0"><a href="#" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">×</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- / Shopping cart table -->
+
+            <div class="d-flex flex-wrap justify-content-between align-items-center pb-4" th:object="${shoppingCart}">
+                <div class="mt-4">
+                    <label class="text-muted font-weight-normal">Discount code</label>
+                    <input type="text" placeholder="Discount code" class="form-control">
+                </div>
+                <div class="d-flex">
+                    <div class="text-right mt-4 mr-5">
+                        <label class="text-muted font-weight-normal m-0">Discount</label>
+                        <div class="text-large"><strong>$20</strong></div>
+                    </div>
+                    <div class="text-right mt-4 mx-5">
+                        <label class="text-muted font-weight-normal m-0 fw-bold">Total price</label>
+                        <div class="text-large fw-bold"><strong th:text="|€${shoppingCart.totalPrice}|">$</strong></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="float-right">
+                <button type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3">Back to shopping</button>
+                <button type="button" class="btn btn-lg btn-primary mt-2">Checkout</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<footer th:replace="~{fragments/footer}"></footer>
+</body>
+</html>
+
+

@@ -12,7 +12,7 @@ public class Brand extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String name;
     @OneToMany(mappedBy = "brand", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    private List<Model> models = new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
 
     public Brand() {
     }
@@ -26,12 +26,12 @@ public class Brand extends BaseEntity {
         return this;
     }
 
-    public List<Model> getModels() {
-        return models;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public Brand setModels(List<Model> models) {
-        this.models = models;
+    public Brand setProducts(List<Product> products) {
+        this.products = products;
         return this;
     }
 

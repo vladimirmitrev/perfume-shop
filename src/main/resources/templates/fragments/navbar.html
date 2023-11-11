@@ -40,6 +40,13 @@
                        th:text="#{navbar_all_products}"
                        th:href="@{/products/all}">All Products</a>
                 </li>
+                    <li class="nav-item">
+
+                        <a class="nav-link"
+                           th:text="#{navbar_cart}"
+                           th:href="@{/cart}">Cart
+                        </a><i class="fa-solid fa-cart-shopping fa-beat" style="color: white"></i>
+                    </li>
                 <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
                     <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

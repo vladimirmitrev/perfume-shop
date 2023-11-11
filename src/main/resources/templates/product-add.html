@@ -34,13 +34,13 @@
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label class="text-white font-weight-bold" for="model">Model</label>
-                <input id="model"
-                       name="model"
-                       th:field="*{model}"
+                <label class="text-white font-weight-bold" for="name">Name</label>
+                <input id="name"
+                       name="name"
+                       th:field="*{name}"
                        th:errorclass="is-invalid"
                        type="text" class="form-control"
-                       placeholder="Model"></input>
+                       placeholder="Name"></input>
                 <p class="invalid-feedback errors alert alert-danger">
                     Model is required.
                 </p>
@@ -73,14 +73,14 @@
                         th:errorclass="is-invalid"
                         class="form-control">
                     <option value="">- Select size -</option>
-                    <option th:each="m : ${T(com.app.perfumeshop.model.enums.MillilitersNameEnum).values()}"
+                    <option th:each="m : ${T(com.app.perfumeshop.model.enums.SizeEnum).values()}"
                             th:text="${m}"
                             th:value="${m}"
                             th:selected="${m} == *{milliliters}"> Size type
                     </option>
                 </select>
                 <p class="invalid-feedback errors alert alert-danger">
-                    Perfume size is required.
+                    Product size is required.
                 </p>
             </div>
         </div>

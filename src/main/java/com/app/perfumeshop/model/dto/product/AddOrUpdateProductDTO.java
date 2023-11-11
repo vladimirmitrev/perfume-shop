@@ -1,8 +1,7 @@
 package com.app.perfumeshop.model.dto.product;
 
-import com.app.perfumeshop.model.entity.Category;
 import com.app.perfumeshop.model.enums.CategoryNameEnum;
-import com.app.perfumeshop.model.enums.MillilitersNameEnum;
+import com.app.perfumeshop.model.enums.SizeEnum;
 import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
@@ -13,13 +12,13 @@ public class AddOrUpdateProductDTO {
     @NotEmpty
     private String brand;
     @NotEmpty
-    private String model;
+    private String name;
     @NotEmpty
     private String imageUrl;
-    @NotNull
+//    @NotNull
     private CategoryNameEnum category;
-    @NotNull
-    private MillilitersNameEnum milliliters;
+//    @NotNull
+    private SizeEnum milliliters;
     @NotEmpty
     @Size(min = 5, max = 255, message = "Description must be between 5 and 255 characters")
     private String description;
@@ -37,12 +36,12 @@ public class AddOrUpdateProductDTO {
         return this;
     }
 
-    public String getModel() {
-        return model;
+    public String getName() {
+        return name;
     }
 
-    public AddOrUpdateProductDTO setModel(String model) {
-        this.model = model;
+    public AddOrUpdateProductDTO setName(String name) {
+        this.name = name;
         return this;
     }
 
@@ -64,11 +63,11 @@ public class AddOrUpdateProductDTO {
         return this;
     }
 
-    public MillilitersNameEnum getMilliliters() {
+    public SizeEnum getMilliliters() {
         return milliliters;
     }
 
-    public AddOrUpdateProductDTO setMilliliters(MillilitersNameEnum milliliters) {
+    public AddOrUpdateProductDTO setMilliliters(SizeEnum milliliters) {
         this.milliliters = milliliters;
         return this;
     }

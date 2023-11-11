@@ -1,17 +1,15 @@
 package com.app.perfumeshop.model.dto.product;
 
-import com.app.perfumeshop.model.enums.MillilitersNameEnum;
-
 import java.math.BigDecimal;
 
 public class ProductViewDTO {
 
     private Long id;
     private String brand;
-    private String model;
+    private String name;
     private  String imageUrl;
     private  String category;
-    private  MillilitersNameEnum milliliters;
+    private String milliliters;
     private  String description;
     private BigDecimal price;
 
@@ -33,12 +31,12 @@ public class ProductViewDTO {
         return this;
     }
 
-    public String getModel() {
-        return model;
+    public String getName() {
+        return name;
     }
 
-    public ProductViewDTO setModel(String model) {
-        this.model = model;
+    public ProductViewDTO setName(String name) {
+        this.name = name;
         return this;
     }
 
@@ -60,11 +58,12 @@ public class ProductViewDTO {
         return this;
     }
 
-    public MillilitersNameEnum getMilliliters() {
+
+    public String getMilliliters() {
         return milliliters;
     }
 
-    public ProductViewDTO setMilliliters(MillilitersNameEnum milliliters) {
+    public ProductViewDTO setMilliliters(String milliliters) {
         this.milliliters = milliliters;
         return this;
     }

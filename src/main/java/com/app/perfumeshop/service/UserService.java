@@ -75,4 +75,8 @@ public class UserService {
 
         userRepository.saveAndFlush(newUser);
     }
+
+    public User findByEmail(String email) {
+        return userRepository.findUserByEmail(email).get();
+    }
 }

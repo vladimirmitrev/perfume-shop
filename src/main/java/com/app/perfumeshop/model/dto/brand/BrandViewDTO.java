@@ -1,4 +1,4 @@
-package com.app.perfumeshop.model.dto;
+package com.app.perfumeshop.model.dto.brand;
 
 public class BrandViewDTO {
 

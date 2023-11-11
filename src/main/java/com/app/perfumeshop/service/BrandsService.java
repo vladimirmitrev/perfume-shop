@@ -1,12 +1,6 @@
 package com.app.perfumeshop.service;
 
-import com.app.perfumeshop.model.dto.BrandDTO;
-import com.app.perfumeshop.model.dto.BrandViewDTO;
-import com.app.perfumeshop.model.dto.ModelViewDTO;
-import com.app.perfumeshop.model.dto.model.ModelDTO;
-import com.app.perfumeshop.model.dto.product.ProductViewDTO;
-import com.app.perfumeshop.model.entity.Brand;
-import com.app.perfumeshop.model.entity.Model;
+import com.app.perfumeshop.model.dto.brand.BrandViewDTO;
 import com.app.perfumeshop.repository.BrandRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;

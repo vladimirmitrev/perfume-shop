@@ -3,10 +3,11 @@ package com.app.perfumeshop.service;
 import com.app.perfumeshop.model.dto.product.AddOrUpdateProductDTO;
 import com.app.perfumeshop.model.dto.product.ProductViewDTO;
 import com.app.perfumeshop.model.entity.*;
+import com.app.perfumeshop.model.enums.SizeEnum;
+import com.app.perfumeshop.model.mapper.ProductMapper;
 import com.app.perfumeshop.model.user.PerfumeShopUserDetails;
 import com.app.perfumeshop.repository.BrandRepository;
 import com.app.perfumeshop.repository.CategoryRepository;
-import com.app.perfumeshop.repository.ModelRepository;
 import com.app.perfumeshop.repository.ProductRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -25,19 +25,18 @@ public class ProductService {
     private final ModelMapper modelMapper;
     private final BrandRepository brandRepository;
     private final CategoryRepository categoryRepository;
-    private final ModelRepository modelRepository;
+    private final ProductMapper productMapper;
 
     public ProductService(ProductRepository productRepository, CloudinaryService cloudinaryService,
                           ModelMapper modelMapper,
                           BrandRepository brandRepository,
-                          CategoryRepository categoryRepository,
-                          ModelRepository modelRepository) {
+                          CategoryRepository categoryRepository, ProductMapper productMapper) {
         this.productRepository = productRepository;
         this.cloudinaryService = cloudinaryService;
         this.modelMapper = modelMapper;
         this.brandRepository = brandRepository;
         this.categoryRepository = categoryRepository;
-        this.modelRepository = modelRepository;
+        this.productMapper = productMapper;
     }
 
 
@@ -51,20 +50,25 @@ public class ProductService {
 
     public List<ProductViewDTO> getAllProducts() {
 
+
         return productRepository.findAll().stream()
                 .map(product -> {
                     ProductViewDTO productViewDTO = new ProductViewDTO();
-                    productViewDTO.setModel(product.getModel().getName());
-                    productViewDTO.setBrand(product.getModel().getBrand().getName());
+                    productViewDTO.setName(product.getName());
+                    productViewDTO.setBrand(product.getBrand().getName());
                     productViewDTO.setId(product.getId());
-                    productViewDTO.setCategory(product.getModel().getCategory().getName().toString());
-                    productViewDTO.setMilliliters(product.getModel().getMilliliters());
-                    productViewDTO.setImageUrl(product.getModel().getImageUrl());
-                    productViewDTO.setDescription(product.getModel().getDescription());
-                    productViewDTO.setPrice(product.getModel().getPrice());
+                    productViewDTO.setCategory(product.getCategory().getName().toString());
+                    productViewDTO.setMilliliters(product.getMilliliters().toString());
+                    productViewDTO.setImageUrl(product.getImageUrl());
+                    productViewDTO.setDescription(product.getDescription());
+                    productViewDTO.setPrice(product.getPrice());
 
                     return productViewDTO;
-                }).collect(Collectors.toList());
+                }).toList();
+
+//        return productRepository.findAll().stream()
+//                .map(productMapper::productEntityToProductViewDTO)
+//                .toList();
     }
 
     public void addOrUpdateProduct(AddOrUpdateProductDTO addOrUpdateProductDTO, PerfumeShopUserDetails userDetails) {
@@ -74,40 +78,47 @@ public class ProductService {
         Category category = categoryRepository
                 .findByName(addOrUpdateProductDTO.getCategory());
 
-        Model model = new Model();
-        model.setBrand(brand);
-        model.setName(addOrUpdateProductDTO.getModel())
+        Product product = new Product();
+        product.setBrand(brand);
+        product.setName(addOrUpdateProductDTO.getName())
                 .setCategory(category)
                 .setDescription(addOrUpdateProductDTO.getDescription())
                 .setMilliliters(addOrUpdateProductDTO.getMilliliters())
                 .setPrice(addOrUpdateProductDTO.getPrice())
                 .setImageUrl(addOrUpdateProductDTO.getImageUrl());
 
-        Product product = new Product();
-        product.setModel(model);
-
         productRepository.save(product);
     }
 
     public Optional<ProductViewDTO> findProductById(Long id) {
-        return modelRepository.findById(id)
-                .map(model -> {
+
+
+        return productRepository.findById(id)
+                .map(product -> {
                     ProductViewDTO productViewDTO = new ProductViewDTO();
                     productViewDTO
-                            .setBrand(model.getBrand().getName())
-                            .setModel(model.getName())
-                            .setCategory(model.getCategory().getName().toString())
-                            .setDescription(model.getDescription())
-                            .setPrice(model.getPrice())
-                            .setMilliliters(model.getMilliliters())
-                            .setImageUrl(model.getImageUrl());
+                            .setBrand(product.getBrand().getName())
+                            .setName(product.getName())
+                            .setCategory(product.getCategory().getName().toString())
+                            .setDescription(product.getDescription())
+                            .setPrice(product.getPrice())
+                            .setMilliliters(product.getMilliliters().toString())
+                            .setImageUrl(product.getImageUrl());
 
                     return productViewDTO;
                 });
+
+        //        return productRepository
+//        .findById(id)
+//        .map(productMapper::productEntityToProductViewDTO);
     }
 
     public void deleteProductById(Long id) {
-        modelRepository.deleteById(id);
         productRepository.deleteById(id);
+    }
+
+    public Product getProductById(Long productId) {
+
+        return productRepository.findById(productId).get();
     }
 }

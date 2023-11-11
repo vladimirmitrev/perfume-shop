@@ -3,21 +3,16 @@ package com.app.perfumeshop.web;
 import com.app.perfumeshop.exception.ObjectNotFoundException;
 import com.app.perfumeshop.model.dto.product.AddOrUpdateProductDTO;
 import com.app.perfumeshop.model.dto.product.ProductViewDTO;
-import com.app.perfumeshop.model.entity.Product;
 import com.app.perfumeshop.model.user.PerfumeShopUserDetails;
 import com.app.perfumeshop.service.BrandsService;
 import com.app.perfumeshop.service.ProductService;
 import jakarta.validation.Valid;
-import org.springframework.data.crossstore.ChangeSetPersister;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.UUID;
 
 @Controller
 public class ProductController {
@@ -97,7 +92,7 @@ public class ProductController {
 
         ProductViewDTO editProductModel =
                 productService.findProductById(id).orElseThrow(() ->
-                        new ObjectNotFoundException("Offer with ID " + id + "not found"));
+                        new ObjectNotFoundException("Product with ID " + id + "not found"));
 
         model.addAttribute("editProductModel", editProductModel);
 
@@ -144,6 +139,7 @@ public class ProductController {
 //        }
 //        return "redirect:/products/0";
 //    }
+
 
 
 
