@@ -12,19 +12,16 @@
 </div>
 
 <div class="container-fluid">
-    <h5 class="text-center text-white mt-5">
+    <h5 class="text-center text-black mt-5">
         <span sec:authorize="isAuthenticated()"
               th:text="#{index_welcome(${#authentication.principal.fullName})}">
         </span>
 
         <span sec:authorize="!isAuthenticated()"
-              th:text="#{index_welcome('Anonymous')}">
+              th:text="#{index_welcome('Guest')}">
         </span>
     </h5>
 </div>
-
 <footer th:replace="~{fragments/footer}"></footer>
-
-
 </body>
 </html>

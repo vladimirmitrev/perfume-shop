@@ -36,12 +36,13 @@ public class ShoppingCartController {
         ShoppingCart shoppingCart = shoppingCartService.findByUserId(user.getId());
 
         if (shoppingCart == null) {
-            model.addAttribute("check", "No item in your shopping cart");
+            model.addAttribute("emptyCart", "Your shopping cart is empty");
+
         }
 
-        if (shoppingCart != null) {
-            model.addAttribute("subTotal", shoppingCart.getTotalPrice());
-        }
+//        if (shoppingCart != null) {
+//            model.addAttribute("subTotal", shoppingCart.getTotalPrice());
+//        }
 
         httpSession.setAttribute("totalItems", shoppingCart != null ? shoppingCart.getTotalItems() : 0);
         model.addAttribute("shoppingCart", shoppingCart);
