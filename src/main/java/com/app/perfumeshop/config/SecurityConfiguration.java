@@ -34,6 +34,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/products/all").permitAll()
 //                        .requestMatchers("/cart", "/order").hasRole(UserRoleEnum.CUSTOMER.name())
                         .requestMatchers("/products/add", "/products/edit").hasAnyRole(UserRoleEnum.ADMIN.name(), UserRoleEnum.EMPLOYEE.name())
+                        .requestMatchers("/users/all", "/users/change-role/**").hasAnyRole(UserRoleEnum.ADMIN.name())
 //                        .requestMatchers(HttpMethod.GET, "/product/**").permitAll()
 //                        .requestMatchers("/brands").hasRole(UserRoleEnum.ADMIN.name())
                         // all other requests are authenticated.

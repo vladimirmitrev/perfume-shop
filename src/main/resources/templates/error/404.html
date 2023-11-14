@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/head}">
+</head>
+<body>
+<div th:replace="fragments/navbar">Navbar</div>
+<div class="container-fluid">
+    <h5 class="text-center text-black mt-5">
+      404 Not Found! UUUUPS!!!! The site that you are looking for is not available!
+
+        Why don't you <a th:href="@{/products/all}">search</a> for something else here?
+    </h5>
+</div>
+<footer th:replace="~{fragments/footer}"></footer>
+</body>
+</html>

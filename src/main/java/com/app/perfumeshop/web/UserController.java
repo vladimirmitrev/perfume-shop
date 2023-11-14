@@ -1,16 +1,16 @@
 package com.app.perfumeshop.web;
 
 import com.app.perfumeshop.model.dto.UserRegisterDTO;
+import com.app.perfumeshop.model.dto.user.UserViewDTO;
 import com.app.perfumeshop.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/users")
@@ -26,6 +26,7 @@ public class UserController {
     public UserRegisterDTO initUserModel() {
         return new UserRegisterDTO();
     }
+
     @GetMapping("/login")
     public String login() {
         return "login";
@@ -49,12 +50,12 @@ public class UserController {
 
     @PostMapping("/register")
     public String confirmRegister(@Valid UserRegisterDTO userModel,
-                               BindingResult bindingResult,
-                               RedirectAttributes redirectAttributes) {
+                                  BindingResult bindingResult,
+                                  RedirectAttributes redirectAttributes) {
 
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
 
-            redirectAttributes.addFlashAttribute("userModel",userModel);
+            redirectAttributes.addFlashAttribute("userModel", userModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userModel", bindingResult);
 
             return "redirect:/users/register";
@@ -65,4 +66,29 @@ public class UserController {
 
         return "redirect:/users/login";
     }
+
+    @GetMapping("/profile")
+    public String myProfile(Model model,
+                            Principal principal) {
+
+        model.addAttribute("userProfile", userService.findByEmail(principal.getName()));
+//        model.addAttribute(COUNT_PRODUCTS,
+//                this.userService
+//                        .getUserByUsername(principal.getName()).getCart()
+//                        .getCountProducts());
+
+        return "user-profile";
+    }
+
+    @GetMapping("/profile/{id}")
+    public String viewUserProfileById(@PathVariable("id") Long id,
+                                      Model model) {
+
+        UserViewDTO userProfile = userService.findUserById(id);
+
+        model.addAttribute("userProfile", userProfile);
+
+        return "user-profile";
+    }
+
 }

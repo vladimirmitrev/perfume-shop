@@ -9,7 +9,7 @@ body {
 
 .navbar .logo {
     max-height: 50px;
-    padding-right: 100px;
+    padding-right: 25px;
 }
 
 .container, .container-fluid {
@@ -61,4 +61,8 @@ form.main-form {
 
 .alert {
     padding: 0.25rem 1rem;
+}
+.bdr {
+    border-radius: 6px;
+    overflow: hidden;
 }

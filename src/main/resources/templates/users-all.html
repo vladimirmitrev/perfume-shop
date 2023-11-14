@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head}">
+</head>
+
+<body>
+<div>
+    <nav th:replace="~{fragments/navbar}">Navbar</nav>
+</div>
+
+<div class="container-fluid">
+    <h2 class="text-center text-black mt-5">All users</h2>
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-bordered rounded-3 overflow-hidden" style="margin-top: 10px;">
+                <thead>
+                <tr style="background-color: #90bfff; color: white; font-weight: bold">
+                    <th scope="col" class="text-center">Username</th>
+                    <th scope="col" class="text-center">Email</th>
+                    <th scope="col" class="text-center">Profile</th>
+                    <th scope="col" class="text-center">User roles</th>
+                    <th scope="col" class="text-center">Change role</th>
+                </tr>
+
+                </thead>
+
+                <tbody>
+
+                <tr th:each="user: ${users}" th:object="${user}" th:if="${user.id != 1}">
+
+                    <th scope="row" th:text="*{username}" class="text-center"
+                        style="background-color: #E098A7; color: white">1
+                    </th>
+
+                    <td th:text="*{email}" class="text-center" style="background-color: #f4f1ed">0.00</td>
+
+                    <td style="text-align: center; background-color: #f4f1ed">
+                        <a type="button" class="button-detail"
+                           th:href="@{/users/profile/{id}(id=${user.id})}">View user profile</a>
+                    </td>
+
+                    <td th:text="*{#strings.listJoin(getRolesNames(),', ')}" class="text-center"
+                        style="background-color: #f4f1ed"></td>
+
+                    <td style="text-align: center; background-color: #f4f1ed">
+                        <a type="button" class="button-detail"
+                           th:href="@{/users/change-role/{id}(id=${user.id})}">Change user roles</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<footer th:replace="~{fragments/footer}"></footer>
+</body>
+</html>

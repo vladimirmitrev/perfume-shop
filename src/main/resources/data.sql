@@ -16,6 +16,7 @@ VALUES
 
 INSERT INTO users_user_roles (user_id, user_roles_id)
 VALUES
+    (1, 2),
     (2, 1),
     (2, 2),
     (3, 2),

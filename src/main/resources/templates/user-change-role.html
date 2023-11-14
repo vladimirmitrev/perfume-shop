@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments/head}">
+</head>
+
+<body>
+<div>
+    <nav th:replace="~{fragments/navbar}">Navbar</nav>
+</div>
+
+<div class="container" style="background-color: transparent; border-radius: 16px; margin-top: 150px; width: 70%;">
+
+    <div class="row" th:object="${user}">
+
+        <div class="col-12">
+            <h4 class="text-center"
+                th:text="|Change role to ${user.getFirstName() + ' ' + user.getLastName()} with email ${user.getEmail()}|"></h4>
+            <table class="table table-bordered rounded-3 overflow-hidden" style="background-color: #90BFFF">
+                <thead>
+                <tr style="background-color: #90BFFF; color: black">
+                    <th scope="col" class="text-center fw-bold">User roles</th>
+                    <th scope="col" class="text-center fw-bold">Manage</th>
+                </tr>
+
+                </thead>
+
+                <tbody>
+
+                <tr th:each="role: ${T(com.app.perfumeshop.model.enums.UserRoleEnum).values()}"
+                    th:object="${role}" style="background-color: #F4F1ED; color: black; border-radius: 10px">
+
+                    <th scope="row" th:text="${role.name()}" class="text-center text-black"
+                    >1
+                    </th>
+
+                    <td style="font-weight:bold; text-align: center"
+                        th:if="${#strings.equals(role.name(),'CUSTOMER')}">
+                        Cannot be changed!
+                    </td>
+
+                    <td style="font-weight: bold; text-align: center; color: red"
+                        th:if="${#strings.equals(role.name(),'ADMIN')}">
+                        Cannot make somebody admin!
+                    </td>
+
+                    <td style="text-align: center;"
+                        th:if="${#strings.equals(role.name(),'EMPLOYEE')}">
+                        <form th:method="PATCH"
+                              th:action="@{/users/roles/add/{id}(id=${user.id})}"
+                              th:object="${user}">
+                            <button class="button-detail btn-success rounded-3" type="submit"
+                                    th:unless="${user.hasRoleEmployee()}"
+                            >Add role
+                            </button>
+                        </form>
+
+                        <form th:method="PATCH"
+                              th:action="@{/users/roles/remove/{id}(id=${user.id})}"
+                              th:object="${user}">
+                            <button class="button-detail btn-danger rounded-3" type="submit"
+                                    th:if="${user.hasRoleEmployee()}"
+                            >Remove role
+                            </button>
+                        </form>
+
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+</div>
+<footer th:replace="~{fragments/footer}"></footer>
+</body>
+</html>
