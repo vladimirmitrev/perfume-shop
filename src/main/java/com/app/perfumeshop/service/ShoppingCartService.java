@@ -4,6 +4,7 @@ import com.app.perfumeshop.model.entity.CartItem;
 import com.app.perfumeshop.model.entity.Product;
 import com.app.perfumeshop.model.entity.ShoppingCart;
 import com.app.perfumeshop.model.entity.User;
+import com.app.perfumeshop.repository.CartItemRepository;
 import com.app.perfumeshop.repository.ShoppingCartRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,14 +17,17 @@ import java.util.Set;
 public class ShoppingCartService {
 
     private final ShoppingCartRepository shoppingCartRepository;
+    private final CartItemRepository cartItemRepository;
 
-    public ShoppingCartService(ShoppingCartRepository shoppingCartRepository) {
+    public ShoppingCartService(ShoppingCartRepository shoppingCartRepository,
+                               CartItemRepository cartItemRepository) {
         this.shoppingCartRepository = shoppingCartRepository;
+        this.cartItemRepository = cartItemRepository;
     }
 
     public ShoppingCart addProductToCart(Product product, User user, int quantity) {
 
-        ShoppingCart shoppingCart = shoppingCartRepository.findByCustomerId(user.getId());
+        ShoppingCart shoppingCart = findByUserId(user.getId());
 
         if (shoppingCart == null) {
             shoppingCart = new ShoppingCart()
@@ -52,10 +56,52 @@ public class ShoppingCartService {
         shoppingCart.setCartItems(cartItemList);
         shoppingCart.setTotalItems(totalItems(cartItemList));
         shoppingCart.setTotalPrice(totalPrice(cartItemList));
-
         return shoppingCartRepository.save(shoppingCart);
     }
 
+    public ShoppingCart updateItemInCart(Product product, int quantity, User user) {
+
+        ShoppingCart shoppingCart = findByUserId(user.getId());
+
+        List<CartItem> cartItems = shoppingCart.getCartItems();
+
+        CartItem item = findCartItem(cartItems, product.getId());
+
+        item.setQuantity(quantity);
+        BigDecimal totalPrice = product.getPrice().multiply(new BigDecimal(item.getQuantity()));
+        item.setTotalPrice(totalPrice);
+        cartItemRepository.save(item);
+
+        int totalItems = totalItems(cartItems);
+        BigDecimal totalPriceBig = totalPrice(cartItems);
+
+        shoppingCart.setTotalItems(totalItems);
+        shoppingCart.setTotalPrice(totalPriceBig);
+
+
+        return shoppingCartRepository.save(shoppingCart);
+    }
+    public ShoppingCart removeItemFromCart(Product product, User user) {
+
+        ShoppingCart shoppingCart = findByUserId(user.getId());
+
+        List<CartItem> cartItems = shoppingCart.getCartItems();
+
+        CartItem item = findCartItem(cartItems, product.getId());
+
+        cartItems.remove(item);
+
+        cartItemRepository.delete(item);
+
+        BigDecimal totalPriceBig = totalPrice(cartItems);
+        int totalItems = totalItems(cartItems);
+
+        shoppingCart.setCartItems(cartItems);
+        shoppingCart.setTotalPrice(totalPriceBig);
+        shoppingCart.setTotalItems(totalItems);
+
+        return shoppingCartRepository.save(shoppingCart);
+    }
 
 
     private CartItem findCartItem(List<CartItem> cartItems, Long productId) {
@@ -91,7 +137,10 @@ public class ShoppingCartService {
 
         return totalPrice;
     }
+
     public ShoppingCart findByUserId(Long id) {
-        return shoppingCartRepository.findByCustomerId(id);
+        return shoppingCartRepository.findShoppingCartByCustomer_Id(id);
     }
+
+
 }

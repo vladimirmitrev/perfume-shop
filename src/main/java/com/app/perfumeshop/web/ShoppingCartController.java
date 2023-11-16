@@ -9,10 +9,7 @@ import com.app.perfumeshop.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -60,8 +57,54 @@ public class ShoppingCartController {
 
         User user = userService.findByEmail(principal.getName());
 
-        this.shoppingCartService.addProductToCart(product, user ,quantity);
+        shoppingCartService.addProductToCart(product, user, quantity);
 
         return "redirect:/products/all";
     }
+
+    @RequestMapping(value = "/update-cart", method = RequestMethod.POST, params = "action=update")
+    public String updateCart(@RequestParam("quantity") int quantity,
+                             @RequestParam("id") Long productId,
+                             Model model,
+                             Principal principal) {
+
+        User user = userService.findByEmail(principal.getName());
+
+        Product product = productService.getProductById(productId);
+
+        ShoppingCart shoppingCart = shoppingCartService.updateItemInCart(product, quantity, user);
+
+        model.addAttribute("shoppingCart", shoppingCart);
+
+        return "redirect:/cart";
+    }
+
+    @RequestMapping(value = "/update-cart", method = RequestMethod.POST, params = "action=delete")
+    public String removeFromCart(@RequestParam("id") Long productId,
+                                 Principal principal,
+                                 Model model) {
+
+        User user = userService.findByEmail(principal.getName());
+        Product product = productService.getProductById(productId);
+        ShoppingCart shoppingCart = shoppingCartService.removeItemFromCart(product, user);
+
+        model.addAttribute("shoppingCart", shoppingCart);
+
+        return "redirect:/cart";
+    }
+
+//    @PatchMapping("/cart/remove/{id}")
+//    public String removeFromCart(@PathVariable("id") Long id,
+//                                 Principal principal,
+//                                 Model model) {
+//
+//        User user = userService.findByEmail(principal.getName());
+//        Product product = productService.findProductById(id).get();
+//        ShoppingCart shoppingCart = shoppingCartService.removeItemFromCart(product, user);
+//
+//        model.addAttribute("shoppingCart", shoppingCart);
+//
+//
+//        return "redirect:/cart";
+//    }
 }

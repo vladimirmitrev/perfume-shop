@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -30,6 +31,9 @@ public class Product extends BaseEntity {
     private BigDecimal price;
     @ManyToOne(cascade = CascadeType.MERGE)
     private Brand brand;
+
+    @OneToMany(mappedBy = "product")
+    private List<CartItem> cartItemList;
 
     public Product() {
     }
@@ -94,6 +98,15 @@ public class Product extends BaseEntity {
 
     public Product setBrand(Brand brand) {
         this.brand = brand;
+        return this;
+    }
+
+    public List<CartItem> getCartItemList() {
+        return cartItemList;
+    }
+
+    public Product setCartItemList(List<CartItem> cartItemList) {
+        this.cartItemList = cartItemList;
         return this;
     }
 }

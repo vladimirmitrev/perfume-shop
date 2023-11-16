@@ -25,7 +25,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered m-0 table-dark">
+                <table class="table table-bordered m-0">
                     <thead>
                     <tr>
                         <!-- Set columns width -->
@@ -48,7 +48,8 @@
                                 <img th:src="${cartItem.product.imageUrl}" style="max-width: 100px"
                                      class="d-block ui-w-40 ui-bordered mr-4" alt="">
                                 <div class="media-body">
-                                    <a href="#" class="d-block text-dark"
+                                    <a th:href="@{/products/{productId}(productId=*{cartItem.product.id})}"
+                                       title="View product details" class="product-details d-block fw-bold "
                                        th:text="|${cartItem.product.brand.name} ${cartItem.product.name}|">Product 1</a>
                                     <small>
                                         <span class="text-muted"
@@ -63,35 +64,35 @@
                         </td>
                         <td class="text-right font-weight-semibold align-middle p-4"
                             th:text="|€${cartItem.product.price}|"></td>
-                        <td class="align-middle p-4"><input type="text" class="form-control text-center" value=""
-                                                            th:value="${cartItem.quantity}"></td>
-                        <td class="text-right font-weight-semibold align-middle p-4"
-                            th:text="|€${cartItem.totalPrice}|"></td>
-                        <td class="text-center align-middle px-0"><a href="#"
-                                                                     class="shop-tooltip close float-none text-danger"
-                                                                     title="" data-original-title="Remove">×</a></td>
+                        <form th:method="POST"
+                              th:action="@{/update-cart}">
+                            <input type="hidden" name="id" th:value="${cartItem.product.id}">
+                            <td class="align-middle p-4"><input type="number" size="4" th:value="${cartItem.quantity}"
+                                                                name="quantity" min="0" step="1"
+                                                                class="form-control text-center"
+                            ></td>
+                            <td class="text-right font-weight-semibold align-middle p-4"
+                                th:text="|€${cartItem.totalPrice}|"></td>
+                            <td class="text-center align-middle">
+                                <button type="submit" name="action" value="update"
+                                        title="Update item in cart"
+                                        class="btn rounded-3 btn-warning"
+                                        data-original-title="Update">Update
+                                </button>
+                            </td>
+                            <td class="text-center align-middle">
+                                <button type="submit" name="action" value="delete"
+                                        class="btn rounded-3 btn-danger"
+                                        title="Remove item from cart" data-original-title="Remove">Remove
+                                </button>
+                            </td>
+                        </form>
+
                     </tr>
                     </tbody>
                 </table>
             </div>
             <!-- / Shopping cart table -->
-
-            <div class="d-flex flex-wrap justify-content-between align-items-center pb-4" th:object="${shoppingCart}">
-                <div class="mt-4">
-                    <label class="text-muted font-weight-normal">Discount code</label>
-                    <input type="text" placeholder="Discount code" class="form-control">
-                </div>
-                <div class="d-flex">
-                    <div class="text-right mt-4 mr-5">
-                        <label class="text-muted font-weight-normal m-0">Discount</label>
-                        <div class="text-large"><strong>$20</strong></div>
-                    </div>
-                    <div class="text-right mt-4 mx-5">
-                        <label class="text-muted font-weight-normal m-0 fw-bold">Total price</label>
-                        <div class="text-large fw-bold"><strong th:text="|€${shoppingCart.totalPrice}|">$</strong></div>
-                    </div>
-                </div>
-            </div>
 
             <div class="d-flex flex-wrap justify-content-between align-items-center pb-4" th:object="${shoppingCart}">
                 <div>
@@ -100,7 +101,7 @@
                         <input type="text" placeholder="Discount code" class="form-control">
                     </div>
                 </div>
-                <div class="">
+                <div class="total-price-calc text-end">
                     <div class="row text-right mt-4 mx-5">
                         <label class="text-muted font-weight-normal m-0 fw-bold">Products price</label>
                         <div class="text-large"><strong th:text="|€${shoppingCart.totalPrice}|">$</strong></div>
@@ -124,12 +125,12 @@
 
             </div>
 
-            <div class="float-right">
+            <div class="checkout-btn">
                 <a th:href="@{/products/all}">
-                    <button type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3">Back to shopping</button>
+                    <button type="button" class="btn btn-lg btn-info text-black">Back to shopping</button>
                 </a>
                 <a th:href="@{/order}">
-                    <button type="button" class="btn btn-lg btn-primary mt-2">Checkout</button>
+                    <button type="button" class="btn btn-lg btn-success mx-5">Checkout</button>
                 </a>
 
             </div>

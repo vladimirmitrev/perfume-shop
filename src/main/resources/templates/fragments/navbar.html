@@ -6,7 +6,7 @@
 <head></head>
 <body>
 <nav th:fragment="navbar"
-     class="navbar navbar-expand-lg bg-transparent navbar-dark fixed-top">
+     class="navbar navbar-expand-lg bg-transparent navbar-dark">
     <a class="navbar-brand mx-1 my-1" href="/"><img alt="logo picture"
                                                     th:src="@{/images/perfume-25-64.png}"
                                                     class="logo">
@@ -27,7 +27,7 @@
             <li class="nav-item">
                 <a class="nav-link text-black"
                    th:text="#{navbar_search}"
-                   th:href="@{/offers/search}">Search</a>
+                   th:href="@{/products/search}">Search</a>
             </li>
             <th:block>
                 <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'EMPLOYEE')">
@@ -40,7 +40,7 @@
                        th:text="#{navbar_all_products}"
                        th:href="@{/products/all}">All Products</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" sec:authorize="isAuthenticated()">
 
                     <a class="nav-link text-black"
                        th:text="#{navbar_cart}"

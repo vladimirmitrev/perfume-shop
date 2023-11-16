@@ -17,7 +17,7 @@ public class ShoppingCart extends BaseEntity {
     private BigDecimal totalPrice;
 
     private int totalItems;
-    @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<CartItem> cartItems;
 
     public ShoppingCart() {

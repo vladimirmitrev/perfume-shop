@@ -66,3 +66,14 @@ form.main-form {
     border-radius: 6px;
     overflow: hidden;
 }
+
+.checkout-btn {
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-details {
+    color: black;
+    /*text-decoration: none;*/
+    margin-top: 10px;
+}
