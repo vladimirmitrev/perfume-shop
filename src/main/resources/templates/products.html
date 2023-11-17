@@ -10,35 +10,46 @@
     <nav th:replace="~{fragments/navbar}">Navbar</nav>
 </div>
 
-    <div class="container-fluid">
-        <h2 class="text-center text-black mt-5">All Products</h2>
-        <div class="offers row mx-auto d-flex flex-row justify-content-center">
+<div class="container-fluid">
+    <h2 class="text-center text-black mt-5">All Products</h2>
+    <div class="offers row mx-auto d-flex flex-row justify-content-center">
 
-            <div th:each="product : ${products}"
+        <div th:each="product : ${products}"
 
 
-                    class="offer card col-sm-6 col-md-3  col-lg-2 m-1 p-0">
-                <div class="card-img-top-wrapper">
-                    <img class="card-img-top" th:src="${product.imageUrl}" alt="Car image">
-                </div>
-                <div class="card-body pb-1">
-                    <h5 class="card-title">
-                        <th:block th:text="|${product.brand} ${product.name}|"></th:block></h5>
-                </div>
-                <ul class="offer-details list-group list-group-flush">
-                    <li class="list-group-item">
-                        <div class="card-text"><span>Description: <th:block th:text="${product.description}"></th:block></span></div>
-                        <div class="card-text"><span>Price: <th:block th:text="${product.price}"></th:block></span></div>
-                        <div class="card-text"><span>Size: <th:block th:text="${product.milliliters.value}"></th:block></span></div>
-                        <div class="card-text"><span>Category: <th:block th:text="${product.category.value}"></th:block></span></div>
-                    </li>
-                </ul>
-                <div class="card-body">
-                    <a class="card-link text-decoration-none fw-bold fs-6" href="#" th:href="@{/products/{productId}(productId=*{product.id})}">View product details</a>
-                </div>
+             class="offer card col-sm-6 col-md-3  col-lg-2 m-1 p-0">
+            <div class="card-img-top-wrapper">
+                <img class="card-img-top px-5 py-5" th:src="${product.imageUrl}" alt="Product image">
             </div>
+            <div class="card-body pb-1">
+                <h5 class="card-title">
+                    <th:block th:text="|${product.brand} ${product.name}|"></th:block>
+                </h5>
+            </div>
+            <ul class="product-details list-group list-group-flush">
+                <li class="list-group-item">
+                    <div class="card-text"><span>Description: <th:block
+                            th:text="${product.description}"></th:block></span></div>
+                    <div class="card-text"><span>Price: <th:block th:text="${product.price}"></th:block></span></div>
+                    <div class="card-text"><span>Size: <th:block
+                            th:text="${product.milliliters.value}"></th:block></span></div>
+                    <div class="card-text"><span>Category: <th:block
+                            th:text="${product.category.value}"></th:block></span></div>
+                </li>
+            </ul>
+            <div class="card-body">
+                <a class="card-link text-decoration-none fw-bold fs-6" href="#"
+                   th:href="@{/products/{productId}(productId=*{product.id})}">View product details</a>
+                <form
+                        th:action="@{/cart/add/{id}(id=${product.id})}"
+                        th:method="post">
+                    <button type="submit" class="btn btn-info mt-3">Аdd to cart</button>
+                </form>
+            </div>
+
         </div>
     </div>
+</div>
 <footer th:replace="~{fragments/footer}"></footer>
 </body>
 </html>

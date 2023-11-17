@@ -98,7 +98,7 @@ public class ProductController {
         return "product-details";
     }
 
-    @DeleteMapping("/products/delete/{id}")
+    @PostMapping("/products/delete/{id}")
     public String deleteProduct(
             @PathVariable("id") Long id) {
 

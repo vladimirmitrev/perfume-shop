@@ -21,26 +21,26 @@
             </div>
             <ul class="offer-details list-group list-group-flush">
                 <li class="list-group-item">
-                    <div class="card-text">• Category <span th:text="${product.getCategory().value}"></span></div>
-                    <div class="card-text">• Size <span th:text="${product.getMilliliters().value}"></span></div>
+                    <div class="card-text">• Category: <span th:text="${product.getCategory().value}"></span></div>
+                    <div class="card-text">• Size: <span th:text="${product.getMilliliters().value}"></span></div>
                     <div class="card-text">• Description: <span th:text="*{description}"></span> </div>
                     <div class="card-text fw-bold">• Price: <span th:text="*{price}"></span></div>
                 </li>
             </ul>
-            <div class="card-body flex-row" >
+            <div class="card-body d-flex justify-content-between flex-row" >
                 <form
                         th:action="@{/cart/add/{id}(id=${id})}"
                         th:method="post">
-                    <input type="submit" class="btn-info" value="Аdd to cart">
+                    <button type="submit" class="btn btn-info">Аdd to cart</button>
                 </form>
-                <form
-                        th:action="@{/products/delete/{id}(id=${id})}"
-                        th:method="delete">
-                    <input type="submit" class="btn-danger" value="Delete">
-                </form>
-                <a class="btn-warning" th:href="@{/products/edit/{id}(id=${id})}">
+                <a class="btn btn-warning" th:href="@{/products/edit/{id}(id=${id})}">
                     Edit product
                 </a>
+                <form
+                        th:action="@{/products/delete/{id}(id=${id})}"
+                        th:method="post">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
             </div>
         </div>
     </div>
