@@ -28,10 +28,18 @@ public class SecurityConfiguration {
                 authorizeRequests -> authorizeRequests
                         // All static resources which are situated in js, images, css are available for anyone
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .requestMatchers("/", "/users/login", "/users/register",
-                                "/users/login-error","/about",
-                                "/contactus","/maintenance","/error").permitAll()
-                        .requestMatchers("/products/all", "/brands/all", "/products/search").permitAll()
+                        .requestMatchers(
+                                "/",
+                                "/users/login",
+                                "/users/register",
+                                "/users/login-error",
+                                "/about-us",
+                                "/contact-us",
+                                "/maintenance",
+                                "/error").permitAll()
+                        .requestMatchers("/products/all",
+                                "/brands/all",
+                                "/products/search").permitAll()
 //                        .requestMatchers("/cart", "/order").hasRole(UserRoleEnum.CUSTOMER.name())
                         .requestMatchers("/products/add", "/products/edit").hasAnyRole(UserRoleEnum.ADMIN.name(), UserRoleEnum.EMPLOYEE.name())
                         .requestMatchers("/users/all", "/users/change-role/**").hasAnyRole(UserRoleEnum.ADMIN.name())

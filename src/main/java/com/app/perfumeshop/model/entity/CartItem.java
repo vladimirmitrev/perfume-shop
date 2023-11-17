@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 @Table(name = "cart_items")
 public class CartItem extends BaseEntity {
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER)
     private ShoppingCart shoppingCart = new ShoppingCart();
 
     @ManyToOne(fetch = FetchType.EAGER)

@@ -27,7 +27,7 @@ public class ShoppingCartController {
     }
 
     @GetMapping("/cart")
-    public String shoppingCart(Model model, Principal principal, HttpSession httpSession) {
+    public String shoppingCart(Model model, Principal principal, HttpSession session) {
 
         User user = userService.findByEmail(principal.getName());
         ShoppingCart shoppingCart = shoppingCartService.findByUserId(user.getId());
@@ -41,7 +41,7 @@ public class ShoppingCartController {
 //            model.addAttribute("subTotal", shoppingCart.getTotalPrice());
 //        }
 
-        httpSession.setAttribute("totalItems", shoppingCart != null ? shoppingCart.getTotalItems() : 0);
+        session.setAttribute("totalItems", shoppingCart != null ? shoppingCart.getTotalItems() : 0);
         model.addAttribute("shoppingCart", shoppingCart);
 
 

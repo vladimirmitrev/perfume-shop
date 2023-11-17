@@ -3,9 +3,14 @@ package com.app.perfumeshop.web;
 import com.app.perfumeshop.exception.ObjectNotFoundException;
 import com.app.perfumeshop.model.dto.product.AddOrUpdateProductDTO;
 import com.app.perfumeshop.model.dto.product.ProductViewDTO;
+import com.app.perfumeshop.model.entity.ShoppingCart;
+import com.app.perfumeshop.model.entity.User;
 import com.app.perfumeshop.model.user.PerfumeShopUserDetails;
 import com.app.perfumeshop.service.BrandsService;
 import com.app.perfumeshop.service.ProductService;
+import com.app.perfumeshop.service.ShoppingCartService;
+import com.app.perfumeshop.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -14,20 +19,36 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.security.Principal;
+
 @Controller
 public class ProductController {
 
     private final ProductService productService;
     private final BrandsService brandService;
+    private final UserService userService;
 
-    public ProductController(ProductService productService, BrandsService brandService) {
+    private final ShoppingCartService shoppingCartService;
+
+    public ProductController(ProductService productService, BrandsService brandService, UserService userService, ShoppingCartService shoppingCartService) {
         this.productService = productService;
         this.brandService = brandService;
+        this.userService = userService;
+        this.shoppingCartService = shoppingCartService;
     }
 
     @GetMapping("/products/all")
-    public String getAllProducts(Model model) {
+    public String getAllProducts(Model model, HttpSession session, Principal principal) {
 
+        if (principal != null) {
+            session.setAttribute("username", principal.getName());
+            User user = userService.findByEmail(principal.getName());
+            ShoppingCart shoppingCart = shoppingCartService.findByUserId(user.getId());
+
+            session.setAttribute("totalItems", shoppingCart != null ? shoppingCart.getTotalItems() : 0);
+        } else {
+            session.removeAttribute("username");
+        }
 
         model.addAttribute("products", productService.getAllProducts());
 
@@ -46,9 +67,9 @@ public class ProductController {
 
     @PostMapping("/products/add")
     public String addProductPost(@Valid AddOrUpdateProductDTO addProductModel,
-                           BindingResult bindingResult,
-                           RedirectAttributes redirectAttributes,
-                           @AuthenticationPrincipal PerfumeShopUserDetails userDetails) {
+                                 BindingResult bindingResult,
+                                 RedirectAttributes redirectAttributes,
+                                 @AuthenticationPrincipal PerfumeShopUserDetails userDetails) {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addProductModel", addProductModel);
@@ -88,7 +109,7 @@ public class ProductController {
 
     @GetMapping("/products/edit/{id}")
     public String editProductGet(@PathVariable("id") Long id,
-                       Model model) {
+                                 Model model) {
 
         ProductViewDTO editProductModel =
                 productService.findProductById(id).orElseThrow(() ->
@@ -101,11 +122,11 @@ public class ProductController {
 
     @PostMapping("/products/edit/{id}")
     public String editProductPost(@PathVariable("id") Long id,
-            @ModelAttribute("editProductModel2")
+                                  @ModelAttribute("editProductModel2")
                                   @Valid AddOrUpdateProductDTO editProductModel,
-                             BindingResult bindingResult,
-                             RedirectAttributes redirectAttributes,
-                             @AuthenticationPrincipal PerfumeShopUserDetails userDetails) {
+                                  BindingResult bindingResult,
+                                  RedirectAttributes redirectAttributes,
+                                  @AuthenticationPrincipal PerfumeShopUserDetails userDetails) {
 
         ProductViewDTO editProductModel2 =
                 productService.findProductById(id).orElseThrow(() ->
@@ -125,6 +146,13 @@ public class ProductController {
 
         return "redirect:/products/all";
     }
+
+    @GetMapping("/products/search")
+    public String searchProducts() {
+
+
+        return "/products-search";
+    }
 //    @PostMapping("/update-product/{id}")
 //    public String updateProduct(@ModelAttribute("productDto") ProductEditDto productDto,
 //                                Product product,
@@ -139,8 +167,6 @@ public class ProductController {
 //        }
 //        return "redirect:/products/0";
 //    }
-
-
 
 
 }
