@@ -9,7 +9,10 @@ import com.app.perfumeshop.model.user.PerfumeShopUserDetails;
 import com.app.perfumeshop.repository.BrandRepository;
 import com.app.perfumeshop.repository.CategoryRepository;
 import com.app.perfumeshop.repository.ProductRepository;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -47,11 +50,16 @@ public class ProductService {
         }
         return pictureUrl;
     }
+//    public Page<OfferDetailDTO> getAllOffers(Pageable pageable) {
+////        return offerRepository.
+////                findAll(pageable).
+////                map(offerMapper::offerEntityToOfferDetailDto);
+////
+////    }
 
-    public List<ProductViewDTO> getAllProducts() {
+    public Page<ProductViewDTO> getAllProducts(Pageable pageable) {
 
-
-        return productRepository.findAll().stream()
+        return productRepository.findAll(pageable)
                 .map(product -> {
                     ProductViewDTO productViewDTO = new ProductViewDTO();
                     productViewDTO.setName(product.getName());
@@ -64,12 +72,12 @@ public class ProductService {
                     productViewDTO.setPrice(product.getPrice());
 
                     return productViewDTO;
-                }).toList();
-
+                });
+    }
 //        return productRepository.findAll().stream()
 //                .map(productMapper::productEntityToProductViewDTO)
 //                .toList();
-    }
+
 
     public void addOrUpdateProduct(AddOrUpdateProductDTO addOrUpdateProductDTO, PerfumeShopUserDetails userDetails) {
         Brand brand = brandRepository
@@ -113,8 +121,10 @@ public class ProductService {
 //        .map(productMapper::productEntityToProductViewDTO);
     }
 
+    @Transactional
     public void deleteProductById(Long id) {
         productRepository.deleteById(id);
+
     }
 
     public Product getProductById(Long productId) {

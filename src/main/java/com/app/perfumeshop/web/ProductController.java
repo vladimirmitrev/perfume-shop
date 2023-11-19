@@ -12,6 +12,9 @@ import com.app.perfumeshop.service.ShoppingCartService;
 import com.app.perfumeshop.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,7 +41,14 @@ public class ProductController {
     }
 
     @GetMapping("/products/all")
-    public String getAllProducts(Model model, HttpSession session, Principal principal) {
+    public String getAllProducts(Model model,
+                                 HttpSession session,
+                                 Principal principal,
+                                 @PageableDefault(
+                                         sort = "brand",
+                                         direction = Sort.Direction.ASC,
+                                         page = 0,
+                                         size = 10) Pageable pageable) {
 
         if (principal != null) {
             session.setAttribute("username", principal.getName());
@@ -50,7 +60,7 @@ public class ProductController {
             session.removeAttribute("username");
         }
 
-        model.addAttribute("products", productService.getAllProducts());
+        model.addAttribute("products", productService.getAllProducts(pageable));
 
         return "products";
     }

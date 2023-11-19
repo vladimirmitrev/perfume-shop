@@ -38,6 +38,7 @@ public class SecurityConfiguration {
                                 "/maintenance",
                                 "/error").permitAll()
                         .requestMatchers("/products/all",
+                                "products/**",
                                 "/brands/all",
                                 "/products/search").permitAll()
 //                        .requestMatchers("/cart", "/order").hasRole(UserRoleEnum.CUSTOMER.name())

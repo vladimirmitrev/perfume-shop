@@ -11,7 +11,7 @@
 </div>
 
 <div class="container">
-    <h2 class="text-center text-white">Register User</h2>
+    <h2 class="text-center text-black">Register User</h2>
     <form
             th:object="${userModel}"
             th:action="@{/users/register}"
@@ -19,12 +19,12 @@
             class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center bg-gradient-primary">
         <div class="row">
             <div class="form-group col-md-6 mb-3">
-                <label for="firstName" class="text-white font-weight-bold">First Name</label>
+                <label for="firstName" class="text-black font-weight-bold mt-2">First Name</label>
                 <input id="firstName"
                        th:field="*{firstName}"
                        th:errorclass="is-invalid"
                        type="text"
-                       class="form-control"
+                       class="form-control mt-2"
                        placeholder="First name"/>
                 <div class="invalid-feedback errors alert alert-danger">
                     <div
@@ -34,11 +34,11 @@
                 </div>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label for="lastName" class="text-white font-weight-bold">Last Name</label>
+                <label for="lastName" class="text-black font-weight-bold mt-2">Last Name</label>
                 <input id="lastName"
                        th:field="*{lastName}"
                        th:errorclass="is-invalid"
-                       type="text" class="form-control"
+                       type="text" class="form-control mt-2"
                        placeholder="Last name"/>
                 <div class="invalid-feedback errors alert alert-danger">
                     <div
@@ -50,12 +50,12 @@
         </div>
         <div class="row">
             <div class="form-group col-md-6 mb-3">
-                <label for="email" class="text-white font-weight-bold">Email</label>
+                <label for="email" class="text-black font-weight-bold mt-2">Email</label>
                 <input id="email"
                        th:field="*{email}"
                        th:errorclass="is-invalid"
                        type="text"
-                       class="form-control"
+                       class="form-control mt-2"
                        placeholder="Email"/>
                 <div class="invalid-feedback errors alert alert-danger">
                     <div
@@ -65,12 +65,12 @@
                 </div>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label for="username" class="text-white font-weight-bold">Username</label>
+                <label for="username" class="text-black font-weight-bold mt-2">Username</label>
                 <input id="username"
                        th:field="*{username}"
                        th:errorclass="is-invalid"
                        type="text"
-                       class="form-control"
+                       class="form-control mt-2"
                        placeholder="Username"/>
                 <div class="invalid-feedback errors alert alert-danger">
                     <div
@@ -80,12 +80,12 @@
                 </div>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label for="phoneNumber" class="text-white font-weight-bold">Phone number</label>
+                <label for="phoneNumber" class="text-black font-weight-bold mt-2">Phone number</label>
                 <input id="phoneNumber"
                        th:field="*{phoneNumber}"
                        th:errorclass="is-invalid"
                        type="text"
-                       class="form-control"
+                       class="form-control mt-2"
                        placeholder="Phone number"/>
                 <div class="invalid-feedback errors alert alert-danger">
                     <div
@@ -97,11 +97,11 @@
         </div>
         <div class="row">
             <div class="form-group col-md-6 mb-3">
-                <label for="password" class="text-white font-weight-bold">Password</label>
+                <label for="password" class="text-black font-weight-bold mt-2">Password</label>
                 <input id="password"
                        th:field="*{password}"
                        th:errorclass="is-invalid"
-                       type="password" class="form-control"
+                       type="password" class="form-control mt-2"
                        placeholder="Password"/>
                 <div class="invalid-feedback errors alert alert-danger">
                     <div
@@ -111,12 +111,12 @@
                 </div>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label for="confirm-password" class="text-white font-weight-bold">Confirm password</label>
+                <label for="confirm-password" class="text-black font-weight-bold mt-2">Confirm password</label>
                 <input id="confirm-password"
                        th:field="*{confirmPassword}"
                        th:errorclass="is-invalid"
                        type="password"
-                       class="form-control"
+                       class="form-control mt-2"
                        placeholder="Confirm password"/>
                 <div class="invalid-feedback errors alert alert-danger">
                     <div
@@ -129,7 +129,7 @@
         <div class="row">
             <div class="col col-md-4">
                 <div class="button-holder d-flex">
-                    <input type="submit" class="btn btn-info form-control" value="Register"/>
+                    <input type="submit" class="btn btn-warning form-control mt-2 mb-2" value="Register"/>
                 </div>
             </div>
         </div>

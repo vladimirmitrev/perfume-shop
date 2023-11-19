@@ -81,3 +81,38 @@ form.main-form {
 .card-img-top {
     padding: 1rem;
 }
+.pagination {
+    padding: 0 5px;
+}
+@keyframes shake {
+    0% {
+        margin-left: 0rem;
+    }
+    25% {
+        margin-left: 0.5rem;
+    }
+    75% {
+        margin-left: -0.5rem;
+    }
+    100% {
+        margin-left: 0rem;
+    }
+}
+select:required {
+    animation: shake 0.2s ease-in-out 0s 2;
+    /*box-shadow: 0 0 0.6rem #ff0000;*/
+}
+input:required {
+    animation: shake 0.2s ease-in-out 0s 2;
+    /*box-shadow: 0 0 0.6rem #ff0000;*/
+}
+textarea:required {
+    animation: shake 0.2s ease-in-out 0s 2;
+    /*box-shadow: 0 0 0.6rem #ff0000;*/
+}
+form.main-form {
+    background-image: linear-gradient(to bottom right, rgba(56, 200, 220, 0.8), rgb(223 188 39 / 80%));
+}
+/*.invalid {*/
+/*    border-color: red;*/
+/*}*/

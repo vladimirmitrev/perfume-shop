@@ -28,13 +28,9 @@
             </div>
             <ul class="product-details list-group list-group-flush">
                 <li class="list-group-item">
-                    <div class="card-text"><span>Description: <th:block
-                            th:text="${product.description}"></th:block></span></div>
-                    <div class="card-text"><span>Price: <th:block th:text="${product.price}"></th:block></span></div>
                     <div class="card-text"><span>Size: <th:block
                             th:text="${product.milliliters.value}"></th:block></span></div>
-                    <div class="card-text"><span>Category: <th:block
-                            th:text="${product.category.value}"></th:block></span></div>
+                    <div class="card-text fw-bold"><span>Price: €<th:block th:text="${product.price}"></th:block></span></div>
                 </li>
             </ul>
             <div class="card-body">
@@ -46,9 +42,54 @@
                     <button type="submit" class="btn btn-info mt-3">Аdd to cart</button>
                 </form>
             </div>
-
         </div>
     </div>
+</div>
+<div class="d-flex justify-content-center mt-5">
+    <nav>
+        <ul class="pagination">
+            <li class="page-item" th:classappend="${products.isFirst()} ? 'disabled' : ''">
+                <a th:unless="${products.isFirst()}"
+                   th:href="@{/products/all(size=${products.getSize()},page=0)}"
+                   class="page-link" href="#">First Page</a>
+                <a th:if="${products.isFirst()}"
+                   class="page-link" href="#">First Page</a>
+            </li>
+        </ul>
+    </nav>
+    <nav>
+        <ul class="pagination">
+            <li class="page-item" th:classappend="${products.hasPrevious() ? '' : 'disabled'}">
+                <a th:if="${products.hasPrevious()}"
+                   th:href="@{/products/all(size=${products.getSize()},page=${products.getNumber() - 1})}"
+                   class="page-link" href="#">Previous Page</a>
+                <a th:unless="${products.hasPrevious()}"
+                   class="page-link" href="#">Previous Page</a>
+            </li>
+        </ul>
+    </nav>
+    <nav>
+        <ul class="pagination">
+            <li class="page-item" th:classappend="${products.hasNext() ? '' : 'disabled'}">
+                <a th:if="${products.hasNext()}"
+                   th:href="@{/products/all(size=${products.getSize()},page=${products.getNumber() + 1})}"
+                   class="page-link" href="#">Next Page</a>
+                <a th:unless="${products.hasNext()}"
+                   class="page-link" href="#">Next Page</a>
+            </li>
+        </ul>
+    </nav>
+    <nav>
+        <ul class="pagination">
+            <li class="page-item" th:classappend="${products.isLast()} ? 'disabled' : ''">
+                <a th:unless="${products.isLast()}"
+                   th:href="@{/products/all(size=${products.getSize()},page=${products.getTotalPages() - 1})}"
+                   class="page-link" href="#">Last Page</a>
+                <a th:if="${products.isLast()}"
+                   class="page-link" href="#">Last Page</a>
+            </li>
+        </ul>
+    </nav>
 </div>
 <footer th:replace="~{fragments/footer}"></footer>
 </body>

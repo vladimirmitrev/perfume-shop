@@ -15,9 +15,9 @@ public class AddOrUpdateProductDTO {
     private String name;
     @NotEmpty
     private String imageUrl;
-//    @NotNull
+    @NotNull
     private CategoryNameEnum category;
-//    @NotNull
+    @NotNull
     private SizeEnum milliliters;
     @NotEmpty
     @Size(min = 5, max = 255, message = "Description must be between 5 and 255 characters")

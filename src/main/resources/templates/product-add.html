@@ -9,7 +9,7 @@
     <nav th:replace="~{fragments/navbar}">Navbar</nav>
 </div>
 <div class="container">
-    <h2 class="text-center text-white">Upload Product</h2>
+    <h2 class="text-center">Upload Product</h2>
     <form th:action="@{/products/add}"
           th:method="post"
           th:object="${addProductModel}"
@@ -17,11 +17,12 @@
         <div class="row">
 
             <div class="form-group col-md-6 mb-3">
-                <label class="text-center text-white font-weight-bold" for="brand">Brand</label>
+                <label class="text-center text-black font-weight-bold mt-2" for="brand">Brand</label>
                 <select id="brand"
                         name="brand"
+                        required
                         th:errorclass="is-invalid"
-                        class="form-control">
+                        class="form-control mt-2">
                     <option value="">- Select a brand -</option>
                         <option class="fw-bold" th:each="brand : ${brands}"
                                 th:text="${brand.name}"
@@ -34,12 +35,13 @@
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label class="text-white font-weight-bold" for="name">Name</label>
+                <label class="text-black font-weight-bold mt-2" for="name">Name</label>
                 <input id="name"
                        name="name"
+                       required
                        th:field="*{name}"
                        th:errorclass="is-invalid"
-                       type="text" class="form-control"
+                       type="text" class="form-control mt-2"
                        placeholder="Name"></input>
                 <p class="invalid-feedback errors alert alert-danger">
                     Model is required.
@@ -48,12 +50,13 @@
         </div>
         <div class="row">
             <div class="form-group col-md-6 mb-3">
-                <label class="text-center text-white font-weight-bold" for="category">Category</label>
+                <label class="text-center text-black font-weight-bold mt-2" for="category">Category</label>
                 <select
                         id="category"
                         name="category"
+                        required
                         th:errorclass="is-invalid"
-                        class="form-control">
+                        class="form-control mt-2">
                     <option value="">- Select category type -</option>
                     <option th:each="c : ${T(com.app.perfumeshop.model.enums.CategoryNameEnum).values()}"
                             th:text="${c}"
@@ -67,11 +70,12 @@
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label class="text-center text-white font-weight-bold" for="milliliters">Size</label>
+                <label class="text-center text-black font-weight-bold mt-2" for="milliliters">Size</label>
                 <select id="milliliters"
                         name="milliliters"
+                        required
                         th:errorclass="is-invalid"
-                        class="form-control">
+                        class="form-control mt-2">
                     <option value="">- Select size -</option>
                     <option th:each="m : ${T(com.app.perfumeshop.model.enums.SizeEnum).values()}"
                             th:text="${m}"
@@ -85,32 +89,35 @@
             </div>
         </div>
         <div class="form-group col-md-6 mb-3">
-            <label for="price" class="text-white font-weight-bold">Price</label>
+            <label for="price" class="font-weight-bold mt-2">Price</label>
             <input  th:field="*{price}"
                     th:errorclass="is-invalid"
-                    id="price" type="number" class="form-control"
+                    required
+                    id="price" type="number" class="form-control mt-2" min="10"
                     placeholder="Suggested price"/>
             <p  class="invalid-feedback errors alert alert-danger">
                 Price is required.
             </p>
         </div>
         <div class="form-group">
-            <label class="text-white font-weight-bold" for="description">Description</label>
+            <label class="text-black font-weight-bold mt-2" for="description">Description</label>
             <textarea id="description"
                       th:field="*{description}"
                       th:errorclass="is-invalid"
-                      type="textarea" class="form-control" rows="3"
+                      required
+                      type="textarea" class="form-control mt-2" rows="3"
                       placeholder="Description"></textarea>
             <p class="invalid-feedback errors alert alert-danger">
                 Description is required.
             </p>
         </div>
         <div class="form-group">
-            <label class="text-white font-weight-bold" for="imageUrl">Image URL</label>
+            <label class="text-black font-weight-bold mt-2" for="imageUrl">Image URL</label>
             <input id="imageUrl"
                    th:field="*{imageUrl}"
                    th:errorclass="is-invalid"
-                   type="url" class="form-control"
+                   required
+                   type="url" class="form-control mt-2"
                    placeholder="Put product image URL here">
             <p class="invalid-feedback errors alert alert-danger">
                 Product image URL is required.
@@ -120,7 +127,7 @@
         <div class="row">
             <div class="col col-md-4">
                 <div class="button-holder d-flex">
-                    <input type="submit" class="btn btn-info btn-lg" value="Add product"/>
+                    <input type="submit" class="btn btn-info btn-lg mt-4 mb-2" value="Add product"/>
                 </div>
             </div>
         </div>
