@@ -1,7 +1,7 @@
 package com.app.perfumeshop.web;
 
 import com.app.perfumeshop.model.dto.user.UserViewDTO;
-import com.app.perfumeshop.model.entity.User;
+import com.app.perfumeshop.service.UserRoleService;
 import com.app.perfumeshop.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +15,11 @@ import java.util.List;
 public class AdminController {
 
     private final UserService userService;
+    private final UserRoleService userRoleService;
 
-    public AdminController(UserService userService) {
+    public AdminController(UserService userService, UserRoleService userRoleService) {
         this.userService = userService;
+        this.userRoleService = userRoleService;
     }
 
     @GetMapping("/users/all")
@@ -44,7 +46,7 @@ public class AdminController {
     @PatchMapping("/users/roles/remove/{id}")
     public String removeRole(@PathVariable("id") Long id) {
 
-        this.userService.removeRole(id);
+        this.userRoleService.removeRole(id);
 
         return "redirect:/users/change-role/{id}";
     }
@@ -52,7 +54,7 @@ public class AdminController {
     @PatchMapping("/users/roles/add/{id}")
     public String addRole(@PathVariable("id") Long id) {
 
-        this.userService.addRole(id);
+        this.userRoleService.addRole(id);
 
         return "redirect:/users/change-role/{id}";
     }

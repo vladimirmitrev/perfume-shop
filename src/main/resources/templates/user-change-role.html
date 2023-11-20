@@ -11,7 +11,7 @@
     <nav th:replace="~{fragments/navbar}">Navbar</nav>
 </div>
 
-<div class="container" style="background-color: transparent; border-radius: 16px; margin-top: 150px; width: 70%;">
+<div class="container d-flex flex-column justify-content-center" style="background-color: transparent; border-radius: 16px; margin-top: 150px; width: 70%;">
 
     <div class="row" th:object="${user}">
 
@@ -37,8 +37,8 @@
                     </th>
 
                     <td style="font-weight:bold; text-align: center"
-                        th:if="${#strings.equals(role.name(),'CUSTOMER')}">
-                        Cannot be changed!
+                        th:if="${#strings.equals(role.name(),'USER')}">
+                        Cannot add User role!
                     </td>
 
                     <td style="font-weight: bold; text-align: center; color: red"
@@ -51,7 +51,7 @@
                         <form th:method="PATCH"
                               th:action="@{/users/roles/add/{id}(id=${user.id})}"
                               th:object="${user}">
-                            <button class="button-detail btn-success rounded-3" type="submit"
+                            <button class="btn button-detail btn-success rounded-3" type="submit"
                                     th:unless="${user.hasRoleEmployee()}"
                             >Add role
                             </button>
@@ -60,22 +60,23 @@
                         <form th:method="PATCH"
                               th:action="@{/users/roles/remove/{id}(id=${user.id})}"
                               th:object="${user}">
-                            <button class="button-detail btn-danger rounded-3" type="submit"
+                            <button class="btn button-detail btn-danger rounded-3" type="submit"
                                     th:if="${user.hasRoleEmployee()}"
                             >Remove role
                             </button>
                         </form>
-
                     </td>
-
                 </tr>
-
                 </tbody>
-
             </table>
-
         </div>
     </div>
+    <div class="d-flex justify-content-center">
+        <a sec:authorize="hasRole('ADMIN')" th:href="@{/users/all}">
+            <button class="btn btn-info rounded-3 d-flex justify-content-center" type="submit">Back to all users</button>
+        </a>
+    </div>
+
 </div>
 <footer th:replace="~{fragments/footer}"></footer>
 </body>

@@ -20,7 +20,7 @@
     <div class="align-content-center justify-content-center">
         <!--        <h4>Details</h4>-->
         <!--        <hr class="mt-0 mb-4 justify-content-center" style="width: 20rem">-->
-        <div class=" justify-content-center">
+        <div class="d-flex flex-column justify-content-center">
             <div>
                 <h6>Name</h6>
                 <p th:text="|${userProfile.firstName} ${userProfile.lastName}|" class="text-muted"
@@ -38,10 +38,10 @@
                     456 789</p>
             </div>
             <a sec:authorize="hasRole('ADMIN')" th:href="@{/users/all}">
-                <button class="btn-info rounded-3" type="submit">Back to all users</button>
+                <button class="btn btn-info rounded-3" type="submit">Back to all users</button>
             </a>
             <a sec:authorize="!hasRole('ADMIN')" th:href="@{/users/edit/{id}(id=${userProfile.id})}">
-                <button class="btn btn-warning rounded-3 text-center" type="submit"
+                <button class="btn btn-warning rounded-3 text-center" disabled type="submit"
                         style="text-decoration: none; "
                 >Edit Profile
                 </button>

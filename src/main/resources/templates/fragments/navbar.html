@@ -46,7 +46,7 @@
                        th:href="@{/cart}">Cart()</a>
                     (<span th:text="${session.totalItems == null} ? '0' : ${session.totalItems}">0</span>)
                 </li>
-                <li class="nav-item" sec:authorize="hasAnyRole('EMPLOYEE', 'CUSTOMER')">
+                <li class="nav-item" sec:authorize="hasAnyRole('EMPLOYEE', 'USER')">
 
                     <a class="nav-link text-black"
                        th:text="#{navbar_my_profile}"
@@ -77,19 +77,19 @@
                         <form
                                 th:action="@{/users/logout}"
                                 th:method="post">
-                            <input class="btn text-black btn-link nav-link" type="submit" th:value="#{navbar_logout}">
+                            <input class="btn btn-warning text-black btn-link nav-link btn-sm" type="submit" th:value="#{navbar_logout}">
                         </form>
                     </div>
                 </li>
             </th:block>
             <th:block sec:authorize="!isAuthenticated()">
                 <li class="nav-item">
-                    <a class="nav-link text-black"
+                    <a class="btn btn-info nav-link text-black"
                        th:text="#{navbar_register}"
                        th:href="@{/users/register}">Register</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-black"
+                    <a class="btn btn-warning nav-link text-black"
                        th:text="#{navbar_login}"
                        th:href="@{/users/login}">Login</a>
                 </li>
