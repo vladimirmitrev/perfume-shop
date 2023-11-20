@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.security.Principal;
 
 @Controller
@@ -32,9 +33,8 @@ public class ShoppingCartController {
         User user = userService.findByEmail(principal.getName());
         ShoppingCart shoppingCart = shoppingCartService.findByUserId(user.getId());
 
-        if (shoppingCart == null) {
+        if (shoppingCart.getTotalPrice().compareTo(BigDecimal.ZERO) == 0) {
             model.addAttribute("emptyCart", "Your shopping cart is empty");
-
         }
 
 //        if (shoppingCart != null) {

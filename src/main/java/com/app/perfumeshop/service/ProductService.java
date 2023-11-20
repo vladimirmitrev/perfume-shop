@@ -3,7 +3,6 @@ package com.app.perfumeshop.service;
 import com.app.perfumeshop.model.dto.product.AddOrUpdateProductDTO;
 import com.app.perfumeshop.model.dto.product.ProductViewDTO;
 import com.app.perfumeshop.model.entity.*;
-import com.app.perfumeshop.model.enums.SizeEnum;
 import com.app.perfumeshop.model.mapper.ProductMapper;
 import com.app.perfumeshop.model.user.PerfumeShopUserDetails;
 import com.app.perfumeshop.repository.BrandRepository;
@@ -12,6 +11,7 @@ import com.app.perfumeshop.repository.ProductRepository;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -131,4 +131,44 @@ public class ProductService {
 
         return productRepository.findById(productId).get();
     }
+
+
+    public List<ProductViewDTO> searchProducts(String keyword) {
+        List<ProductViewDTO> products =
+                productRepository.searchProductsByBrandOrNameOrDescription(keyword).stream().map(
+                        (product -> {
+                            ProductViewDTO productViewDTO = new ProductViewDTO();
+                            productViewDTO.setName(product.getName());
+                            productViewDTO.setBrand(product.getBrand().getName());
+                            productViewDTO.setId(product.getId());
+                            productViewDTO.setCategory(product.getCategory().getName());
+                            productViewDTO.setMilliliters(product.getMilliliters());
+                            productViewDTO.setImageUrl(product.getImageUrl());
+                            productViewDTO.setDescription(product.getDescription());
+                            productViewDTO.setPrice(product.getPrice());
+
+                            return productViewDTO;
+                        })).toList();
+        return products;
+    }
+
+//    public Page<ProductViewDTO> pageProducts(int pageNo) {
+//        Pageable pageable = PageRequest.of(pageNo, 5);
+//        Page<ProductViewDTO> productPages =
+//                productRepository.pageProduct(pageable)
+//                        .map(product -> {
+//                            ProductViewDTO productViewDTO = new ProductViewDTO();
+//                            productViewDTO.setName(product.getName());
+//                            productViewDTO.setBrand(product.getBrand().getName());
+//                            productViewDTO.setId(product.getId());
+//                            productViewDTO.setCategory(product.getCategory().getName());
+//                            productViewDTO.setMilliliters(product.getMilliliters());
+//                            productViewDTO.setImageUrl(product.getImageUrl());
+//                            productViewDTO.setDescription(product.getDescription());
+//                            productViewDTO.setPrice(product.getPrice());
+//
+//                            return productViewDTO;
+//                        });
+//        return productPages;
+//    }
 }

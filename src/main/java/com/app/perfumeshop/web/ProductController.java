@@ -6,12 +6,14 @@ import com.app.perfumeshop.model.dto.product.ProductViewDTO;
 import com.app.perfumeshop.model.entity.ShoppingCart;
 import com.app.perfumeshop.model.entity.User;
 import com.app.perfumeshop.model.user.PerfumeShopUserDetails;
+import com.app.perfumeshop.repository.ProductRepository;
 import com.app.perfumeshop.service.BrandsService;
 import com.app.perfumeshop.service.ProductService;
 import com.app.perfumeshop.service.ShoppingCartService;
 import com.app.perfumeshop.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -23,6 +25,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class ProductController {
@@ -32,12 +36,15 @@ public class ProductController {
     private final UserService userService;
 
     private final ShoppingCartService shoppingCartService;
+    private final ProductRepository productRepository;
 
-    public ProductController(ProductService productService, BrandsService brandService, UserService userService, ShoppingCartService shoppingCartService) {
+    public ProductController(ProductService productService, BrandsService brandService, UserService userService, ShoppingCartService shoppingCartService,
+                             ProductRepository productRepository) {
         this.productService = productService;
         this.brandService = brandService;
         this.userService = userService;
         this.shoppingCartService = shoppingCartService;
+        this.productRepository = productRepository;
     }
 
     @GetMapping("/products/all")
@@ -60,10 +67,29 @@ public class ProductController {
             session.removeAttribute("username");
         }
 
-        model.addAttribute("products", productService.getAllProducts(pageable));
+        Page<ProductViewDTO> products = productService.getAllProducts(pageable);
+        model.addAttribute("products", products );
 
+        if (products.getSize() == 0) {
+            model.addAttribute("emptyShop", "Your shop is empty");
+        }
         return "products";
     }
+
+//    @GetMapping("/products/{pageNo}")
+//    public String productsPage(@PathVariable("pageNo") int pageNo,
+//                               Model model) {
+//
+//        Page<ProductViewDTO> products = productService.pageProducts(pageNo);
+//
+//        model.addAttribute("title", "Manage Product");
+//        model.addAttribute("size", products.getSize());
+//        model.addAttribute("totalPages", products.getTotalPages());
+//        model.addAttribute("currentPage", pageNo);
+//        model.addAttribute("products", products);
+//
+//        return "products";
+//    }
 
     @GetMapping("/products/add")
     public String addProductGet(Model model) {
@@ -93,7 +119,7 @@ public class ProductController {
         return "redirect:/products/all";
     }
 
-    @GetMapping("/products/{id}")
+    @GetMapping("/products/details/{id}")
     public String getProductDetails(@PathVariable("id") Long id,
                                     Model model) {
 
@@ -157,26 +183,17 @@ public class ProductController {
         return "redirect:/products/all";
     }
 
-    @GetMapping("/products/search")
-    public String searchProducts() {
+    @GetMapping("/search")
+    public String search(@RequestParam(name = "query", required = false) String query, Model model) {
 
+        List<ProductViewDTO> searchResults = new ArrayList<>();
 
-        return "/products-search";
+        if (query != null && !query.isEmpty()) {
+            searchResults = productService.searchProducts(query);
+        }
+
+        model.addAttribute("searchResults", searchResults);
+
+        return "search";
     }
-//    @PostMapping("/update-product/{id}")
-//    public String updateProduct(@ModelAttribute("productDto") ProductEditDto productDto,
-//                                Product product,
-//                                RedirectAttributes redirectAttributes) {
-//        try {
-//
-//            productServiceImpl.saveProduct(productDto, product);
-//            redirectAttributes.addFlashAttribute("success", "Update successfully!");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            redirectAttributes.addFlashAttribute("error", "Error server, please try again!");
-//        }
-//        return "redirect:/products/0";
-//    }
-
-
 }

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="~{fragments/head}">
 </head>
@@ -11,13 +12,25 @@
 </div>
 
 <div class="container-fluid">
-    <h2 class="text-center text-black mt-5">All Products</h2>
-    <div class="offers row mx-auto d-flex flex-row justify-content-center">
+    <div th:if="${emptyShop}" class="text-center text-danger py-5">
+        <h5 th:text="${emptyShop}"></h5>
+        <a sec:authorize="hasAnyRole('ADMIN', 'EMPLOYEE')" th:href="@{/products/add}">
+            <button type="button" class="btn btn-primary btn-lg btn-default md-btn-flat mt-2 mr-3">Add products
+            </button>
+        </a>
+    </div>
+    <div class="d-flex justify-content-center flex-column align-items-center">
+        <h5 class="text-left">Search for products</h5>
+        <form class="d-flex justify-content-center align-items-center gap-1" th:action="@{/search}" method="get">
+            <input class="form-control" type="text" name="query"/>
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+    </div>
+    <h3 class="text-center text-black mt-5">All Products</h3>
+    <div th:if="${products.size > 0}" class="offers row mx-auto d-flex flex-row justify-content-center">
 
         <div th:each="product : ${products}"
-
-
-             class="offer card col-sm-6 col-md-3  col-lg-2 m-1 p-0">
+             class="offer card col-sm-6 col-md-3  col-lg-2 m-1 p-0 mx-2">
             <div class="card-img-top-wrapper">
                 <img class="card-img-top px-5 py-5" th:src="${product.imageUrl}" alt="Product image">
             </div>
@@ -30,12 +43,13 @@
                 <li class="list-group-item">
                     <div class="card-text"><span>Size: <th:block
                             th:text="${product.milliliters.value}"></th:block></span></div>
-                    <div class="card-text fw-bold"><span>Price: €<th:block th:text="${product.price}"></th:block></span></div>
+                    <div class="card-text fw-bold"><span>Price: €<th:block th:text="${product.price}"></th:block></span>
+                    </div>
                 </li>
             </ul>
             <div class="card-body">
                 <a class="card-link text-decoration-none fw-bold fs-6" href="#"
-                   th:href="@{/products/{productId}(productId=*{product.id})}">View product details</a>
+                   th:href="@{/products/details/{productId}(productId=*{product.id})}">View product details</a>
                 <form
                         th:action="@{/cart/add/{id}(id=${product.id})}"
                         th:method="post">
@@ -45,6 +59,22 @@
         </div>
     </div>
 </div>
+<!--<nav aria-label="Page navigation example">-->
+<!--    <ul class="pagination">-->
+<!--        <li th:if = "${currentPage != 0}" class="page-item">-->
+<!--            <a th:href="@{'/products/' + ${currentPage - 1}}" class="page-link" href="#">Previous</a>-->
+<!--        </li>-->
+<!--        <li th:each="i : ${#numbers.sequence(1, totalPages)}" th:classappend="${currentPage == i - 1 ? 'active' : ''}" class="page-item">-->
+<!--            <a th:href="@{'/products/' ${i - 1}}" class="page-link" href="#">1<span th:text="${i}"></span></a>-->
+<!--        </li>-->
+<!--        <li th:if = "${currentPage + 1 != totalPages}" class="page-item">-->
+<!--            <a th:href="@{'/products/' + ${currentPage + 1}}" class="page-link" href="#">Next</a></li>-->
+<!--        <li class="page-item">-->
+<!--            <a class="page-link" href="#">3</a></li>-->
+<!--        <li class="page-item">-->
+<!--            <a class="page-link" href="#">Next</a></li>-->
+<!--    </ul>-->
+<!--</nav>-->
 <div class="d-flex justify-content-center mt-5">
     <nav>
         <ul class="pagination">

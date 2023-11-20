@@ -19,7 +19,7 @@
         </a>
     </div>
     <!-- Shopping cart table -->
-    <div class="card" th:if="${shoppingCart != null}">
+    <div class="card" th:if="${shoppingCart.totalPrice != 0}">
         <div class="card-header">
             <h2>Shopping Cart</h2>
         </div>

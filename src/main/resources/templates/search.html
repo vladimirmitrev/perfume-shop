@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments/head}">
+</head>
+
+<body>
+<div>
+    <nav th:replace="~{fragments/navbar}">Navbar</nav>
+</div>
+
+<div class="container-fluid d-flex flex-column justify-content-center">
+    <div class="d-flex justify-content-center flex-column align-items-center">
+        <h5 class="text-left">Search for products</h5>
+        <form class="d-flex justify-content-center align-items-center gap-1" th:action="@{/search}" method="get">
+            <input class="form-control" type="text" name="query"/>
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+    </div>
+    <div>
+        <h4 th:if="${#lists.isEmpty(searchResults)}" class="text-center text-black mt-5">No results found.</h4>
+        <h4 th:unless="${#lists.isEmpty(searchResults)}" class="text-center text-black mt-5">Products found</h4>
+        <div th:if="${not #lists.isEmpty(searchResults)}"
+             class="offers row mx-auto d-flex flex-row justify-content-center">
+            <!--            <span th:text="${product.brand} + ' ' + ${product.name} + ' ' + ${product.description}"></span>-->
+            <div th:each="product : ${searchResults}" class="offer card col-sm-6 col-md-3  col-lg-2 m-1 p-0 mx-2">
+                <div class="card-img-top-wrapper">
+                    <img class="card-img-top px-5 py-5" th:src="${product.imageUrl}" alt="Product image">
+                </div>
+                <div class="card-body pb-1">
+                    <h5 class="card-title">
+                        <th:block th:text="|${product.brand} ${product.name}|"></th:block>
+                    </h5>
+                </div>
+                <ul class="product-details list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="card-text"><span>Size: <th:block
+                                th:text="${product.milliliters.value}"></th:block></span></div>
+                        <div class="card-text fw-bold"><span>Price: €<th:block
+                                th:text="${product.price}"></th:block></span></div>
+                    </li>
+                </ul>
+                <div class="card-body">
+                    <a class="card-link text-decoration-none fw-bold fs-6" href="#"
+                       th:href="@{/products/{productId}(productId=*{product.id})}">View product details</a>
+                    <form
+                            th:action="@{/cart/add/{id}(id=${product.id})}"
+                            th:method="post">
+                        <button type="submit" class="btn btn-info mt-3">Аdd to cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!--<nav aria-label="Page navigation example">-->
+<!--    <ul class="pagination">-->
+<!--        <li th:if = "${currentPage != 0}" class="page-item">-->
+<!--            <a th:href="@{'/products/' + ${currentPage - 1}}" class="page-link" href="#">Previous</a>-->
+<!--        </li>-->
+<!--        <li th:each="i : ${#numbers.sequence(1, totalPages)}" th:classappend="${currentPage == i - 1 ? 'active' : ''}" class="page-item">-->
+<!--            <a th:href="@{'/products/' ${i - 1}}" class="page-link" href="#">1<span th:text="${i}"></span></a>-->
+<!--        </li>-->
+<!--        <li th:if = "${currentPage + 1 != totalPages}" class="page-item">-->
+<!--            <a th:href="@{'/products/' + ${currentPage + 1}}" class="page-link" href="#">Next</a></li>-->
+<!--        <li class="page-item">-->
+<!--            <a class="page-link" href="#">3</a></li>-->
+<!--        <li class="page-item">-->
+<!--            <a class="page-link" href="#">Next</a></li>-->
+<!--    </ul>-->
+<!--</nav>-->
+<!--<div class="d-flex justify-content-center mt-5">-->
+<!--    <nav>-->
+<!--        <ul class="pagination">-->
+<!--            <li class="page-item" th:classappend="${products.isFirst()} ? 'disabled' : ''">-->
+<!--                <a th:unless="${products.isFirst()}"-->
+<!--                   th:href="@{/products/all(size=${products.getSize()},page=0)}"-->
+<!--                   class="page-link" href="#">First Page</a>-->
+<!--                <a th:if="${products.isFirst()}"-->
+<!--                   class="page-link" href="#">First Page</a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </nav>-->
+<!--    <nav>-->
+<!--        <ul class="pagination">-->
+<!--            <li class="page-item" th:classappend="${products.hasPrevious() ? '' : 'disabled'}">-->
+<!--                <a th:if="${products.hasPrevious()}"-->
+<!--                   th:href="@{/products/all(size=${products.getSize()},page=${products.getNumber() - 1})}"-->
+<!--                   class="page-link" href="#">Previous Page</a>-->
+<!--                <a th:unless="${products.hasPrevious()}"-->
+<!--                   class="page-link" href="#">Previous Page</a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </nav>-->
+<!--    <nav>-->
+<!--        <ul class="pagination">-->
+<!--            <li class="page-item" th:classappend="${products.hasNext() ? '' : 'disabled'}">-->
+<!--                <a th:if="${products.hasNext()}"-->
+<!--                   th:href="@{/products/all(size=${products.getSize()},page=${products.getNumber() + 1})}"-->
+<!--                   class="page-link" href="#">Next Page</a>-->
+<!--                <a th:unless="${products.hasNext()}"-->
+<!--                   class="page-link" href="#">Next Page</a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </nav>-->
+<!--    <nav>-->
+<!--        <ul class="pagination">-->
+<!--            <li class="page-item" th:classappend="${products.isLast()} ? 'disabled' : ''">-->
+<!--                <a th:unless="${products.isLast()}"-->
+<!--                   th:href="@{/products/all(size=${products.getSize()},page=${products.getTotalPages() - 1})}"-->
+<!--                   class="page-link" href="#">Last Page</a>-->
+<!--                <a th:if="${products.isLast()}"-->
+<!--                   class="page-link" href="#">Last Page</a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </nav>-->
+<!--</div>-->
+<footer th:replace="~{fragments/footer}"></footer>
+</body>
+</html>
