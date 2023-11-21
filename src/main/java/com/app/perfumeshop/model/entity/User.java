@@ -36,8 +36,11 @@ public class User extends BaseEntity {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<UserRole> userRoles = new ArrayList<>();
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
     private List<Order> orders = new ArrayList<>();
+
+    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
+    private ShoppingCart shoppingCart;
 
 
     public String getFirstName() {
@@ -117,4 +120,12 @@ public class User extends BaseEntity {
     }
 
 
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public User setShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
+        return this;
+    }
 }

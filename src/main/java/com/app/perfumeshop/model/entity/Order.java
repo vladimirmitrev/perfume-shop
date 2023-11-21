@@ -5,26 +5,44 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
 public class Order extends BaseEntity {
 
     @Column(nullable = false)
-    private LocalDate createdOn;
+    private Date createdOn;
     @Column(nullable = false)
     private BigDecimal totalPrice;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private OrderStatusEnum status;
-    @ManyToOne
+    @Column(nullable = false)
+    private String paymentMethod;
+    @Column(nullable = false)
+    private boolean isAccepted;
+    @ManyToOne(fetch = FetchType.EAGER)
     private User customer;
 
-    public LocalDate getCreatedOn() {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
+    private List<OrderDetail> orderDetailList;
+
+    public List<OrderDetail> getOrderDetailList() {
+        return orderDetailList;
+    }
+
+    public void setOrderDetailList(List<OrderDetail> orderDetailList) {
+        this.orderDetailList = orderDetailList;
+    }
+
+
+    public Date getCreatedOn() {
         return createdOn;
     }
 
-    public Order setCreatedOn(LocalDate createdOn) {
+    public Order setCreatedOn(Date createdOn) {
         this.createdOn = createdOn;
         return this;
     }
@@ -56,4 +74,21 @@ public class Order extends BaseEntity {
         return this;
     }
 
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public Order setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+        return this;
+    }
+
+    public boolean isAccepted() {
+        return isAccepted;
+    }
+
+    public Order setAccepted(boolean accepted) {
+        isAccepted = accepted;
+        return this;
+    }
 }

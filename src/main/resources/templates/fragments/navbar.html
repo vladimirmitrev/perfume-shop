@@ -46,20 +46,26 @@
                        th:href="@{/cart}">Cart()</a>
                     (<span th:text="${session.totalItems == null} ? '0' : ${session.totalItems}">0</span>)
                 </li>
-                <li class="nav-item" sec:authorize="hasAnyRole('EMPLOYEE', 'USER')">
-
-                    <a sec:authorize="!hasRole('ADMIN')" class="nav-link text-black"
-                       th:text="#{navbar_my_profile}"
-                       th:href="@{/users/profile}">My profile
-                    </a><i class="fa-solid fa-cart-shopping fa-beat" style="color: white"></i>
+                <li class="nav-item dropdown" sec:authorize="hasAnyRole('EMPLOYEE', 'USER')">
+                    <div class="dropdown">
+                        <a class="nav-link  text-black dropdown-toggle" type="button" id="accountDropdownMenu"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            My account
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="accountDropdownMenu">
+                            <li><a class="dropdown-item" th:href="@{/order}">View my orders</a></li>
+                            <li><a class="dropdown-item" th:text="#{navbar_my_profile}" th:href="@{/users/profile}">My profile</a></li>
+                            <li><a class="dropdown-item" href="#">Change password</a></li>
+                        </ul>
+                    </div>
                 </li>
                 <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
                     <div class="dropdown">
-                        <a class="nav-link  text-black dropdown-toggle" type="button" id="dropdownMenu"
+                        <a class="nav-link  text-black dropdown-toggle" type="button" id="adminDropdownMenu"
                            data-bs-toggle="dropdown" aria-expanded="false">
                             Admin
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                        <ul class="dropdown-menu" aria-labelledby="adminDropdownMenu">
                             <li><a class="dropdown-item" th:href="@{/users/all}">View all users</a></li>
                             <li><a class="dropdown-item" th:href="@{/users/profile/1}">My profile</a></li>
                             <li><a class="dropdown-item" href="#">Change password</a></li>

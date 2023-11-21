@@ -63,6 +63,7 @@ form.main-form {
 .alert {
     padding: 0.25rem 1rem;
 }
+
 .bdr {
     border-radius: 6px;
     overflow: hidden;
@@ -78,12 +79,15 @@ form.main-form {
     /*text-decoration: none;*/
     margin-top: 10px;
 }
+
 .card-img-top {
     padding: 1rem;
 }
+
 .pagination {
     padding: 0 5px;
 }
+
 @keyframes shake {
     0% {
         margin-left: 0rem;
@@ -98,21 +102,56 @@ form.main-form {
         margin-left: 0rem;
     }
 }
+
 select:required {
     animation: shake 0.2s ease-in-out 0s 2;
     /*box-shadow: 0 0 0.6rem #ff0000;*/
 }
+
 input:required {
     animation: shake 0.2s ease-in-out 0s 2;
     /*box-shadow: 0 0 0.6rem #ff0000;*/
 }
+
 textarea:required {
     animation: shake 0.2s ease-in-out 0s 2;
     /*box-shadow: 0 0 0.6rem #ff0000;*/
 }
+
 form.main-form {
     background-image: linear-gradient(to bottom right, rgba(56, 200, 220, 0.8), rgb(223 188 39 / 80%));
 }
+
+.order-container {
+    background-image: linear-gradient(to bottom right, rgba(56, 200, 220, 0.8), rgb(223 188 39 / 80%));
+    border-radius: 3rem;
+    padding: 3rem;
+}
+
+.checkout-image {
+    max-width: 2rem;
+}
+
+.order-box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.checkout-items {
+    overflow: auto;
+    max-height: 13rem;
+}
+
+.profile-box {
+    width: 20rem;
+    height: 30rem;
+    background-image: linear-gradient(to bottom right, rgba(56, 200, 220, 0.8), rgb(223 188 39 / 80%));
+    padding-top: 1rem;
+    border-radius: 3rem;
+    margin-top: 2rem;
+}
+
 /*.invalid {*/
 /*    border-color: red;*/
 /*}*/

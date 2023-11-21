@@ -86,6 +86,24 @@ public class UserViewDTO {
                 roleEnumNames.add(role.getUserRole().name()));
         return roleEnumNames;
     }
+
+    public String getFullName() {
+        StringBuilder fullName = new StringBuilder();
+
+        if(getFirstName() != null) {
+            fullName.append(getFirstName());
+        }
+
+        if(getLastName() != null) {
+            if (!fullName.isEmpty()) {
+                fullName.append(" ");
+            }
+            fullName.append(getLastName());
+        }
+
+        return fullName.toString();
+    }
+
     public boolean hasRoleEmployee(){
         return getRolesNames().contains("EMPLOYEE");
     }

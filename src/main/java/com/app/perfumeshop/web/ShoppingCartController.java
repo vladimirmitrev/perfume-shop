@@ -33,6 +33,12 @@ public class ShoppingCartController {
         User user = userService.findByEmail(principal.getName());
         ShoppingCart shoppingCart = shoppingCartService.findByUserId(user.getId());
 
+        if (shoppingCart == null) {
+            model.addAttribute("emptyCartNull", "Your shopping cart is empty");
+        }
+
+
+        assert shoppingCart != null;
         if (shoppingCart.getTotalPrice().compareTo(BigDecimal.ZERO) == 0) {
             model.addAttribute("emptyCart", "Your shopping cart is empty");
         }

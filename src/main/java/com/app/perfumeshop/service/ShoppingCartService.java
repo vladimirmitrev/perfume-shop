@@ -143,4 +143,8 @@ public class ShoppingCartService {
     }
 
 
+    public void deleteCartById(Long id) {
+
+        shoppingCartRepository.deleteById(id);
+    }
 }

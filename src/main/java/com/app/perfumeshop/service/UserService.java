@@ -9,6 +9,7 @@ import com.app.perfumeshop.model.enums.UserRoleEnum;
 import com.app.perfumeshop.model.mapper.UserMapper;
 import com.app.perfumeshop.repository.UserRepository;
 import com.app.perfumeshop.repository.UserRoleRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -29,13 +30,16 @@ public class UserService {
 
     @Value("${perfumeshop.default.admin.phone}")
     public String hiddenAdminPhone;
+    private final ModelMapper modelMapper;
 
-    public UserService(UserRepository userRepository, UserRoleRepository userRoleRepository, PasswordEncoder passwordEncoder, UserMapper userMapper, UserRoleService userRoleService) {
+    public UserService(UserRepository userRepository, UserRoleRepository userRoleRepository, PasswordEncoder passwordEncoder, UserMapper userMapper, UserRoleService userRoleService,
+                       ModelMapper modelMapper) {
         this.userRepository = userRepository;
         this.userRoleRepository = userRoleRepository;
         this.passwordEncoder = passwordEncoder;
         this.userMapper = userMapper;
         this.userRoleService = userRoleService;
+        this.modelMapper = modelMapper;
     }
 
     public void init() {
@@ -97,5 +101,12 @@ public class UserService {
                 .map(userMapper::userEntityToUserDto)
                 .orElseThrow(() -> new ObjectNotFoundException("User with this id " + id + "is not found!"));
 
+    }
+
+    public UserViewDTO getUserByEmail(String email) {
+
+        return userRepository.findUserByEmail(email)
+                .map(userMapper::userEntityToUserDto)
+                .orElseThrow(() -> new ObjectNotFoundException("User with this email " + email + "is not found!"));
     }
 }
