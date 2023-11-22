@@ -156,6 +156,9 @@ form.main-form {
     border-radius: 1rem;
     padding: 1rem;
 }
+.nav-link {
+    padding: 0;
+}
 
 /*.invalid {*/
 /*    border-color: red;*/

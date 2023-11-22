@@ -11,8 +11,15 @@
 </div>
 
 <div class="container px-3 my-5 clearfix">
-    <div    th:if="${emptyCartNull}" class="text-center text-danger py-5">
+    <div    th:if="${emptyCart}" class="text-center text-danger py-5">
         <h5 th:text="${emptyCart}"></h5>
+        <a th:href="@{/products/all}">
+            <button type="button" class="btn btn-primary btn-lg btn-default md-btn-flat mt-2 mr-3">Back to shopping
+            </button>
+        </a>
+    </div>
+    <div    th:if="${emptyCartNull}" class="text-center text-danger py-5">
+        <h5 th:text="${emptyCartNull}"></h5>
         <a th:href="@{/products/all}">
             <button type="button" class="btn btn-primary btn-lg btn-default md-btn-flat mt-2 mr-3">Back to shopping
             </button>

@@ -73,7 +73,7 @@ public class OrderController {
 
         User user = userService.findByEmail(principal.getName());
         ShoppingCart shoppingCart = user.getShoppingCart();
-        Order order = orderService.saveOrder(shoppingCart);
+        Order order = orderService.placeOrder(shoppingCart);
 
         session.removeAttribute("totalItems");
         model.addAttribute("order", order);
@@ -83,7 +83,7 @@ public class OrderController {
 
         return "redirect:/my-orders";
     }
-    @RequestMapping(value = "/cancel-order", method = {RequestMethod.POST}, params = "action=delete")
+    @RequestMapping(value = "/cancel-order", method = {RequestMethod.POST}, params = "action=cancel")
     public String cancelOrder(@RequestParam("id") Long id,
                               RedirectAttributes attributes) {
 
@@ -92,7 +92,7 @@ public class OrderController {
 
         return "redirect:/my-orders";
     }
-    @RequestMapping(value = "/cancel-customer-order", method = {RequestMethod.POST}, params = "action=delete")
+    @RequestMapping(value = "/cancel-customer-order", method = {RequestMethod.POST}, params = "action=cancel")
     public String cancelCustomerOrder(@RequestParam("id") Long id,
                               RedirectAttributes attributes) {
 
@@ -103,10 +103,10 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/ship-order", method = {RequestMethod.POST}, params = "action=ship")
-    public String acceptOrder(@RequestParam("id") Long id,
+    public String shipOrder(@RequestParam("id") Long id,
                               RedirectAttributes attributes) {
 
-        orderService.acceptOrder(id);
+        orderService.shippedOrder(id);
         attributes.addFlashAttribute("success", "Order was shipped successfully!");
 
         return "redirect:/orders-all";

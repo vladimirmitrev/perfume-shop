@@ -9,8 +9,6 @@
 <div>
     <nav th:replace="~{fragments/navbar}">Navbar</nav>
 </div>
-
->
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
@@ -39,12 +37,15 @@
                             <b><span th:text="${#dates.format(order.createdOn, 'dd-MM-yyyy')}"></span></b>
                         </td>
                         <td class="name-pr">
-                            <span th:if="${order.accepted != null}" th:text="|2 working days after day of purchase|">
+                            <span th:if="${order.shipped != null}" th:text="|2 working days after day of purchase|">
                             </span>
-                            <a th:if="${order.accepted == null}"><p>Pending</p></a>
+                            <a th:if="${order.shipped == null}"><p>Pending</p></a>
                         </td>
                         <td class="price-pr">
-                            <p th:text="${order.status}"></p>
+<!--                            <p th:text="${order.status}"></p>-->
+                            <p th:if="${order.status.name() == 'CANCELLED'}" class="text-danger">CANCELLED</p>
+                            <p th:if="${order.status.name() == 'SHIPPED'}" class="text-success">SHIPPED</p>
+                            <p th:if="${order.status.name() == 'PROCESSING'}" class="text-black">PROCESSING</p>
                         </td>
                         <td class="total-pr">
                             <p th:text="|€${order.totalPrice}|" style="color: green"></p>
@@ -60,7 +61,7 @@
                                   th:action="@{/ship-order}">
                                 <input type="hidden" name="id" th:value="${order.id}">
                                 <button sec:authorize="hasAnyRole('ADMIN', 'EMPLOYEE')"
-                                        th:if="${order.status.name() != 'SHIPPED'}"
+                                        th:if="${order.status.name() != 'SHIPPED' and order.status.name() != 'CANCELLED'}"
                                         type="submit" name="action" value="ship"
                                         title="Order shipped"
                                         class="btn btn-sm btn-success">Shipped
@@ -69,7 +70,8 @@
                             <form th:method="POST"
                                   th:action="@{/cancel-customer-order}">
                                 <input type="hidden" name="id" th:value="${order.id}">
-                                <button type="submit" name="action" value="delete"
+                                <button th:if="${order.status.name() != 'CANCELLED'}"
+                                        type="submit" name="action" value="cancel"
                                         title="Cancel order"
                                         class="btn btn-sm btn-danger">Cancel
                                 </button>

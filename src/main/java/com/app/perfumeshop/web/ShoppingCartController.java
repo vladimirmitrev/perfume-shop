@@ -35,15 +35,13 @@ public class ShoppingCartController {
 
         if (shoppingCart == null) {
             model.addAttribute("emptyCartNull", "Your shopping cart is empty");
+            return "redirect:/products/all";
         }
-
-
-        assert shoppingCart != null;
         if (shoppingCart.getTotalPrice().compareTo(BigDecimal.ZERO) == 0) {
             model.addAttribute("emptyCart", "Your shopping cart is empty");
         }
 
-//        if (shoppingCart != null) {
+//        if (shoppingCart != null && shoppingCart.getTotalPrice().compareTo(BigDecimal.ZERO) != 0 ) {
 //            model.addAttribute("subTotal", shoppingCart.getTotalPrice());
 //        }
 

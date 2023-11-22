@@ -22,7 +22,7 @@ public class Order extends BaseEntity {
     @Column(nullable = false)
     private String paymentMethod;
     @Column(nullable = false)
-    private boolean isAccepted;
+    private boolean isShipped;
     @ManyToOne(fetch = FetchType.EAGER)
     private User customer;
 
@@ -83,12 +83,12 @@ public class Order extends BaseEntity {
         return this;
     }
 
-    public boolean isAccepted() {
-        return isAccepted;
+    public boolean isShipped() {
+        return isShipped;
     }
 
-    public Order setAccepted(boolean accepted) {
-        isAccepted = accepted;
+    public Order setShipped(boolean shipped) {
+        isShipped = shipped;
         return this;
     }
 }

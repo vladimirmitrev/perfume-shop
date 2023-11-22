@@ -23,10 +23,11 @@
                    th:text="#{navbar_all_brands}"
                    th:href="@{/brands/all}">All Brands</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item d-flex">
                 <a class="nav-link text-black"
                    th:text="#{navbar_search}"
                    th:href="@{/search}">Search</a>
+                <i class="fa-solid fa-magnifying-glass"></i>
             </li>
             <th:block>
                 <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'EMPLOYEE')">
@@ -40,13 +41,18 @@
                        th:href="@{/products/all}">All Products</a>
                 </li>
                 <li class="d-flex nav-item" sec:authorize="isAuthenticated()">
-                    <i class="fa-solid fa-cart-shopping fa-beat" style="color: black"></i>
                     <a class="nav-link text-black"
                        th:text="#{navbar_cart}"
                        th:href="@{/cart}">Cart()</a>
                     (<span th:text="${session.totalItems == null} ? '0' : ${session.totalItems}">0</span>)
+                    <i class="fa-solid fa-cart-shopping fa-beat" style="color: black"></i>
                 </li>
-                <li class="nav-item dropdown" sec:authorize="!hasRole('ADMIN')">
+                <li class="nav-item" sec:authorize="hasAnyRole('EMPLOYEE', 'ADMIN')">
+                    <a class="nav-link text-black"
+                       th:text="#{navbar_all_orders}"
+                       th:href="@{/orders-all}">All Orders</a>
+                </li>
+                <li class="nav-item dropdown"  sec:authorize="isAuthenticated()">
                     <div class="dropdown">
                         <a class="nav-link  text-black dropdown-toggle" type="button" id="accountDropdownMenu"
                            data-bs-toggle="dropdown" aria-expanded="false">
@@ -54,6 +60,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="accountDropdownMenu">
                             <li><a class="dropdown-item" th:href="@{/my-orders}">View my orders</a></li>
+                            <li sec:authorize="hasAnyRole('EMPLOYEE', 'ADMIN')"><a class="dropdown-item" th:href="@{/orders-all}">View all orders</a></li>
                             <li><a class="dropdown-item" th:text="#{navbar_my_profile}" th:href="@{/users/profile}">My profile</a></li>
                             <li><a class="dropdown-item" href="#">Change password</a></li>
                         </ul>

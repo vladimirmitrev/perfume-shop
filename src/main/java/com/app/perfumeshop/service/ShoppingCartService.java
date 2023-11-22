@@ -6,6 +6,7 @@ import com.app.perfumeshop.model.entity.ShoppingCart;
 import com.app.perfumeshop.model.entity.User;
 import com.app.perfumeshop.repository.CartItemRepository;
 import com.app.perfumeshop.repository.ShoppingCartRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -143,8 +144,18 @@ public class ShoppingCartService {
     }
 
 
+    @Transactional
     public void deleteCartById(Long id) {
-
+        List<CartItem> cartItems = shoppingCartRepository.findById(id).get().getCartItems();
+        cartItemRepository.deleteAll(cartItems);
         shoppingCartRepository.deleteById(id);
+    }
+
+    public void clearCurrentCartById(Long id) {
+        ShoppingCart cart = shoppingCartRepository.findById(id).get();
+        cart.getCartItems().clear();
+        cart.setTotalPrice(BigDecimal.valueOf(0.00));
+        cart.setTotalItems(0);
+        shoppingCartRepository.save(cart);
     }
 }
