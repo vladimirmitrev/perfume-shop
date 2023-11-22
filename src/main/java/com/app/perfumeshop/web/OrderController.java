@@ -46,14 +46,23 @@ public class OrderController {
     }
 
 
-    @GetMapping("/orders")
+    @GetMapping("/my-orders")
     public String order(Model model, Principal principal) {
 
         User user = userService.findByEmail(principal.getName());
         List<Order> orderList = user.getOrders();
         model.addAttribute("orders", orderList);
 
-        return "order";
+        return "my-orders";
+    }
+    @GetMapping("/orders-all")
+    public String ordersAll(Model model) {
+
+        List<Order> orderList = orderService.getAllOrders();
+
+        model.addAttribute("orders", orderList);
+
+        return "orders-all";
     }
 
 //    @RequestMapping(value = "/add-order", method = {RequestMethod.POST})
@@ -72,7 +81,7 @@ public class OrderController {
         model.addAttribute("page", "Order Detail");
         model.addAttribute("success", "Add order successfully");
 
-        return "redirect:/orders";
+        return "redirect:/my-orders";
     }
     @RequestMapping(value = "/cancel-order", method = {RequestMethod.POST}, params = "action=delete")
     public String cancelOrder(@RequestParam("id") Long id,
@@ -81,6 +90,43 @@ public class OrderController {
         orderService.cancelOrder(id);
         attributes.addFlashAttribute("success", "Order was canceled successfully!");
 
-        return "redirect:/orders";
+        return "redirect:/my-orders";
     }
+    @RequestMapping(value = "/cancel-customer-order", method = {RequestMethod.POST}, params = "action=delete")
+    public String cancelCustomerOrder(@RequestParam("id") Long id,
+                              RedirectAttributes attributes) {
+
+        orderService.cancelOrder(id);
+        attributes.addFlashAttribute("success", "Order was canceled successfully!");
+
+        return "redirect:/orders-all";
+    }
+
+    @RequestMapping(value = "/ship-order", method = {RequestMethod.POST}, params = "action=ship")
+    public String acceptOrder(@RequestParam("id") Long id,
+                              RedirectAttributes attributes) {
+
+        orderService.acceptOrder(id);
+        attributes.addFlashAttribute("success", "Order was shipped successfully!");
+
+        return "redirect:/orders-all";
+    }
+
+
+//    @RequestMapping(value = "/update-cart", method = RequestMethod.POST, params = "action=update")
+//    public String updateCart(@RequestParam("quantity") int quantity,
+//                             @RequestParam("id") Long productId,
+//                             Model model,
+//                             Principal principal) {
+//
+//        User user = userService.findByEmail(principal.getName());
+//
+//        Product product = productService.getProductById(productId);
+//
+//        ShoppingCart shoppingCart = shoppingCartService.updateItemInCart(product, quantity, user);
+//
+//        model.addAttribute("shoppingCart", shoppingCart);
+//
+//        return "redirect:/cart";
+//    }
 }

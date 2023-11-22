@@ -61,4 +61,19 @@ public class OrderService {
     public void cancelOrder(Long id) {
         orderRepository.deleteById(id);
     }
+
+    public void acceptOrder(Long id) {
+
+        Order order = orderRepository.findById(id).get();
+
+        order.setAccepted(true)
+                .setStatus(OrderStatusEnum.SHIPPED);
+
+        orderRepository.save(order);
+    }
+
+    public List<Order> getAllOrders() {
+
+        return orderRepository.findAll();
+    }
 }

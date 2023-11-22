@@ -46,14 +46,14 @@
                        th:href="@{/cart}">Cart()</a>
                     (<span th:text="${session.totalItems == null} ? '0' : ${session.totalItems}">0</span>)
                 </li>
-                <li class="nav-item dropdown" sec:authorize="hasAnyRole('EMPLOYEE', 'USER')">
+                <li class="nav-item dropdown" sec:authorize="!hasRole('ADMIN')">
                     <div class="dropdown">
                         <a class="nav-link  text-black dropdown-toggle" type="button" id="accountDropdownMenu"
                            data-bs-toggle="dropdown" aria-expanded="false">
                             My account
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="accountDropdownMenu">
-                            <li><a class="dropdown-item" th:href="@{/orders}">View my orders</a></li>
+                            <li><a class="dropdown-item" th:href="@{/my-orders}">View my orders</a></li>
                             <li><a class="dropdown-item" th:text="#{navbar_my_profile}" th:href="@{/users/profile}">My profile</a></li>
                             <li><a class="dropdown-item" href="#">Change password</a></li>
                         </ul>
@@ -67,6 +67,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="adminDropdownMenu">
                             <li><a class="dropdown-item" th:href="@{/users/all}">View all users</a></li>
+                            <li><a class="dropdown-item" th:href="@{/orders-all}">View all orders</a></li>
                             <li><a class="dropdown-item" th:href="@{/users/profile/1}">My profile</a></li>
                             <li><a class="dropdown-item" href="#">Change password</a></li>
                         </ul>

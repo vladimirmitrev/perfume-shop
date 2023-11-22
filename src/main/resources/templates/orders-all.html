@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments/head}"></head>
+
+<body>
+<div>
+    <nav th:replace="~{fragments/navbar}">Navbar</nav>
+</div>
+
+>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div th:if="${success}" class="text-center alert-success alert">
+                <p th:text="${success}"></p>
+            </div>
+            <div class="table-main table-responsive">
+                <table class="table orders-table">
+                    <thead>
+                    <tr class="fw-bold">
+                        <th class="user-email">User Email</th>
+                        <th class="order-date">Order Date</th>
+                        <th>Estimated Delivery Date</th>
+                        <th class="price-pr">Order Status</th>
+                        <th>Total Price</th>
+                        <th class="total-pr">Payment Method</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="order : ${orders}">
+                        <td class="user-email">
+                            <span th:text="${order.getCustomer().email}"></span>
+                        </td>
+                        <td class="order-date text-blue">
+                            <b><span th:text="${#dates.format(order.createdOn, 'dd-MM-yyyy')}"></span></b>
+                        </td>
+                        <td class="name-pr">
+                            <span th:if="${order.accepted != null}" th:text="|2 working days after day of purchase|">
+                            </span>
+                            <a th:if="${order.accepted == null}"><p>Pending</p></a>
+                        </td>
+                        <td class="price-pr">
+                            <p th:text="${order.status}"></p>
+                        </td>
+                        <td class="total-pr">
+                            <p th:text="|€${order.totalPrice}|" style="color: green"></p>
+                        </td>
+                        <td class="total-pr" style="color: black">
+                            <span th:text="${order.paymentMethod}"></span>
+                        </td>
+                        <form>
+
+                        </form>
+                        <td class="d-flex gap-1">
+                            <form th:method="POST"
+                                  th:action="@{/ship-order}">
+                                <input type="hidden" name="id" th:value="${order.id}">
+                                <button sec:authorize="hasAnyRole('ADMIN', 'EMPLOYEE')"
+                                        th:if="${order.status.name() != 'SHIPPED'}"
+                                        type="submit" name="action" value="ship"
+                                        title="Order shipped"
+                                        class="btn btn-sm btn-success">Shipped
+                                </button>
+                            </form>
+                            <form th:method="POST"
+                                  th:action="@{/cancel-customer-order}">
+                                <input type="hidden" name="id" th:value="${order.id}">
+                                <button type="submit" name="action" value="delete"
+                                        title="Cancel order"
+                                        class="btn btn-sm btn-danger">Cancel
+                                </button>
+                            </form>
+                        </td>
+                        </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<footer th:replace="~{fragments/footer}"></footer>
+</body>
+</html>
+
+

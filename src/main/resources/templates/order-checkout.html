@@ -81,9 +81,9 @@
                                                                  th:src="${item.product.imageUrl}"></img>
                                         <a th:href="@{/products/details/{productId}(productId=${item.id})}"
                                            th:text="|${item.product.brand.getName().toString()} ${item.product.name}|"></a>
-                                        <div class="small text-muted">Price: €[(${item.product.price})] <span
+                                        <div class="small text-muted">Price: € [(${item.product.price})] <span
                                                 class="mx-2">|</span> Qty: [(${item.quantity})] <span
-                                                class="mx-2">|</span> Sub Total: €[(${item.product.price *
+                                                class="mx-2">|</span> Sub Total: € [(${item.product.price *
                                             item.quantity})]
                                         </div>
                                     </div>
@@ -103,23 +103,23 @@
                             <hr class="my-1">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h6>Sub Total</h6>
-                                <div class="ml-auto font-weight-bold" th:text="|€${shoppingCart.totalPrice}|"></div>
+                                <div class="ml-auto font-weight-bold" th:text="|€ ${shoppingCart.totalPrice}|"></div>
                             </div>
                             <hr class="my-1">
                             <div class="d-flex justify-content-between">
-                                <h6>Shipping cost</h6>
-                                <div class="ml-auto font-weight-bold">€7.99</div>
+                                <h6>Shipping and handling</h6>
+                                <div class="ml-auto font-weight-bold">+ € 7.99</div>
                             </div>
                             <hr>
                             <div class="d-flex gr-total justify-content-between">
                                 <h4>Total price</h4>
-                                <div class="ml-auto h5" th:text="|€${shoppingCart.totalPrice + 7.99}|"></div>
+                                <div class="ml-auto h5 text-danger" th:text="|€ ${shoppingCart.totalPrice + 7.99}|"></div>
                             </div>
                             <hr>
                         </div>
                     </div>
                     <div class="col-12 d-flex justify-content-between shopping-box">
-                        <button type="submit" class="ml-auto btn btn-info">Place Order</button>
+                        <button type="submit" class="ml-auto btn btn-info btn-lg">Place Order</button>
                     </div>
                 </form>
             </div>

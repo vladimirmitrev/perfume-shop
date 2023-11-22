@@ -46,15 +46,20 @@
                             <p th:text="|€${order.totalPrice}|" style="color: green"></p>
                         </td>
                         <td class="total-pr" style="color: black">
-                            <span>[(${order.paymentMethod})]</span>
+                            <span th:text="${order.paymentMethod}"></span>
                         </td>
                         <form>
 
                         </form>
                         <td class="d-flex gap-1">
-                            <button sec:authorize="hasAnyRole('ADMIN', 'EMPLOYEE')"
-                            th:href="@{/accept-order/(id = ${order.id})}" class="btn btn-sm btn-success">Accept
-                            </button>
+                            <form th:method="POST"
+                                  th:action="@{/ship-order}">
+                                <input type="hidden" name="id" th:value="${order.id}">
+                                <button sec:authorize="hasAnyRole('ADMIN', 'EMPLOYEE')" type="submit" name="action" value="ship"
+                                        title="Order shipped"
+                                        class="btn btn-sm btn-success">Shipped
+                                </button>
+                            </form>
                             <form th:method="POST"
                                   th:action="@{/cancel-order}">
                                 <input type="hidden" name="id" th:value="${order.id}">
