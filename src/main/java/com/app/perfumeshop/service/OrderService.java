@@ -57,4 +57,8 @@ public class OrderService {
 
         return orderRepository.save(order);
     }
+
+    public void cancelOrder(Long id) {
+        orderRepository.deleteById(id);
+    }
 }

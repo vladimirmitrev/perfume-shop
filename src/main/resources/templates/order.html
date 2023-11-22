@@ -14,18 +14,16 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
-<!--            <div th:if="${success}" class="text-center alert-success alert">-->
-<!--                <p th:text="${success}"></p>-->
-<!--            </div>-->
+            <div th:if="${success}" class="text-center alert-success alert">
+                <p th:text="${success}"></p>
+            </div>
             <div class="table-main table-responsive">
-                <table class="table">
+                <table class="table orders-table">
                     <thead>
                     <tr>
                         <th class="order-date">Order Date</th>
-                        <th>Delivery Date</th>
+                        <th>Estimated Delivery Date</th>
                         <th class="price-pr">Order Status</th>
-
-                        <th class="quantity-box">Quantity</th>
                         <th>Total Price</th>
                         <th class="total-pr">Payment Method</th>
                         <th>Action</th>
@@ -34,25 +32,37 @@
                     <tbody>
                     <tr th:each="order : ${orders}">
                         <td class="order-date">
-                            <span><b>[(${order.createdOn})]</b></span>
+                            <b><span th:text="${#dates.format(order.createdOn, 'dd-MM-yyyy')}"></span></b>
                         </td>
-                        <td class="name-pr" >
-
-                            <a th:if = "${order.accepted == null}"><p>Pending</p> </a>
+                        <td class="name-pr">
+                            <b><span th:if="${order.accepted != null}" th:text="|2 working days after day of purchase|">
+                            </span></b>
+                            <a th:if="${order.accepted == null}"><p>Pending</p></a>
                         </td>
                         <td class="price-pr">
                             <p th:text="${order.status}"></p>
                         </td>
-                        <td class="quantity-box" th:text="${order.totalPrice}"> </td>
                         <td class="total-pr">
-                            <p style="color: red">$ [(${order.totalPrice})]</p>
+                            <p th:text="|€${order.totalPrice}|" style="color: green"></p>
                         </td>
                         <td class="total-pr" style="color: black">
                             <span>[(${order.paymentMethod})]</span>
                         </td>
-                        <td>
-                            <a th:href="@{/cancel-order/(id = ${order.id})}" class="button-cancel">Cancel</a>
-                            <a sec:authorize="hasAnyRole('ADMIN', 'EMPLOYEE')" th:href="@{/cancel-order/(id = ${order.id})}" class="button-cancel">Accept</a>
+                        <form>
+
+                        </form>
+                        <td class="d-flex gap-1">
+                            <button sec:authorize="hasAnyRole('ADMIN', 'EMPLOYEE')"
+                            th:href="@{/accept-order/(id = ${order.id})}" class="btn btn-sm btn-success">Accept
+                            </button>
+                            <form th:method="POST"
+                                  th:action="@{/cancel-order}">
+                                <input type="hidden" name="id" th:value="${order.id}">
+                                <button type="submit" name="action" value="delete"
+                                        title="Cancel order"
+                                        class="btn btn-sm btn-danger">Cancel
+                                </button>
+                            </form>
                         </td>
                         </a>
                         </td>

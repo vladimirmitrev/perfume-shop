@@ -10,10 +10,8 @@ import com.app.perfumeshop.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.util.List;
@@ -48,7 +46,7 @@ public class OrderController {
     }
 
 
-    @GetMapping("/order")
+    @GetMapping("/orders")
     public String order(Model model, Principal principal) {
 
         User user = userService.findByEmail(principal.getName());
@@ -74,6 +72,15 @@ public class OrderController {
         model.addAttribute("page", "Order Detail");
         model.addAttribute("success", "Add order successfully");
 
-        return "redirect:/order";
+        return "redirect:/orders";
+    }
+    @RequestMapping(value = "/cancel-order", method = {RequestMethod.POST}, params = "action=delete")
+    public String cancelOrder(@RequestParam("id") Long id,
+                              RedirectAttributes attributes) {
+
+        orderService.cancelOrder(id);
+        attributes.addFlashAttribute("success", "Order was canceled successfully!");
+
+        return "redirect:/orders";
     }
 }

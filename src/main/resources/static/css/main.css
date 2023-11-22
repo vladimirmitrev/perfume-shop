@@ -151,6 +151,11 @@ form.main-form {
     border-radius: 3rem;
     margin-top: 2rem;
 }
+.orders-table {
+    background: aliceblue;
+    border-radius: 1rem;
+    padding: 1rem;
+}
 
 /*.invalid {*/
 /*    border-color: red;*/
