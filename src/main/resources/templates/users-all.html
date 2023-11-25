@@ -13,10 +13,10 @@
 <div class="container-fluid">
     <h2 class="text-center text-black mt-5">All users</h2>
     <div class="row">
-        <div class="col-12">
-            <table class="table table-bordered rounded-3 overflow-hidden" style="margin-top: 10px;">
+        <div class="table-main table-responsive">
+            <table class="table orders-table" style="margin-top: 10px;">
                 <thead>
-                <tr style="background-color: #90bfff; color: white; font-weight: bold">
+                <tr style="font-weight: bold">
                     <th scope="col" class="text-center">Username</th>
                     <th scope="col" class="text-center">Email</th>
                     <th scope="col" class="text-center">Profile</th>
@@ -31,20 +31,19 @@
                 <tr th:each="user: ${users}" th:object="${user}" th:if="${user.id != 1}">
 
                     <th scope="row" th:text="*{username}" class="text-center"
-                        style="background-color: #E098A7; color: white">1
+                       >1
                     </th>
 
-                    <td th:text="*{email}" class="text-center" style="background-color: #f4f1ed">0.00</td>
+                    <td th:text="*{email}" class="text-center fw-bold text-danger">0.00</td>
 
-                    <td style="text-align: center; background-color: #f4f1ed">
+                    <td style="text-align: center;">
                         <a type="button" class="button-detail"
                            th:href="@{/users/profile/{id}(id=${user.id})}">View user profile</a>
                     </td>
 
-                    <td th:text="*{#strings.listJoin(getRolesNames(),', ')}" class="text-center"
-                        style="background-color: #f4f1ed"></td>
+                    <td th:text="*{#strings.listJoin(getRolesNames(),', ')}" class="text-center fw-bold"></td>
 
-                    <td style="text-align: center; background-color: #f4f1ed">
+                    <td style="text-align: center;">
                         <a type="button" class="button-detail"
                            th:href="@{/users/change-role/{id}(id=${user.id})}">Change user roles</a>
                     </td>

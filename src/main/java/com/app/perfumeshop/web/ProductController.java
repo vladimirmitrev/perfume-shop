@@ -114,7 +114,7 @@ public class ProductController {
             return "redirect:/products/add";
         }
 
-        productService.addOrUpdateProduct(addProductModel, userDetails);
+        productService.addProduct(addProductModel, userDetails);
 
         return "redirect:/products/all";
     }
@@ -151,12 +151,13 @@ public class ProductController {
                 productService.findProductById(id).orElseThrow(() ->
                         new ObjectNotFoundException("Product with ID " + id + "not found"));
 
+        model.addAttribute("brands", brandService.getAllBrands());
         model.addAttribute("editProductModel", editProductModel);
 
         return "product-edit";
     }
 
-    @PostMapping("/products/edit/{id}")
+    @PatchMapping("/products/edit/{id}")
     public String editProductPost(@PathVariable("id") Long id,
                                   @ModelAttribute("editProductModel2")
                                   @Valid AddOrUpdateProductDTO editProductModel,
@@ -178,7 +179,7 @@ public class ProductController {
 //            return "redirect:/products/edit/{id}";
 //        }
 
-        productService.addOrUpdateProduct(editProductModel, userDetails);
+        productService.editProduct(editProductModel, userDetails, id);
 
         return "redirect:/products/all";
     }

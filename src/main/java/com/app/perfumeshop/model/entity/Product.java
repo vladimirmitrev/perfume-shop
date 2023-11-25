@@ -20,7 +20,7 @@ public class Product extends BaseEntity {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private SizeEnum milliliters;
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Category category;
 
     @Column(nullable = false,columnDefinition = "TEXT")
@@ -29,7 +29,7 @@ public class Product extends BaseEntity {
     @Column(nullable = false)
     @Positive
     private BigDecimal price;
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Brand brand;
 
     @OneToMany(mappedBy = "product")

@@ -38,8 +38,10 @@ td, th {
 }
 
 .card.offer, .product-details .list-group-item {
+    border-radius: 1rem;
+    max-width: 25rem;
     /*background: transparent;*/
-    background-image: linear-gradient(to bottom right, rgba(220, 220, 220, 0.9), rgba(255, 255, 255, 0.9));
+    /*background-image: linear-gradient(to bottom right, rgba(220, 220, 220, 0.9), rgba(255, 255, 255, 0.9));*/
 }
 
 .card-img-top-wrapper {
@@ -157,6 +159,9 @@ form.main-form {
     border-radius: 1rem;
     padding: 1rem;
 }
+/*.orders-table td {*/
+/*    margin-top: 40px;*/
+/*}*/
 .navbar-nav .nav-link {
     padding: 5px 10px;
 }

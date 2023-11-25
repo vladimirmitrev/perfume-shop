@@ -11,15 +11,14 @@ import com.app.perfumeshop.repository.ProductRepository;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -80,7 +79,7 @@ public class ProductService {
 //                .toList();
 
 
-    public void addOrUpdateProduct(AddOrUpdateProductDTO addOrUpdateProductDTO, PerfumeShopUserDetails userDetails) {
+    public void addProduct(AddOrUpdateProductDTO addOrUpdateProductDTO, PerfumeShopUserDetails userDetails) {
         Brand brand = brandRepository
                 .findByName(addOrUpdateProductDTO.getBrand());
 
@@ -97,6 +96,30 @@ public class ProductService {
                 .setImageUrl(addOrUpdateProductDTO.getImageUrl());
 
         productRepository.save(product);
+    }
+    public void editProduct(AddOrUpdateProductDTO addOrUpdateProductDTO, PerfumeShopUserDetails userDetails, Long productId) {
+        Brand brand = brandRepository
+                .findByName(addOrUpdateProductDTO.getBrand());
+
+        Category category = categoryRepository
+                .findByName(addOrUpdateProductDTO.getCategory());
+
+
+        Product product = findById(productId);
+
+        product.setBrand(brand);
+        product.setName(addOrUpdateProductDTO.getName())
+                .setCategory(category)
+                .setDescription(addOrUpdateProductDTO.getDescription())
+                .setMilliliters(addOrUpdateProductDTO.getMilliliters())
+                .setPrice(addOrUpdateProductDTO.getPrice())
+                .setImageUrl(addOrUpdateProductDTO.getImageUrl());
+
+        productRepository.save(product);
+    }
+
+    private Product findById(Long productId) {
+        return productRepository.findById(productId).get();
     }
 
     public Optional<ProductViewDTO> findProductById(Long id) {

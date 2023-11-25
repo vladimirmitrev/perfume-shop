@@ -9,16 +9,14 @@
     <nav th:replace="~{fragments/navbar}">Navbar</nav>
 </div>
 <div class="container">
-    <h2 class="text-center text-white">Edit product</h2>
+    <h2 class="text-center text-black">Edit product</h2>
     <form   th:object="${editProductModel}"
-            th:action="@{/products/edit/{id}(id = ${editProductModel.id})}"
-            th:method="POST"
+            th:action="@{/products/edit/{id}(id=${id})}"
+            th:method="PATCH"
           class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
         <div class="row">
-
             <div class="form-group col-md-6 mb-3">
-                <label class="text-center text-white font-weight-bold" for="brand">Brand</label>
-
+                <label class="text-center text-black font-weight-bold mb-1" for="brand">Brand</label>
                <div>
                    <input type="text" id="brand"
                           name="brand"
@@ -31,7 +29,7 @@
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label class="text-white font-weight-bold" for="model">Model</label>
+                <label class="text-black font-weight-bold mb-1" for="model">Model</label>
                 <input id="model"
                        name="model"
                        th:field="*{name}"
@@ -45,7 +43,7 @@
         </div>
         <div class="row">
             <div class="form-group col-md-6 mb-3">
-                <label class="text-center text-white font-weight-bold" for="category">Category</label>
+                <label class="text-center text-black font-weight-bold mb-1" for="category">Category</label>
                 <input
                         id="category"
                         name="category"
@@ -58,7 +56,7 @@
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label class="text-center text-white font-weight-bold" for="milliliters">Size</label>
+                <label class="text-center text-black font-weight-bold mb-1" for="milliliters">Size</label>
                 <input id="milliliters"
                         name="milliliters"
                         th:errorclass="is-invalid"
@@ -71,10 +69,10 @@
             </div>
         </div>
         <div class="form-group col-md-6 mb-3">
-            <label for="price" class="text-white font-weight-bold">Price</label>
+            <label for="price" class="text-black font-weight-bold mb-1">Price</label>
             <input  th:field="*{price}"
                     name="price"
-                    th:errorclass="is-invalid"
+                    th:errorclass="is-invalid" min="10"
                     id="price" type="number" class="form-control"
                     placeholder="Suggested price"/>
             <p  class="invalid-feedback errors alert alert-danger">
@@ -82,7 +80,7 @@
             </p>
         </div>
         <div class="form-group">
-            <label class="text-white font-weight-bold" for="description">Description</label>
+            <label class="text-black font-weight-bold mb-1" for="description">Description</label>
             <textarea id="description"
                       th:field="*{description}"
                       th:errorclass="is-invalid"
@@ -94,7 +92,7 @@
             </p>
         </div>
         <div class="form-group">
-            <label class="text-white font-weight-bold" for="imageUrl">Image URL</label>
+            <label class="text-black font-weight-bold mb-1" for="imageUrl">Image URL</label>
             <input id="imageUrl"
                    th:field="*{imageUrl}"
                    th:errorclass="is-invalid"
@@ -109,7 +107,7 @@
         <div class="row">
             <div class="col col-md-4">
                 <div class="button-holder d-flex">
-                    <input type="submit" class="btn btn-info btn-lg" value="Edit product"/>
+                    <button type="submit" class="btn btn-danger btn-lg mt-4 ">Edit product</button>
                 </div>
             </div>
         </div>
