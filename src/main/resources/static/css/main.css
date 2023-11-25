@@ -29,14 +29,15 @@ body {
 }
 
 .brand-section {
-    background-image: linear-gradient(to bottom right, rgba(220, 220, 220, 0.9), rgba(255, 255, 255, 0.9));
+    /*background-image: linear-gradient(to bottom right, rgba(231, 209, 74, 0.9), rgba(255, 255, 255, 0.9));*/
+    border-radius: 10px;
 }
 
 td, th {
     padding: 3px 8px;
 }
 
-.card.offer, .offer-details .list-group-item {
+.card.offer, .product-details .list-group-item {
     /*background: transparent;*/
     background-image: linear-gradient(to bottom right, rgba(220, 220, 220, 0.9), rgba(255, 255, 255, 0.9));
 }

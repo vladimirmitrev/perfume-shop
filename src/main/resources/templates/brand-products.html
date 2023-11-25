@@ -26,7 +26,7 @@
             <button class="btn btn-primary" type="submit">Search</button>
         </form>
     </div>
-    <h3 class="text-center text-black mt-5">All Products</h3>
+    <h3 th:object="${brand}" class="text-center text-black mt-5">All Products By Brand <span><b class="text-danger">[(${brand.toString()})]</b></span></h3>
     <div th:if="${products.size > 0}" class="offers row mx-auto d-flex flex-row justify-content-center">
 
         <div th:each="product : ${products}"

@@ -39,7 +39,8 @@ public class SecurityConfiguration {
                                 "/error").permitAll()
                         .requestMatchers("/products/all",
                                 "/products/details/**",
-                                "/brands/all",
+                                "/brands",
+                                "/api/all-brands",
                                 "/search").permitAll()
                         .requestMatchers("/products/add", "/products/edit","/orders-all").hasAnyRole(UserRoleEnum.ADMIN.name(), UserRoleEnum.EMPLOYEE.name())
                         .requestMatchers("/users/all", "/users/change-role/**").hasAnyRole(UserRoleEnum.ADMIN.name())

@@ -27,6 +27,10 @@ public class BrandsService {
                 .toList();
     }
 
+    public String getBrandNameById(Long id) {
+        return brandRepository.findById(id).get().getName();
+    }
+
 //    public List<BrandDTO> getAllBrands() {
 //
 //        List<BrandDTO> allBrands = brandRepository.findAll()

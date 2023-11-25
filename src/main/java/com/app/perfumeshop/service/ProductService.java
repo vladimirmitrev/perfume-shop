@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -150,6 +151,11 @@ public class ProductService {
                             return productViewDTO;
                         })).toList();
         return products;
+    }
+
+    public Page<ProductViewDTO> getAllProductByBrandId(Long id, Pageable pageable) {
+        return productRepository.findProductsByBrand_Id(id, pageable)
+                .map(productMapper::productEntityToProductViewDTO);
     }
 
 //    public Page<ProductViewDTO> pageProducts(int pageNo) {

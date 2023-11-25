@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments/head}">
+</head>
+
+<body>
+<div>
+    <nav th:replace="~{fragments/navbar}">Navbar</nav>
+</div>
+
+<div class="container">
+    <h2 class="text-center m-3">All Brands</h2>
+    <div class='row mb-4 d-flex justify-content-around'>
+        <div class="brand-section col-md-5 mr-auto d-flex flex-column" name="brand-section">
+
+
+        </div>
+    </div>
+    <footer th:replace="~{fragments/footer}"></footer>
+</div>
+</body>
+</html>
+<script th:src="@{/js/brands.js}"></script>

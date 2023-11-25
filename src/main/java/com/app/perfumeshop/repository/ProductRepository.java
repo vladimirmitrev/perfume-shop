@@ -1,5 +1,6 @@
 package com.app.perfumeshop.repository;
 
+import com.app.perfumeshop.model.dto.product.ProductViewDTO;
 import com.app.perfumeshop.model.entity.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,4 +18,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "FROM Product p" +
             " WHERE p.brand.name LIKE %?1% OR p.name LIKE %?1% OR p.description LIKE %?1%")
     List<Product> searchProductsByBrandOrNameOrDescription(String keyword);
+
+    Page<Product> findProductsByBrand_Id(Long id, Pageable pageable);
 }
