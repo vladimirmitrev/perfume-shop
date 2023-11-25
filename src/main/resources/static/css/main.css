@@ -156,10 +156,12 @@ form.main-form {
     border-radius: 1rem;
     padding: 1rem;
 }
-.nav-link {
-    padding: 0;
+.navbar-nav .nav-link {
+    padding: 5px 10px;
 }
-
+.place-order-btn {
+    background-color: #8aff4b;
+}
 /*.invalid {*/
 /*    border-color: red;*/
 /*}*/

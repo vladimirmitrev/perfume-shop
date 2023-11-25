@@ -7,11 +7,11 @@
 <body>
 <nav th:fragment="navbar"
      class="navbar navbar-expand-lg bg-transparent navbar-light">
-    <a class="navbar-brand mx-1 my-1" href="/"><img alt="logo picture"
+    <a class="navbar-brand mx-1 my-1" href="/" th:title="#{navbar_logo}"><img alt="logo picture"
                                                     th:src="@{/images/perfume-25-64.png}"
                                                     class="logo">
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -52,31 +52,31 @@
                        th:text="#{navbar_all_orders}"
                        th:href="@{/orders-all}">All Orders</a>
                 </li>
-                <li class="nav-item dropdown"  sec:authorize="isAuthenticated()">
+                <li class="nav-item dropdown"  sec:authorize="hasAnyRole('EMPLOYEE', 'USER')">
                     <div class="dropdown">
                         <a class="nav-link  text-black dropdown-toggle" type="button" id="accountDropdownMenu"
-                           data-bs-toggle="dropdown" aria-expanded="false">
+                           data-bs-toggle="dropdown" aria-expanded="false" th:text="#{navbar_my_account}">
                             My account
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="accountDropdownMenu">
-                            <li><a class="dropdown-item" th:href="@{/my-orders}">View my orders</a></li>
-                            <li sec:authorize="hasAnyRole('EMPLOYEE', 'ADMIN')"><a class="dropdown-item" th:href="@{/orders-all}">View all orders</a></li>
+                            <li><a class="dropdown-item" th:text="#{navbar_my_orders}" th:href="@{/my-orders}">View my orders</a></li>
+                            <li sec:authorize="hasAnyRole('EMPLOYEE', 'ADMIN')"><a class="dropdown-item" th:text="#{navbar_all_orders}" th:href="@{/orders-all}">View all orders</a></li>
                             <li><a class="dropdown-item" th:text="#{navbar_my_profile}" th:href="@{/users/profile}">My profile</a></li>
-                            <li><a class="dropdown-item" href="#">Change password</a></li>
+                            <li><a class="dropdown-item" th:text="#{navbar_change_password}" href="#">Change password</a></li>
                         </ul>
                     </div>
                 </li>
                 <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
                     <div class="dropdown">
                         <a class="nav-link  text-black dropdown-toggle" type="button" id="adminDropdownMenu"
-                           data-bs-toggle="dropdown" aria-expanded="false">
+                           data-bs-toggle="dropdown" aria-expanded="false" th:text="#{navbar_admin}">
                             Admin
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="adminDropdownMenu">
-                            <li><a class="dropdown-item" th:href="@{/users/all}">View all users</a></li>
-                            <li><a class="dropdown-item" th:href="@{/orders-all}">View all orders</a></li>
-                            <li><a class="dropdown-item" th:href="@{/users/profile/1}">My profile</a></li>
-                            <li><a class="dropdown-item" href="#">Change password</a></li>
+                            <li><a class="dropdown-item" th:text="#{navbar_view_all_users}"  th:href="@{/users/all}">View all users</a></li>
+                            <li><a class="dropdown-item"  th:text="#{navbar_all_orders}" th:href="@{/orders-all}">View all orders</a></li>
+                            <li><a class="dropdown-item" th:text="#{navbar_my_profile}" th:href="@{/users/profile/1}">My profile</a></li>
+                            <li><a class="dropdown-item" th:text="#{navbar_change_password}" href="#">Change password</a></li>
                         </ul>
                     </div>
                 </li>

@@ -55,7 +55,7 @@
                                 <img th:src="${cartItem.product.imageUrl}" style="max-width: 100px"
                                      class="d-block ui-w-40 ui-bordered mr-4" alt="">
                                 <div class="media-body">
-                                    <a th:href="@{/products/{productId}(productId=*{cartItem.product.id})}"
+                                    <a th:href="@{/products/details/{productId}(productId=*{cartItem.product.id})}"
                                        title="View product details" class="product-details d-block fw-bold "
                                        th:text="|${cartItem.product.brand.name} ${cartItem.product.name}|">Product 1</a>
                                     <small>
