@@ -77,7 +77,7 @@ public class OrderService {
 //        List<ShoppingCart> carts = shoppingCartRepository.findByCustomer(user);
 //
 //        carts.forEach(cart -> shoppingCartRepository.deleteById(cart.getId()));
-                ;
+        ;
         shoppingCartService.clearCurrentCartById(shoppingCart.getId());
         shoppingCartService.deleteCartById(shoppingCart.getId());
 
@@ -115,5 +115,10 @@ public class OrderService {
             orderRepository.deleteById(order.getId());
         });
 //        orderRepository.deleteAllCanceledOrders(OrderStatusEnum.CANCELLED);
+    }
+
+    public Order findOrderById(Long id) {
+
+        return orderRepository.findById(id).get();
     }
 }

@@ -1,12 +1,10 @@
 package com.app.perfumeshop.web;
 
-import com.app.perfumeshop.model.dto.UserRegisterDTO;
 import com.app.perfumeshop.model.dto.order.OrderCheckoutDTO;
-import com.app.perfumeshop.model.dto.product.AddOrUpdateProductDTO;
 import com.app.perfumeshop.model.dto.user.UserViewDTO;
-import com.app.perfumeshop.model.entity.Order;
-import com.app.perfumeshop.model.entity.ShoppingCart;
-import com.app.perfumeshop.model.entity.User;
+import com.app.perfumeshop.model.entity.*;
+import com.app.perfumeshop.model.enums.UserRoleEnum;
+import com.app.perfumeshop.service.OrderDetailService;
 import com.app.perfumeshop.service.OrderService;
 import com.app.perfumeshop.service.ShoppingCartService;
 import com.app.perfumeshop.service.UserService;
@@ -19,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -27,11 +26,13 @@ public class OrderController {
     private final UserService userService;
     private final OrderService orderService;
     private final ShoppingCartService shoppingCartService;
+    private final OrderDetailService orderDetailService;
 
-    public OrderController(UserService userService, OrderService orderService, ShoppingCartService shoppingCartService) {
+    public OrderController(UserService userService, OrderService orderService, ShoppingCartService shoppingCartService, OrderDetailService orderDetailService) {
         this.userService = userService;
         this.orderService = orderService;
         this.shoppingCartService = shoppingCartService;
+        this.orderDetailService = orderDetailService;
     }
 
     @GetMapping("/order-checkout")
@@ -117,10 +118,26 @@ public class OrderController {
 
     @RequestMapping(value = "/cancel-order", method = {RequestMethod.POST}, params = "action=cancel")
     public String cancelOrder(@RequestParam("id") Long id,
-                              RedirectAttributes attributes) {
+                              RedirectAttributes attributes,
+                              Principal principal) {
 
+//        User currentUser = userService.findByEmail(principal.getName());
+//        Order order = orderService.findOrderById(id);
+//        User userOwner = userService.getUserById(order.getCustomer().getId());
+//
+//        List<UserRole> userRoles = currentUser.getUserRoles();
+//        List<UserRoleEnum> userRoleList = Arrays.asList(UserRoleEnum.ADMIN, UserRoleEnum.EMPLOYEE);
+//
+//        if(currentUser == userOwner || userRoles.stream().anyMatch(userRoleList::contains)) {
+//            orderService.cancelOrder(id);
+//            attributes.addFlashAttribute("success", "Order was canceled successfully!");
+//        } else  {
+//            return "redirect:/";
+//        }
         orderService.cancelOrder(id);
         attributes.addFlashAttribute("success", "Order was canceled successfully!");
+
+
 
         return "redirect:/my-orders";
     }
@@ -145,21 +162,16 @@ public class OrderController {
         return "redirect:/orders-all";
     }
 
+    @GetMapping("/order-details/{id}")
+    public String orderDetails(@PathVariable("id") Long id, Model model) {
 
-//    @RequestMapping(value = "/update-cart", method = RequestMethod.POST, params = "action=update")
-//    public String updateCart(@RequestParam("quantity") int quantity,
-//                             @RequestParam("id") Long productId,
-//                             Model model,
-//                             Principal principal) {
-//
-//        User user = userService.findByEmail(principal.getName());
-//
-//        Product product = productService.getProductById(productId);
-//
-//        ShoppingCart shoppingCart = shoppingCartService.updateItemInCart(product, quantity, user);
-//
-//        model.addAttribute("shoppingCart", shoppingCart);
-//
-//        return "redirect:/cart";
-//    }
+        List<OrderDetail> orderDetail = orderDetailService.findOrderById(id);
+        Order order = orderService.findOrderById(id);
+
+        model.addAttribute("orderDetail", orderDetail);
+        model.addAttribute("order", order);
+
+
+        return "order-details";
+    }
 }

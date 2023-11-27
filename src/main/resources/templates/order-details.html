@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments/head}">
+</head>
+<body>
+<div>
+    <nav th:replace="~{fragments/navbar}">Navbar</nav>
+</div>
+<div class="order-details mt-5">
+    <div class="container order-details-container" th:object="${order}">
+        <div class="row">
+            <div class="title-left">
+                <h3 class="mb-4" th:text="|Details for order #907732${order.id}|">2</h3>
+            </div>
+            <div class="col-sm-12 col-lg-12 mb-3 d-flex gap-5">
+                    <input type="hidden" name="id" th:value="${id}">
+                    <div class="col-md-6 col-lg-6">
+                        <div class="odr-box">
+                            <div class="rounded p-2 bg-light order-items">
+                                <div class="media mb-2 border-bottom" th:each="order : ${orderDetail}">
+                                    <div class="media-body"><img class="order-image"
+                                                                 th:src="${order.product.imageUrl}"></img>
+                                        <a th:href="@{/products/details/{productId}(productId=${order.product.id})}"
+                                           th:text="|${order.product.brand.getName().toString()} ${order.product.name}|"
+                                        title="View product details"></a>
+                                        <div class="small text-muted">Price: € [(${order.product.price})]
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex gr-total justify-content-between mt-3">
+                                <h4>Total price</h4>
+                                <div class="ml-auto h5 text-success fw-bold"
+                                     th:text="|€ ${order.totalPrice}|"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 order-box">
+                        <div class="title-left">
+                            <h5 class="mt-4"><b>Shipping address</b></h5>
+                            <span class="text-danger fw-bold" th:text="|${order.shippingAddress}, ${order.city}, ${order.postCode}|"></span>
+                            <h5 class="mt-4"><b>Preferred shipping courier</b></h5>
+                            <span class="text-success fw-bold h5" th:text="${order.courier}"></span>
+                            <h5 class="mt-4"><b>Date of purchase</b></h5>
+                            <span class="text-primary fw-bold h5" th:text="${#dates.format(order.createdOn, 'dd-MM-yyyy')}"></span>
+                            <h5 class="mt-4"><b>Order status</b></h5>
+                            <div class="text-success fw-bold h5">
+                            <p th:if="${order.status.name() == 'CANCELLED'}" class="text-danger">CANCELLED</p>
+                            <p th:if="${order.status.name() == 'SHIPPED'}" class="text-success">SHIPPED</p>
+                            <p th:if="${order.status.name() == 'PROCESSING'}" class="text-secondary">PROCESSING</p>
+                            </div>
+                        <div class="mt-4 d-flex gap-5">
+                            <a th:href="@{/my-orders}" class="ml-auto btn btn-warning btn-lg">Back to my orders</a>
+                            <form th:method="POST"
+                                  th:action="@{/cancel-order}">
+                                <input type="hidden" name="id" th:value="${order.id}">
+                                <button th:if="${order.status.name() != 'SHIPPED' and order.status.name() != 'CANCELLED'}"
+                                        sec:authorize="hasAnyRole('ADMIN', 'EMPLOYEE')"
+                                        type="submit" name="action" value="cancel"
+                                        title="Cancel order"
+                                        class="btn btn-lg btn-danger">Cancel order
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{fragments/footer}"></footer>
+</body>
+</html>

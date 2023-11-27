@@ -25,7 +25,6 @@
                         <th class="price-pr">Order Status</th>
                         <th>Total Price</th>
                         <th class="total-pr">Payment Method</th>
-                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -34,7 +33,7 @@
                             <b><span th:text="${#dates.format(order.createdOn, 'dd-MM-yyyy')}"></span></b>
                         </td>
                         <td class="order-number fw-bold">
-                            <a th:href="@{#}" th:text="|#907732${order.getId()}|" title="View Order Details"></a>
+                            <a th:href="@{/order-details/{id}(id=${order.id})}" th:text="|#907732${order.getId()}|" title="View Order Details"></a>
                         </td>
                         <td class="name-pr">
                             <b><span th:if="${order.shipped != null}" th:text="|2 working days after day of purchase|">
@@ -48,7 +47,7 @@
                             <p th:if="${order.status.name() == 'PROCESSING'}" class="text-black">PROCESSING</p>
                         </td>
                         <td class="total-pr">
-                            <p th:text="|€${order.totalPrice}|" style="color: green"></p>
+                            <p th:text="|€ ${order.totalPrice}|" style="color: green"></p>
                         </td>
                         <td class="total-pr" style="color: black">
                             <span th:text="${order.paymentMethod}"></span>
@@ -56,26 +55,27 @@
                         <form>
 
                         </form>
-                        <td class="d-flex gap-1">
-                            <form th:method="POST"
-                                  th:action="@{/ship-order}">
-                                <input type="hidden" name="id" th:value="${order.id}">
-                                <button sec:authorize="hasAnyRole('ADMIN', 'EMPLOYEE')" type="submit" name="action" value="ship"
-                                        th:if="${order.status.name() != 'SHIPPED' and order.status.name() != 'CANCELLED'}"
-                                        title="Order shipped"
-                                        class="btn btn-sm btn-success">Shipped
-                                </button>
-                            </form>
-                            <form th:method="POST"
-                                  th:action="@{/cancel-order}">
-                                <input type="hidden" name="id" th:value="${order.id}">
-                                <button th:if="${order.status.name() != 'SHIPPED' and order.status.name() != 'CANCELLED'}"
-                                        type="submit" name="action" value="cancel"
-                                        title="Cancel order"
-                                        class="btn btn-sm btn-danger">Cancel
-                                </button>
-                            </form>
-                        </td>
+<!--                        <td class="d-flex gap-1">-->
+<!--                            <form th:method="POST"-->
+<!--                                  th:action="@{/ship-order}">-->
+<!--                                <input type="hidden" name="id" th:value="${order.id}">-->
+<!--                                <button sec:authorize="hasAnyRole('ADMIN', 'EMPLOYEE')" type="submit" name="action" value="ship"-->
+<!--                                        th:if="${order.status.name() != 'SHIPPED' and order.status.name() != 'CANCELLED'}"-->
+<!--                                        title="Order shipped"-->
+<!--                                        class="btn btn-sm btn-success">Shipped-->
+<!--                                </button>-->
+<!--                            </form>-->
+<!--                            <form th:method="POST"-->
+<!--                                  th:action="@{/cancel-order}">-->
+<!--                                <input type="hidden" name="id" th:value="${order.id}">-->
+<!--                                <button th:if="${order.status.name() != 'SHIPPED' and order.status.name() != 'CANCELLED'}"-->
+<!--                                        sec:authorize="hasAnyRole('ADMIN', 'EMPLOYEE')"-->
+<!--                                        type="submit" name="action" value="cancel"-->
+<!--                                        title="Cancel order"-->
+<!--                                        class="btn btn-sm btn-danger">Cancel-->
+<!--                                </button>-->
+<!--                            </form>-->
+<!--                        </td>-->
                         </a>
                         </td>
                     </tr>

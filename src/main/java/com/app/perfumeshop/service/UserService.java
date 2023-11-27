@@ -109,4 +109,8 @@ public class UserService {
                 .map(userMapper::userEntityToUserDto)
                 .orElseThrow(() -> new ObjectNotFoundException("User with this email " + email + "is not found!"));
     }
+
+    public User getUserById(Long id) {
+        return userRepository.findById(id).get();
+    }
 }

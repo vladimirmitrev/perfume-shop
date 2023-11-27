@@ -35,7 +35,7 @@
                             <span th:text="${order.getCustomer().email}"></span>
                         </td>
                         <td class="order-number fw-bold">
-                            <a th:href="@{#}" th:text="|#907732${order.getId()}|" title="View Order Details"></a>
+                            <a th:href="@{/order-details/{id}(id=${order.id})}" th:text="|#907732${order.getId()}|" title="View Order Details"></a>
                         </td>
                         <td class="order-date text-blue">
                             <b><span th:text="${#dates.format(order.createdOn, 'dd-MM-yyyy')}"></span></b>
@@ -75,6 +75,7 @@
                                   th:action="@{/cancel-customer-order}">
                                 <input type="hidden" name="id" th:value="${order.id}">
                                 <button th:if="${order.status.name() != 'SHIPPED' and order.status.name() != 'CANCELLED'}"
+                                        sec:authorize="hasAnyRole('ADMIN', 'EMPLOYEE')"
                                         type="submit" name="action" value="cancel"
                                         title="Cancel order"
                                         class="btn btn-sm btn-danger">Cancel
