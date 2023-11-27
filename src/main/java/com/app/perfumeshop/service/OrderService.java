@@ -1,5 +1,6 @@
 package com.app.perfumeshop.service;
 
+import com.app.perfumeshop.model.dto.order.OrderCheckoutDTO;
 import com.app.perfumeshop.model.entity.Order;
 import com.app.perfumeshop.model.entity.OrderDetail;
 import com.app.perfumeshop.model.entity.ShoppingCart;
@@ -12,6 +13,7 @@ import com.app.perfumeshop.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -38,15 +40,25 @@ public class OrderService {
     }
 
     @Transactional
-    public Order placeOrder(ShoppingCart shoppingCart) {
+    public Order placeOrder(ShoppingCart shoppingCart, OrderCheckoutDTO orderCheckoutDTO) {
+        BigDecimal totalPrice = shoppingCart.getTotalPrice();
+        BigDecimal discountPercentage = BigDecimal.valueOf(5);
+        BigDecimal shipping = BigDecimal.valueOf(7.99);
+        BigDecimal discountAmount = totalPrice.multiply(discountPercentage.divide(BigDecimal.valueOf(100)));
+        BigDecimal discountedPrice = totalPrice.subtract(discountAmount).add(shipping);
+
         Order order = new Order();
         order
                 .setCreatedOn(new Date())
                 .setStatus(OrderStatusEnum.PROCESSING)
                 .setCustomer(shoppingCart.getCustomer())
-                .setTotalPrice(shoppingCart.getTotalPrice())
+                .setTotalPrice(discountedPrice)
                 .setShipped(false)
-                .setPaymentMethod("CASH");
+                .setPaymentMethod("CASH")
+                .setShippingAddress(orderCheckoutDTO.getAddress())
+                .setCity(orderCheckoutDTO.getCity())
+                .setCourier(orderCheckoutDTO.getCourier().name())
+                .setPostCode(orderCheckoutDTO.getPostCode());
 
         List<OrderDetail> orderDetailList = new ArrayList<>();
 

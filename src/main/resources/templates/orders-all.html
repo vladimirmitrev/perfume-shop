@@ -20,6 +20,7 @@
                     <thead>
                     <tr class="fw-bold">
                         <th class="user-email">User Email</th>
+                        <th class="order-number">Order Number</th>
                         <th class="order-date">Order Date</th>
                         <th>Estimated Delivery Date</th>
                         <th class="price-pr">Order Status</th>
@@ -33,11 +34,14 @@
                         <td class="user-email">
                             <span th:text="${order.getCustomer().email}"></span>
                         </td>
+                        <td class="order-number fw-bold">
+                            <a th:href="@{#}" th:text="|#907732${order.getId()}|" title="View Order Details"></a>
+                        </td>
                         <td class="order-date text-blue">
                             <b><span th:text="${#dates.format(order.createdOn, 'dd-MM-yyyy')}"></span></b>
                         </td>
                         <td class="name-pr">
-                            <span th:if="${order.shipped != null}" th:text="|2 working days after day of purchase|">
+                            <span th:if="${order.shipped != null}" th:text="|1-3 bussiness days after day of purchase|">
                             </span>
                             <a th:if="${order.shipped == null}"><p>Pending</p></a>
                         </td>
@@ -70,7 +74,7 @@
                             <form th:method="POST"
                                   th:action="@{/cancel-customer-order}">
                                 <input type="hidden" name="id" th:value="${order.id}">
-                                <button th:if="${order.status.name() != 'CANCELLED'}"
+                                <button th:if="${order.status.name() != 'SHIPPED' and order.status.name() != 'CANCELLED'}"
                                         type="submit" name="action" value="cancel"
                                         title="Cancel order"
                                         class="btn btn-sm btn-danger">Cancel

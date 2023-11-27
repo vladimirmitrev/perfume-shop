@@ -1,62 +1,27 @@
 package com.app.perfumeshop.model.dto.order;
 
-import java.math.BigDecimal;
+import com.app.perfumeshop.model.enums.CourierNameEnum;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 
 public class OrderCheckoutDTO {
 
-    private String firstName;
-    private String lastName;
-    private String phoneNumber;
-
-    private String email;
-
+    @NotEmpty(message = "Shipping address cannot be empty!")
+    @Size(min = 5, max = 30, message = "Address length must be between 5 and 30 characters!")
     private String address;
+    @NotEmpty(message = "City cannot be empty!")
+    @Size(min = 3, max = 30, message = "Address length must be between 3 and 30 characters!")
     private String city;
+    @NotEmpty(message = "Postcode cannot be empty!")
+    @Size(min = 4, max = 10, message = "Postcode length must be between 4 and 10 characters!")
     private String postCode;
-
-    private String courier;
-
-    private String notes;
-
-    private BigDecimal totalPrice;
+    @NotNull(message = "Choose a courier!")
+    private CourierNameEnum courier;
 
     public OrderCheckoutDTO() {
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public OrderCheckoutDTO setFirstName(String firstName) {
-        this.firstName = firstName;
-        return this;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public OrderCheckoutDTO setLastName(String lastName) {
-        this.lastName = lastName;
-        return this;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public OrderCheckoutDTO setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-        return this;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public OrderCheckoutDTO setEmail(String email) {
-        this.email = email;
-        return this;
     }
 
     public String getAddress() {
@@ -86,30 +51,12 @@ public class OrderCheckoutDTO {
         return this;
     }
 
-    public String getCourier() {
+    public CourierNameEnum getCourier() {
         return courier;
     }
 
-    public OrderCheckoutDTO setCourier(String courier) {
+    public OrderCheckoutDTO setCourier(CourierNameEnum courier) {
         this.courier = courier;
-        return this;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public OrderCheckoutDTO setNotes(String notes) {
-        this.notes = notes;
-        return this;
-    }
-
-    public BigDecimal getTotalPrice() {
-        return totalPrice;
-    }
-
-    public OrderCheckoutDTO setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
         return this;
     }
 }

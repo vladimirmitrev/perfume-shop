@@ -1,5 +1,8 @@
 package com.app.perfumeshop.web;
 
+import com.app.perfumeshop.model.dto.UserRegisterDTO;
+import com.app.perfumeshop.model.dto.order.OrderCheckoutDTO;
+import com.app.perfumeshop.model.dto.product.AddOrUpdateProductDTO;
 import com.app.perfumeshop.model.dto.user.UserViewDTO;
 import com.app.perfumeshop.model.entity.Order;
 import com.app.perfumeshop.model.entity.ShoppingCart;
@@ -8,8 +11,10 @@ import com.app.perfumeshop.service.OrderService;
 import com.app.perfumeshop.service.ShoppingCartService;
 import com.app.perfumeshop.service.UserService;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -32,9 +37,14 @@ public class OrderController {
     @GetMapping("/order-checkout")
     public String checkOut(Principal principal, Model model) {
 
+        if (!model.containsAttribute("shippingInfo")) {
+            model.addAttribute("shippingInfo", new OrderCheckoutDTO());
+        }
+
         UserViewDTO userViewDTO = userService.getUserByEmail(principal.getName());
 
         ShoppingCart shoppingCart = userService.findByEmail(principal.getName()).getShoppingCart();
+
 
         model.addAttribute("user", userViewDTO);
         model.addAttribute("title", "Check-Out");
@@ -55,6 +65,7 @@ public class OrderController {
 
         return "my-orders";
     }
+
     @GetMapping("/orders-all")
     public String ordersAll(Model model) {
 
@@ -65,17 +76,37 @@ public class OrderController {
         return "orders-all";
     }
 
-//    @RequestMapping(value = "/add-order", method = {RequestMethod.POST})
-    @PostMapping("/add-order")
-    public String addOrder(Model model,
+//    @ModelAttribute("shippingInfo")
+//    public OrderCheckoutDTO initShippingInfo() {
+//        return new OrderCheckoutDTO();
+//    }
+
+    //    @RequestMapping(value = "/add-order", method = {RequestMethod.POST})
+    @PostMapping("/order-checkout")
+    public String addOrder(@Valid OrderCheckoutDTO shippingInfo,
+                           BindingResult bindingResult,
+                           RedirectAttributes redirectAttributes,
+                           Model model,
                            Principal principal,
                            HttpSession session) {
 
+        model.addAttribute("shippingInfo", shippingInfo);
+
+        if (bindingResult.hasErrors()) {
+
+            redirectAttributes.addFlashAttribute("shippingInfo", shippingInfo);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.shippingInfo", bindingResult);
+
+            return "redirect:/order-checkout";
+
+        }
+
         User user = userService.findByEmail(principal.getName());
         ShoppingCart shoppingCart = user.getShoppingCart();
-        Order order = orderService.placeOrder(shoppingCart);
+        Order order = orderService.placeOrder(shoppingCart, shippingInfo);
 
         session.removeAttribute("totalItems");
+        model.addAttribute("shippingInfo", shippingInfo);
         model.addAttribute("order", order);
         model.addAttribute("title", "Order Detail");
         model.addAttribute("page", "Order Detail");
@@ -83,6 +114,7 @@ public class OrderController {
 
         return "redirect:/my-orders";
     }
+
     @RequestMapping(value = "/cancel-order", method = {RequestMethod.POST}, params = "action=cancel")
     public String cancelOrder(@RequestParam("id") Long id,
                               RedirectAttributes attributes) {
@@ -92,9 +124,10 @@ public class OrderController {
 
         return "redirect:/my-orders";
     }
+
     @RequestMapping(value = "/cancel-customer-order", method = {RequestMethod.POST}, params = "action=cancel")
     public String cancelCustomerOrder(@RequestParam("id") Long id,
-                              RedirectAttributes attributes) {
+                                      RedirectAttributes attributes) {
 
         orderService.cancelOrder(id);
         attributes.addFlashAttribute("success", "Order was canceled successfully!");
@@ -104,7 +137,7 @@ public class OrderController {
 
     @RequestMapping(value = "/ship-order", method = {RequestMethod.POST}, params = "action=ship")
     public String shipOrder(@RequestParam("id") Long id,
-                              RedirectAttributes attributes) {
+                            RedirectAttributes attributes) {
 
         orderService.shippedOrder(id);
         attributes.addFlashAttribute("success", "Order was shipped successfully!");

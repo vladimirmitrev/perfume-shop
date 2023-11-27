@@ -12,63 +12,8 @@
 <div class="cart-box-main">
     <div class="container order-container">
         <div class="row">
-            <div class="col-sm-6 col-lg-6 mb-1">
-                <div class="checkout-address">
-                    <div class="title-left">
-                        <h3>Billing address</h3>
-                    </div>
-                    <form class="needs-validation" novalidate th:object="${user}">
-
-                        <div class="mb-1">
-                            <label for="firstName">First name *</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" th:field="*{firstName}" id="firstName"
-                                       readonly>
-                            </div>
-                            <label for="lastName">Last name *</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" th:field="*{lastName}" id="lastName"
-                                       readonly>
-                            </div>
-                            <label for="email">Username *</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" th:field="*{email}" id="email"
-                                       readonly>
-                            </div>
-                        </div>
-                        <div class="mb-1">
-                            <label for="phone">Phone Number *</label>
-                            <input type="text" class="form-control" th:field="*{phoneNumber}" id="phone"
-                                   readonly>
-                        </div>
-                        <div class="mb-1">
-                            <label for="address">Address *</label>
-                            <input type="text" class="form-control"
-                                   id="address" placeholder="Type an address for shipping" required>
-                            <label for="address">City *</label>
-                            <input type="text" class="form-control"
-                                   id="city" placeholder="Type an city or town" required>
-                        </div>
-                        <select class="form-select" aria-label="Default select example" required>
-                            <option selected>Select a courier</option>
-                            <option value="Speedy">Speedy</option>
-                            <option value="Econt">Econt</option>
-                        </select>
-                        <hr class="mb-2">
-                        <div class="title"><span>Payment Method</span></div>
-                        <div class="d-block my-2">
-                            <div class="custom-control custom-radio">
-                                <input id="debit" name="paymentMethod" type="radio" checked class="custom-control-input"
-                                       required>
-                                <label class="custom-control-label" for="debit">Cash</label>
-                            </div>
-                        </div>
-                        <hr class="mb-1">
-                    </form>
-                </div>
-            </div>
             <div class="col-sm-6 col-lg-6 mb-3">
-                <form th:action="@{/add-order}" method="post" th:object="${shoppingCart}">
+                <div th:object="${shoppingCart}">
                     <input type="hidden" name="id" th:value="${id}">
                     <div class="col-md-12 col-lg-12">
                         <div class="odr-box">
@@ -91,38 +36,156 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 col-lg-12">
-                        <div class="order-box">
-                            <div class="title-left">
-                                <h4 class="mt-4"><b>Your order</b></h4>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <div class="font-weight-bold">Products</div>
-                                <div class="ml-auto font-weight-bold">Total</div>
-                            </div>
-                            <hr class="my-1">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h6>Sub Total</h6>
-                                <div class="ml-auto font-weight-bold" th:text="|€ ${shoppingCart.totalPrice}|"></div>
-                            </div>
-                            <hr class="my-1">
-                            <div class="d-flex justify-content-between">
-                                <h6>Shipping and handling</h6>
-                                <div class="ml-auto font-weight-bold">+ € 7.99</div>
-                            </div>
-                            <hr>
-                            <div class="d-flex gr-total justify-content-between">
-                                <h4>Total price</h4>
-                                <div class="ml-auto h5 text-danger" th:text="|€ ${shoppingCart.totalPrice + 7.99}|"></div>
-                            </div>
-                            <hr>
+                    <div class="col-md-12 col-lg-12 order-box">
+                        <div class="title-left">
+                            <h4 class="mt-4"><b>Your order</b></h4>
+                        </div>
+                        <!--                            <div class="d-flex justify-content-between">-->
+                        <!--                                <div class="font-weight-bold">Products</div>-->
+                        <!--                                <div class="ml-auto font-weight-bold">Total</div>-->
+                        <!--                            </div>-->
+                        <hr class="my-1">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h6>Sub Total</h6>
+                            <div class="ml-auto fw-bold" th:text="|€ ${shoppingCart.totalPrice}|"></div>
+                        </div>
+                        <hr class="my-1">
+                        <div class="d-flex justify-content-between">
+                            <h6>Discount</h6>
+                            <div class="ml-auto fw-bold text-danger">- 5%</div>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between">
+                            <h6>Shipping and handling</h6>
+                            <div class="ml-auto fw-bold">+ € 7.99</div>
+                        </div>
+                        <hr>
+                        <div class="d-flex gr-total justify-content-between">
+                            <h4>Total price</h4>
+                            <div class="ml-auto h5 text-success fw-bold"
+                                 th:text="|€ ${shoppingCart.totalPrice - (shoppingCart.totalPrice * 5 / 100) + 7.99}|"></div>
+                        </div>
+                        <hr>
+                        <div class="col-12 d-flex justify-content-between shopping-box">
+                            <a th:href="@{/cart}" class="ml-auto btn btn-warning btn-lg">Back to Cart</a>
                         </div>
                     </div>
-                    <div class="col-12 d-flex justify-content-between shopping-box">
-                        <a th:href="@{/cart}" class="ml-auto btn btn-warning btn-lg">Back to Cart</a>
-                        <button type="submit" class="ml-auto btn btn-info btn-lg place-order-btn">Place Order</button>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-6 mb-1">
+                <div class="checkout-address">
+                    <div class="title-left">
+                        <h3>Billing address</h3>
                     </div>
-                </form>
+                    <div class="filed fields" th:object="${user}">
+                        <div class="mb-1">
+                            <label for="firstName">First name *</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" th:field="${user.firstName}" id="firstName"
+                                       readonly>
+                            </div>
+                            <label for="lastName">Last name *</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" th:field="${user.lastName}" id="lastName"
+                                       readonly>
+                            </div>
+                            <label for="email">Username *</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" th:field="${user.email}" id="email"
+                                       readonly>
+                            </div>
+                        </div>
+                        <div class="mb-1">
+                            <label for="phone">Phone Number *</label>
+                            <input type="text" class="form-control" th:field="${user.phoneNumber}" id="phone"
+                                   readonly>
+                        </div>
+                    </div>
+                    <!--                    </div>-->
+                    <form class="needs-validation" novalidate
+                          th:object="${shippingInfo}"
+                          th:action="@{/order-checkout}"
+                          th:method="POST">
+                        <div class="mb-1">
+                            <label for="address">Address *</label>
+                            <input type="text" class="form-control"
+                                   id="address"
+                                   name="address"
+                                   th:field="${shippingInfo.address}"
+                                   th:errorclass="is-invalid"
+                                   placeholder="Type an address for shipping">
+                            <div class="invalid-feedback errors alert alert-danger">
+                                <div
+                                        th:each="err : ${#fields.errors('address')}"
+                                        th:text="${err}"
+                                />
+                            </div>
+                            <label for="city">City *</label>
+                            <input type="text" class="form-control"
+                                   id="city"
+                                   name="city"
+                                   th:field="${shippingInfo.city}"
+                                   th:errorclass="is-invalid"
+                                   placeholder="Type an city or town">
+                            <div class="invalid-feedback errors alert alert-danger">
+                                <div
+                                        th:each="err : ${#fields.errors('city')}"
+                                        th:text="${err}"
+                                />
+                            </div>
+                            <label for="postCode">Postal Code *</label>
+                            <input type="text" class="form-control"
+                                   id="postCode"
+                                   name="postCode"
+                                   th:field="${shippingInfo.postCode}"
+                                   th:errorclass="is-invalid"
+                                   placeholder="Type a postal code">
+                            <div class="invalid-feedback errors alert alert-danger">
+                                <div
+                                        th:each="err : ${#fields.errors('postCode')}"
+                                        th:text="${err}"
+                                />
+                            </div>
+
+                            <!--                        <select class="form-select" aria-label="Default select example" required>-->
+                            <!--                            <option selected>Select a courier</option>-->
+                            <!--                            <option value="Speedy">Speedy</option>-->
+                            <!--                            <option value="Econt">Econt</option>-->
+                            <!--                        </select>-->
+                            <label for="courier">Courier *</label>
+                            <select
+                                    id="courier"
+                                    name="courier"
+                                    th:errorclass="is-invalid"
+                                    class="form-control mt-2">
+                                <option value="">- Select courier -</option>
+                                <option th:each="c : ${T(com.app.perfumeshop.model.enums.CourierNameEnum).values()}"
+                                        th:text="${c}"
+                                        th:value="${c}"
+                                        th:selected="${c} == ${shippingInfo.courier}"> Courier type
+                                </option>
+                            </select>
+                            <div class="invalid-feedback errors alert alert-danger">
+                                <div
+                                        th:each="err : ${#fields.errors('courier')}"
+                                        th:text="${err}"
+                                />
+                            </div>
+                        </div>
+                        <hr class="mb-2">
+                        <div class="title"><span>Payment Method</span></div>
+                        <div class="d-block my-2">
+                            <div class="custom-control custom-radio">
+                                <input id="debit" name="paymentMethod" type="radio" checked class="custom-control-input"
+                                       required>
+                                <label class="custom-control-label" for="debit">Cash</label>
+                            </div>
+                        </div>
+                        <hr class="mb-1">
+                        <!--                        <a th:href="@{/cart}" class="ml-auto btn btn-warning btn-lg">Back to Cart</a>-->
+                        <button type="submit" class="ml-auto btn btn-info btn-lg place-order-btn">Place Order</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

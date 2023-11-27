@@ -21,6 +21,17 @@ public class Order extends BaseEntity {
     private OrderStatusEnum status;
     @Column(nullable = false)
     private String paymentMethod;
+
+    @Column(nullable = true)
+    private String shippingAddress;
+
+    @Column(nullable = true)
+    private String city;
+    @Column(nullable = true)
+    private String postCode;
+
+    @Column(nullable = true)
+    private String courier;
     @Column(nullable = false)
     private boolean isShipped;
     @ManyToOne(fetch = FetchType.EAGER)
@@ -28,6 +39,9 @@ public class Order extends BaseEntity {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     private List<OrderDetail> orderDetailList;
+
+    public Order() {
+    }
 
     public List<OrderDetail> getOrderDetailList() {
         return orderDetailList;
@@ -89,6 +103,42 @@ public class Order extends BaseEntity {
 
     public Order setShipped(boolean shipped) {
         isShipped = shipped;
+        return this;
+    }
+
+    public String getShippingAddress() {
+        return shippingAddress;
+    }
+
+    public Order setShippingAddress(String shippingAddress) {
+        this.shippingAddress = shippingAddress;
+        return this;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public Order setCity(String city) {
+        this.city = city;
+        return this;
+    }
+
+    public String getCourier() {
+        return courier;
+    }
+
+    public Order setCourier(String courier) {
+        this.courier = courier;
+        return this;
+    }
+
+    public String getPostCode() {
+        return postCode;
+    }
+
+    public Order setPostCode(String postCode) {
+        this.postCode = postCode;
         return this;
     }
 }
