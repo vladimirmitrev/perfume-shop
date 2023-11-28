@@ -13,6 +13,7 @@
     <form th:action="@{/products/add}"
           th:method="post"
           th:object="${addProductModel}"
+          enctype="multipart/form-data"
           class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
         <div class="row">
 
@@ -20,7 +21,6 @@
                 <label class="text-center text-black font-weight-bold mt-2" for="brand">Brand</label>
                 <select id="brand"
                         name="brand"
-                        required
                         th:errorclass="is-invalid"
                         class="form-control mt-2">
                     <option value="">- Select a brand -</option>
@@ -38,7 +38,6 @@
                 <label class="text-black font-weight-bold mt-2" for="name">Name</label>
                 <input id="name"
                        name="name"
-                       required
                        th:field="*{name}"
                        th:errorclass="is-invalid"
                        type="text" class="form-control mt-2"
@@ -54,7 +53,6 @@
                 <select
                         id="category"
                         name="category"
-                        required
                         th:errorclass="is-invalid"
                         class="form-control mt-2">
                     <option value="">- Select category type -</option>
@@ -73,7 +71,6 @@
                 <label class="text-center text-black font-weight-bold mt-2" for="milliliters">Size</label>
                 <select id="milliliters"
                         name="milliliters"
-                        required
                         th:errorclass="is-invalid"
                         class="form-control mt-2">
                     <option value="">- Select size -</option>
@@ -92,7 +89,6 @@
             <label for="price" class="font-weight-bold mt-2">Price</label>
             <input  th:field="*{price}"
                     th:errorclass="is-invalid"
-                    required
                     id="price" type="number" class="form-control mt-2" min="10"
                     placeholder="Suggested price"/>
             <p  class="invalid-feedback errors alert alert-danger">
@@ -104,26 +100,39 @@
             <textarea id="description"
                       th:field="*{description}"
                       th:errorclass="is-invalid"
-                      required
                       type="textarea" class="form-control mt-2" rows="3"
                       placeholder="Description"></textarea>
             <p class="invalid-feedback errors alert alert-danger">
                 Description is required.
             </p>
         </div>
+<!--        <div class="form-group">-->
+<!--            <label class="text-black font-weight-bold mt-2" for="imageUrl">Image URL</label>-->
+<!--            <input id="imageUrl"-->
+<!--                   th:field="*{imageUrl}"-->
+<!--                   th:errorclass="is-invalid"-->
+<!--                   required-->
+<!--                   type="url" class="form-control mt-2"-->
+<!--                   placeholder="Put product image URL here">-->
+<!--            <p class="invalid-feedback errors alert alert-danger">-->
+<!--                Product image URL is required.-->
+<!--            </p>-->
+<!--        </div>-->
         <div class="form-group">
-            <label class="text-black font-weight-bold mt-2" for="imageUrl">Image URL</label>
-            <input id="imageUrl"
-                   th:field="*{imageUrl}"
-                   th:errorclass="is-invalid"
-                   required
-                   type="url" class="form-control mt-2"
-                   placeholder="Put product image URL here">
-            <p class="invalid-feedback errors alert alert-danger">
-                Product image URL is required.
-            </p>
+            <p>Product photo</p>
+            <div class="col-md-4 d-flex">
+                <div class="custom-file">
+                    <input type="file" class="form-control-file" name="photo"
+                           accept="image/*"
+                           id="imgInput"/>
+                    <label class="custom-file-label" for="imgInput">Choose file image</label>
+                </div>
+                <div class="form-group">
+                    <img id="imagePreview" height="150px" width="150px"
+                         alt=" ">
+                </div>
+            </div>
         </div>
-
         <div class="row">
             <div class="col col-md-4">
                 <div class="button-holder d-flex">
@@ -136,3 +145,21 @@
 <footer th:replace="~{fragments/footer}"></footer>
 </body>
 </html>
+<script>
+    document.getElementById('imgInput').addEventListener('change', function (event) {
+        var input = event.target;
+        var preview = document.getElementById('imagePreview');
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                preview.innerHTML = '<img src="' + e.target.result + '" alt=" " style="max-width: 150px; max-height: 150px;">';
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            preview.innerHTML = '';
+        }
+    });
+</script>

@@ -3,27 +3,32 @@ package com.app.perfumeshop.model.dto.product;
 import com.app.perfumeshop.model.enums.CategoryNameEnum;
 import com.app.perfumeshop.model.enums.SizeEnum;
 import jakarta.validation.constraints.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 
-public class AddOrUpdateProductDTO {
+public class AddProductDTO {
 
 
     @NotEmpty
+    @Size(min = 3, max = 30, message = "Brand name must be between 5 and 30 characters")
     private String brand;
     @NotEmpty
+    @Size(min = 3, max = 30, message = "Model name must be between 5 and 30 characters")
     private String name;
-    @NotEmpty
-    private String imageUrl;
-    @NotNull
+//    @NotEmpty
+    @NotNull(message = "Please choose a file")
+
+    private MultipartFile photo;
+    @NotNull(message = "Please choose category")
     private CategoryNameEnum category;
-    @NotNull
+    @NotNull(message = "Please a size category")
     private SizeEnum milliliters;
     @NotEmpty
     @Size(min = 5, max = 255, message = "Description must be between 5 and 255 characters")
     private String description;
     @Positive
-    @NotNull
+    @NotNull(message = "Please set a price")
     private BigDecimal price;
 
 
@@ -31,7 +36,7 @@ public class AddOrUpdateProductDTO {
         return brand;
     }
 
-    public AddOrUpdateProductDTO setBrand(String brand) {
+    public AddProductDTO setBrand(String brand) {
         this.brand = brand;
         return this;
     }
@@ -40,17 +45,17 @@ public class AddOrUpdateProductDTO {
         return name;
     }
 
-    public AddOrUpdateProductDTO setName(String name) {
+    public AddProductDTO setName(String name) {
         this.name = name;
         return this;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public MultipartFile getPhoto() {
+        return photo;
     }
 
-    public AddOrUpdateProductDTO setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public AddProductDTO setPhoto(MultipartFile photo) {
+        this.photo = photo;
         return this;
     }
 
@@ -58,7 +63,7 @@ public class AddOrUpdateProductDTO {
         return category;
     }
 
-    public AddOrUpdateProductDTO setCategory(CategoryNameEnum category) {
+    public AddProductDTO setCategory(CategoryNameEnum category) {
         this.category = category;
         return this;
     }
@@ -67,7 +72,7 @@ public class AddOrUpdateProductDTO {
         return milliliters;
     }
 
-    public AddOrUpdateProductDTO setMilliliters(SizeEnum milliliters) {
+    public AddProductDTO setMilliliters(SizeEnum milliliters) {
         this.milliliters = milliliters;
         return this;
     }
@@ -76,7 +81,7 @@ public class AddOrUpdateProductDTO {
         return description;
     }
 
-    public AddOrUpdateProductDTO setDescription(String description) {
+    public AddProductDTO setDescription(String description) {
         this.description = description;
         return this;
     }
@@ -85,7 +90,7 @@ public class AddOrUpdateProductDTO {
         return price;
     }
 
-    public AddOrUpdateProductDTO setPrice(BigDecimal price) {
+    public AddProductDTO setPrice(BigDecimal price) {
         this.price = price;
         return this;
     }

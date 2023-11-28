@@ -1,6 +1,7 @@
 package com.app.perfumeshop.service;
 
-import com.app.perfumeshop.model.dto.product.AddOrUpdateProductDTO;
+import com.app.perfumeshop.model.dto.product.AddProductDTO;
+import com.app.perfumeshop.model.dto.product.EditProductDTO;
 import com.app.perfumeshop.model.dto.product.ProductViewDTO;
 import com.app.perfumeshop.model.entity.*;
 import com.app.perfumeshop.model.mapper.ProductMapper;
@@ -17,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -79,41 +79,43 @@ public class ProductService {
 //                .toList();
 
 
-    public void addProduct(AddOrUpdateProductDTO addOrUpdateProductDTO, PerfumeShopUserDetails userDetails) {
+    public void addProduct(AddProductDTO addProductDTO, PerfumeShopUserDetails userDetails) throws IOException {
         Brand brand = brandRepository
-                .findByName(addOrUpdateProductDTO.getBrand());
+                .findByName(addProductDTO.getBrand());
 
         Category category = categoryRepository
-                .findByName(addOrUpdateProductDTO.getCategory());
+                .findByName(addProductDTO.getCategory());
+
+        MultipartFile photo = addProductDTO.getPhoto();
+        String imageUrl = cloudinaryService.uploadImage(photo);
 
         Product product = new Product();
         product.setBrand(brand);
-        product.setName(addOrUpdateProductDTO.getName())
+        product.setName(addProductDTO.getName())
                 .setCategory(category)
-                .setDescription(addOrUpdateProductDTO.getDescription())
-                .setMilliliters(addOrUpdateProductDTO.getMilliliters())
-                .setPrice(addOrUpdateProductDTO.getPrice())
-                .setImageUrl(addOrUpdateProductDTO.getImageUrl());
+                .setDescription(addProductDTO.getDescription())
+                .setMilliliters(addProductDTO.getMilliliters())
+                .setPrice(addProductDTO.getPrice())
+                .setImageUrl(imageUrl);
 
         productRepository.save(product);
     }
-    public void editProduct(AddOrUpdateProductDTO addOrUpdateProductDTO, PerfumeShopUserDetails userDetails, Long productId) {
+    public void editProduct(EditProductDTO editProductDTO, PerfumeShopUserDetails userDetails, Long productId) throws IOException {
         Brand brand = brandRepository
-                .findByName(addOrUpdateProductDTO.getBrand());
+                .findByName(editProductDTO.getBrand());
 
         Category category = categoryRepository
-                .findByName(addOrUpdateProductDTO.getCategory());
-
+                .findByName(editProductDTO.getCategory());
 
         Product product = findById(productId);
 
         product.setBrand(brand);
-        product.setName(addOrUpdateProductDTO.getName())
+        product.setName(editProductDTO.getName())
                 .setCategory(category)
-                .setDescription(addOrUpdateProductDTO.getDescription())
-                .setMilliliters(addOrUpdateProductDTO.getMilliliters())
-                .setPrice(addOrUpdateProductDTO.getPrice())
-                .setImageUrl(addOrUpdateProductDTO.getImageUrl());
+                .setDescription(editProductDTO.getDescription())
+                .setMilliliters(editProductDTO.getMilliliters())
+                .setPrice(editProductDTO.getPrice())
+                .setImageUrl(editProductDTO.getImageUrl());
 
         productRepository.save(product);
     }

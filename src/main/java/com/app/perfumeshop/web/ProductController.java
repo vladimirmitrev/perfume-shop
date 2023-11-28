@@ -1,7 +1,8 @@
 package com.app.perfumeshop.web;
 
 import com.app.perfumeshop.exception.ObjectNotFoundException;
-import com.app.perfumeshop.model.dto.product.AddOrUpdateProductDTO;
+import com.app.perfumeshop.model.dto.product.AddProductDTO;
+import com.app.perfumeshop.model.dto.product.EditProductDTO;
 import com.app.perfumeshop.model.dto.product.ProductViewDTO;
 import com.app.perfumeshop.model.entity.ShoppingCart;
 import com.app.perfumeshop.model.entity.User;
@@ -24,6 +25,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -94,7 +96,7 @@ public class ProductController {
     @GetMapping("/products/add")
     public String addProductGet(Model model) {
         if (!model.containsAttribute("addProductModel")) {
-            model.addAttribute("addProductModel", new AddOrUpdateProductDTO());
+            model.addAttribute("addProductModel", new AddProductDTO());
         }
         model.addAttribute("brands", brandService.getAllBrands());
 
@@ -102,10 +104,10 @@ public class ProductController {
     }
 
     @PostMapping("/products/add")
-    public String addProductPost(@Valid AddOrUpdateProductDTO addProductModel,
+    public String addProductPost(@Valid AddProductDTO addProductModel,
                                  BindingResult bindingResult,
                                  RedirectAttributes redirectAttributes,
-                                 @AuthenticationPrincipal PerfumeShopUserDetails userDetails) {
+                                 @AuthenticationPrincipal PerfumeShopUserDetails userDetails) throws IOException {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addProductModel", addProductModel);
@@ -160,10 +162,10 @@ public class ProductController {
     @PatchMapping("/products/edit/{id}")
     public String editProductPost(@PathVariable("id") Long id,
                                   @ModelAttribute("editProductModel2")
-                                  @Valid AddOrUpdateProductDTO editProductModel,
+                                  @Valid EditProductDTO editProductModel,
                                   BindingResult bindingResult,
                                   RedirectAttributes redirectAttributes,
-                                  @AuthenticationPrincipal PerfumeShopUserDetails userDetails) {
+                                  @AuthenticationPrincipal PerfumeShopUserDetails userDetails) throws IOException {
 
         ProductViewDTO editProductModel2 =
                 productService.findProductById(id).orElseThrow(() ->

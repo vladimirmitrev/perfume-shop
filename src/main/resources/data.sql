@@ -34,7 +34,13 @@ values (1, 'MEN'),
 INSERT INTO brands (id, name)
 VALUES (1, 'Armani'),
        (2, 'Chanel'),
-       (3, 'Paco Rabanne');
+       (3, 'Paco Rabanne'),
+       (4, 'Dior'),
+       (5, 'Bvlgari');
+
+# INSERT INTO brands (id, name)
+# VALUES  (5, 'Bvlgari');
+
 
 INSERT INTO products (id, name, price, milliliters, description, category_id, brand_id, image_url)
 VALUES (1, 'Code', 77.00, 'FIFTY','Very good smell', 1, 1, 'https://res.cloudinary.com/dvj9qondf/image/upload/v1699350342/Perfumes/nsxrpyiwhdsg3l5lihhc.jpg'),
