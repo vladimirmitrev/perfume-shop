@@ -189,3 +189,43 @@ form.main-form {
 .about-us-final {
     color: rgb(39, 28, 193);
 }
+.send-message-btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    /*border: none;*/
+    cursor: pointer;
+    border-radius: 10px;
+    width: 15rem;
+    margin-top: 3rem;
+}
+
+.send-message-btn:hover {
+    background-color: #45a049;
+}
+.contact-input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+.contact-container {
+    max-width: 40rem;
+    margin: 0 auto;
+}
+
+.contact-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+.contact-form-group {
+    margin-bottom: 15px;
+}
+
+.contact-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
