@@ -19,14 +19,14 @@
                 <table class="table orders-table">
                     <thead>
                     <tr class="fw-bold">
-                        <th class="user-email">User Email</th>
-                        <th class="order-number">Order Number</th>
-                        <th class="order-date">Order Date</th>
-                        <th>Estimated Delivery Date</th>
-                        <th class="price-pr">Order Status</th>
-                        <th>Total Price</th>
-                        <th class="total-pr">Payment Method</th>
-                        <th>Action</th>
+                        <th class="user-email" th:text="#{orders_order_user_email}">User Email</th>
+                        <th class="order-number" th:text="#{orders_order_number}">Order Number</th>
+                        <th class="order-date" th:text="#{orders_order_date}">Order Date</th>
+                        <th th:text="#{orders_estimated_delivery}">Estimated Delivery Date</th>
+                        <th class="price-pr" th:text="#{orders_order_status}">Order Status</th>
+                        <th th:text="#{orders_order_total_price}">Total Price</th>
+                        <th class="total-pr" th:text="#{orders_order_payment_method}">Payment Method</th>
+                        <th th:text="#{orders_order_change_status}">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -41,7 +41,7 @@
                             <b><span th:text="${#dates.format(order.createdOn, 'dd-MM-yyyy')}"></span></b>
                         </td>
                         <td class="name-pr">
-                            <span th:if="${order.shipped != null}" th:text="|1-3 bussiness days after day of purchase|">
+                            <span th:if="${order.shipped != null}" th:text="#{orders_estimated_delivery_text}">
                             </span>
                             <a th:if="${order.shipped == null}"><p>Pending</p></a>
                         </td>

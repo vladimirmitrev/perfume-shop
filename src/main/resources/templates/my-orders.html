@@ -19,12 +19,12 @@
                 <table class="table orders-table">
                     <thead>
                     <tr>
-                        <th class="order-date">Order Date</th>
-                        <th class="order-number">Order Number</th>
-                        <th>Estimated Delivery Date</th>
-                        <th class="price-pr">Order Status</th>
-                        <th>Total Price</th>
-                        <th class="total-pr">Payment Method</th>
+                        <th class="order-date" th:text="#{orders_order_date}">Order Date</th>
+                        <th class="order-number" th:text="#{orders_order_number}">Order Number</th>
+                        <th th:text="#{orders_estimated_delivery}">Estimated Delivery Date</th>
+                        <th class="price-pr" th:text="#{orders_order_status}">Order Status</th>
+                        <th th:text="#{orders_order_total_price}">Total Price</th>
+                        <th class="total-pr" th:text="#{orders_order_payment_method}">Payment Method</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -36,9 +36,9 @@
                             <a th:href="@{/order-details/{id}(id=${order.id})}" th:text="|#907732${order.getId()}|" title="View Order Details"></a>
                         </td>
                         <td class="name-pr">
-                            <b><span th:if="${order.shipped != null}" th:text="|2 working days after day of purchase|">
-                            </span></b>
-                            <a th:if="${order.shipped == null}"><p>Pending</p></a>
+                            <span th:text="#{orders_estimated_delivery_text}">
+                            </span>
+<!--                            <a th:if="${order.shipped == null}"><p>Pending</p></a>-->
                         </td>
                         <td class="price-pr">
 <!--                            <p th:text="${order.status}"></p>-->

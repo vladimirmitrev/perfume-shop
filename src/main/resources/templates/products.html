@@ -44,10 +44,8 @@
             </div>
             <ul class="product-details list-group list-group-flush">
                 <li class="list-group-item">
-                    <div class="card-text"><span>Size: <th:block
-                            th:text="${product.milliliters.value}"></th:block></span></div>
-                    <div class="card-text fw-bold"><span>Price: €<th:block th:text="${product.price}"></th:block></span>
-                    </div>
+                    <div class="card-text "><span th:text="#{products_size}"> Size:</span> [(${product.milliliters.value})]</div>
+                    <div class="card-text fw-bold"><span th:text="#{products_price}"> Price:</span> € [(${product.price})]</div>
                 </li>
             </ul>
             <div class="card-body">
@@ -84,9 +82,9 @@
             <li class="page-item" th:classappend="${products.isFirst()} ? 'disabled' : ''">
                 <a th:unless="${products.isFirst()}"
                    th:href="@{/products/all(size=${products.getSize()},page=0)}"
-                   class="page-link" href="#">First</a>
+                   class="page-link" href="#" th:text="#{page_first}">First</a>
                 <a th:if="${products.isFirst()}"
-                   class="page-link" href="#">First</a>
+                   class="page-link" href="#" th:text="#{page_first}">First</a>
             </li>
         </ul>
     </nav>
@@ -95,9 +93,9 @@
             <li class="page-item" th:classappend="${products.hasPrevious() ? '' : 'disabled'}">
                 <a th:if="${products.hasPrevious()}"
                    th:href="@{/products/all(size=${products.getSize()},page=${products.getNumber() - 1})}"
-                   class="page-link" href="#">Previous</a>
+                   class="page-link" href="#" th:text="#{page_previous}">Previous</a>
                 <a th:unless="${products.hasPrevious()}"
-                   class="page-link" href="#">Previous</a>
+                   class="page-link" href="#" th:text="#{page_previous}">Previous</a>
             </li>
         </ul>
     </nav>
@@ -106,9 +104,9 @@
             <li class="page-item" th:classappend="${products.hasNext() ? '' : 'disabled'}">
                 <a th:if="${products.hasNext()}"
                    th:href="@{/products/all(size=${products.getSize()},page=${products.getNumber() + 1})}"
-                   class="page-link" href="#">Next</a>
+                   class="page-link" href="#" th:text="#{page_next}">Next</a>
                 <a th:unless="${products.hasNext()}"
-                   class="page-link" href="#">Next</a>
+                   class="page-link" href="#" th:text="#{page_next}">Next</a>
             </li>
         </ul>
     </nav>
@@ -117,9 +115,9 @@
             <li class="page-item" th:classappend="${products.isLast()} ? 'disabled' : ''">
                 <a th:unless="${products.isLast()}"
                    th:href="@{/products/all(size=${products.getSize()},page=${products.getTotalPages() - 1})}"
-                   class="page-link" href="#">Last</a>
+                   class="page-link" href="#" th:text="#{page_last}">Last</a>
                 <a th:if="${products.isLast()}"
-                   class="page-link" href="#">Last</a>
+                   class="page-link" href="#" th:text="#{page_last}">Last</a>
             </li>
         </ul>
     </nav>

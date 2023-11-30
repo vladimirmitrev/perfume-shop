@@ -39,10 +39,8 @@
                 </div>
                 <ul class="product-details list-group list-group-flush">
                     <li class="list-group-item">
-                        <div class="card-text"><span>Size: <th:block
-                                th:text="${product.milliliters.value}"></th:block></span></div>
-                        <div class="card-text fw-bold"><span>Price: €<th:block
-                                th:text="${product.price}"></th:block></span></div>
+                        <div class="card-text "><span th:text="#{products_size}"> Size:</span> [(${product.milliliters.value})]</div>
+                        <div class="card-text fw-bold"><span th:text="#{products_price}"> Price:</span> € [(${product.price})]</div>
                     </li>
                 </ul>
                 <div class="card-body">

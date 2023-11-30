@@ -11,7 +11,7 @@
 </div>
 
 <div class="container">
-    <h2 class="text-center text-black">Register User</h2>
+    <h2 class="text-center text-black" th:text="#{register_user}">Register User</h2>
     <form
             th:object="${userModel}"
             th:action="@{/users/register}"
@@ -19,13 +19,13 @@
             class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center bg-gradient-primary">
         <div class="row">
             <div class="form-group col-md-6 mb-3">
-                <label for="firstName" class="text-black font-weight-bold mt-2">First Name</label>
+                <label for="firstName" class="text-black font-weight-bold mt-2" th:text="#{register_fname}">First Name</label>
                 <input id="firstName"
                        th:field="*{firstName}"
                        th:errorclass="is-invalid"
                        type="text"
                        class="form-control mt-2"
-                       placeholder="First name"/>
+                       th:placeholder="#{register_fname}"/>
                 <div class="invalid-feedback errors alert alert-danger">
                     <div
                             th:each="err : ${#fields.errors('firstName')}"
@@ -34,12 +34,12 @@
                 </div>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label for="lastName" class="text-black font-weight-bold mt-2">Last Name</label>
+                <label for="lastName" class="text-black font-weight-bold mt-2" th:text="#{register_lname}">Last Name</label>
                 <input id="lastName"
                        th:field="*{lastName}"
                        th:errorclass="is-invalid"
                        type="text" class="form-control mt-2"
-                       placeholder="Last name"/>
+                       th:placeholder="#{register_lname}"/>
                 <div class="invalid-feedback errors alert alert-danger">
                     <div
                             th:each="err : ${#fields.errors('lastName')}"
@@ -50,13 +50,13 @@
         </div>
         <div class="row">
             <div class="form-group col-md-6 mb-3">
-                <label for="email" class="text-black font-weight-bold mt-2">Email</label>
+                <label for="email" class="text-black font-weight-bold mt-2" th:text="#{register_email}">Email</label>
                 <input id="email"
                        th:field="*{email}"
                        th:errorclass="is-invalid"
                        type="text"
                        class="form-control mt-2"
-                       placeholder="Email"/>
+                       th:placeholder="#{register_email}"/>
                 <div class="invalid-feedback errors alert alert-danger">
                     <div
                             th:each="err : ${#fields.errors('email')}"
@@ -65,13 +65,13 @@
                 </div>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label for="username" class="text-black font-weight-bold mt-2">Username</label>
+                <label for="username" class="text-black font-weight-bold mt-2" th:text="#{register_username}">Username</label>
                 <input id="username"
                        th:field="*{username}"
                        th:errorclass="is-invalid"
                        type="text"
                        class="form-control mt-2"
-                       placeholder="Username"/>
+                       th:placeholder="#{register_username}"/>
                 <div class="invalid-feedback errors alert alert-danger">
                     <div
                             th:each="err : ${#fields.errors('username')}"
@@ -80,13 +80,13 @@
                 </div>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label for="phoneNumber" class="text-black font-weight-bold mt-2">Phone number</label>
+                <label for="phoneNumber" class="text-black font-weight-bold mt-2" th:text="#{register_phone}">Phone number</label>
                 <input id="phoneNumber"
                        th:field="*{phoneNumber}"
                        th:errorclass="is-invalid"
                        type="text"
                        class="form-control mt-2"
-                       placeholder="Phone number"/>
+                       th:placeholder="#{register_phone}"/>
                 <div class="invalid-feedback errors alert alert-danger">
                     <div
                             th:each="err : ${#fields.errors('phoneNumber')}"
@@ -97,12 +97,12 @@
         </div>
         <div class="row">
             <div class="form-group col-md-6 mb-3">
-                <label for="password" class="text-black font-weight-bold mt-2">Password</label>
+                <label for="password" class="text-black font-weight-bold mt-2" th:text="#{register_password}">Password</label>
                 <input id="password"
                        th:field="*{password}"
                        th:errorclass="is-invalid"
                        type="password" class="form-control mt-2"
-                       placeholder="Password"/>
+                       th:placeholder="#{register_password}"/>
                 <div class="invalid-feedback errors alert alert-danger">
                     <div
                             th:each="err : ${#fields.errors('password')}"
@@ -111,13 +111,13 @@
                 </div>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label for="confirm-password" class="text-black font-weight-bold mt-2">Confirm password</label>
+                <label for="confirm-password" class="text-black font-weight-bold mt-2" th:text="#{register_confirmPassword}">Confirm password</label>
                 <input id="confirm-password"
                        th:field="*{confirmPassword}"
                        th:errorclass="is-invalid"
                        type="password"
                        class="form-control mt-2"
-                       placeholder="Confirm password"/>
+                       th:placeholder="#{register_confirmPassword}"/>
                 <div class="invalid-feedback errors alert alert-danger">
                     <div
                             th:each="err : ${#fields.errors('confirmPassword')}"
@@ -129,7 +129,8 @@
         <div class="row">
             <div class="col col-md-4">
                 <div class="button-holder d-flex">
-                    <input type="submit" class="btn btn-warning form-control mt-2 mb-2 register-btn" value="Register"/>
+                    <button type="submit" class="btn btn-warning form-control mt-2 mb-2 register-btn" th:text="#{navbar_register}">Register</button>
+
                 </div>
             </div>
         </div>

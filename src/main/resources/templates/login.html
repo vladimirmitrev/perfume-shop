@@ -7,32 +7,32 @@
     <nav th:replace="~{fragments/navbar}"></nav>
 </div>
 <div class="container">
-    <h2 class="text-center text-black">Login</h2>
+    <h2 class="text-center text-black" th:text="#{navbar_login}">Login</h2>
     <form th:method="post"
           th:action="@{/users/login}"
           class="main-form mx-auto col-md-4 d-flex flex-column justify-content-center">
         <div class="form-group">
-            <label for="email" class="text-black font-weight-bold mt-2">Email</label>
+            <label for="email" class="text-black font-weight-bold mt-2" th:text="#{register_email}">Email</label>
             <input id="email"
                    name="email"
                    th:value="${email}"
                    type="text"
                    class="form-control mt-2"
-                   placeholder="Email"/>
+                   th:placeholder="#{register_email}"/>
         </div>
         <div class="form-group">
-            <label for="password" class="text-black font-weight-bold mt-2">Password</label>
+            <label for="password" class="text-black font-weight-bold mt-2" th:text="#{register_password}">Password</label>
             <input id="password"
                    name="password"
                    type="password" min="2"
                    max="20" class="form-control mt-2"
-                   placeholder="Password"/>
+                   th:placeholder="#{register_password}"/>
         </div>
         <div class="form-group">
             <input id="rememberme"
                    name="rememberme"
                    type="checkbox"/>
-            <label for="rememberme" class="text-black font-weight-bold mt-2">Remember me</label>
+            <label for="rememberme" class="text-black font-weight-bold mt-2" th:text="#{remember_me}">Remember me</label>
         </div>
         <p th:if="${bad_credentials}" class="errors alert alert-danger small mt-2">
             Invalid username or password.
@@ -40,7 +40,8 @@
         <div class="row">
             <div class="col col-md-4">
                 <div class="button-holder d-flex">
-                    <input type="submit" class="btn btn-info form-control mt-2 mb-2 login-btn" value="Login"/>
+                    <button type="submit" class="btn btn-info form-control mt-2 mb-2 login-btn" th:text="#{navbar_login}">Login</button>
+
                 </div>
             </div>
         </div>

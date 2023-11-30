@@ -22,18 +22,22 @@
         <!--        <hr class="mt-0 mb-4 justify-content-center" style="width: 20rem">-->
         <div class="d-flex flex-column justify-content-center">
             <div>
-                <h6>Name</h6>
+                <h6 th:text="#{user_profile_name}">Name</h6>
                 <p th:text="|${userProfile.firstName} ${userProfile.lastName}|" class="text-primary"
                    style="font-weight: 500">123 456 789</p>
             </div>
             <div>
-                <h6>Email</h6>
+                <h6 th:text="#{register_email}">Email</h6>
                 <p th:text="${userProfile.email}" class="text-primary" style="font-weight: 500">
                     info@example.com</p>
             </div>
-
             <div>
-                <h6>Phone</h6>
+                <h6 th:text="#{register_username}">Username</h6>
+                <p th:text="${userProfile.username}" class="text-primary" style="font-weight: 500">123
+                    456 789</p>
+            </div>
+            <div>
+                <h6 th:text="#{register_phone}">Phone</h6>
                 <p th:text="${userProfile.phoneNumber}" class="text-primary" style="font-weight: 500">123
                     456 789</p>
             </div>
