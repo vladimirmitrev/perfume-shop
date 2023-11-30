@@ -20,13 +20,16 @@
         </a>
     </div>
     <div class="d-flex justify-content-center flex-column align-items-center">
-        <h5 class="text-left">Search for products</h5>
+        <div class="d-flex gap-2">
+            <h5 class="text-left" th:text="#{products_search}">Search for products</h5>
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
         <form class="d-flex justify-content-center align-items-center gap-1" th:action="@{/search}" method="get">
             <input class="form-control" type="text" name="query"/>
-            <button class="btn btn-primary" type="submit">Search</button>
+            <button class="btn btn-primary" type="submit" th:text="#{button_search}">Search</button>
         </form>
     </div>
-    <h3 class="text-center text-black mt-5">All Products</h3>
+    <h3 class="text-center text-black mt-5" th:text="#{navbar_all_products}">All Products</h3>
     <div th:if="${products.size > 0}" class="offers row mx-auto d-flex flex-row justify-content-center">
 
         <div th:each="product : ${products}"
@@ -48,12 +51,12 @@
                 </li>
             </ul>
             <div class="card-body">
-                <a class="card-link text-decoration-none fw-bold fs-6" href="#"
-                   th:href="@{/products/details/{productId}(productId=*{product.id})}">View product details</a>
+                <a class="btn btn-warning btn-sm form-control view-details" href="#"
+                   th:href="@{/products/details/{productId}(productId=*{product.id})}" th:text="#{products_view_details}">View details</a>
                 <form
                         th:action="@{/cart/add/{id}(id=${product.id})}"
                         th:method="post">
-                    <button type="submit" class="btn btn-info mt-3">Аdd to cart</button>
+                    <button type="submit" class="btn btn-info mt-3 form-control add-to-cart" th:text="#{products_add_to_cart}">Аdd to cart</button>
                 </form>
             </div>
         </div>

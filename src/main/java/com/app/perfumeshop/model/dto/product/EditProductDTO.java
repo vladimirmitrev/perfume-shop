@@ -20,7 +20,7 @@ public class EditProductDTO {
     @Size(min = 3, max = 30, message = "Model name must be between 5 and 30 characters")
     private String name;
     @NotEmpty
-    @NotNull(message = "Please choose a file")
+    @NotNull(message = "Please put a link to product photo")
     private String imageUrl;
     @NotNull(message = "Please choose category")
     private CategoryNameEnum category;

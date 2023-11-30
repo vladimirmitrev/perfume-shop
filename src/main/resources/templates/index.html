@@ -11,8 +11,8 @@
     <nav th:replace="~{fragments/navbar}">Navbar</nav>
 </div>
 
-<div class="container-fluid">
-    <h5 class="text-center text-black mt-5">
+<div class="container-fluid col-md-6 text-center d-flex flex-column align-items-center gap-3">
+    <h4 class="text-center text-black mt-5" style="font-family: 'Calibri'">
         <span sec:authorize="isAuthenticated()"
               th:text="#{index_welcome(${#authentication.principal.fullName})}">
         </span>
@@ -20,7 +20,20 @@
         <span sec:authorize="!isAuthenticated()"
               th:text="#{index_welcome('Guest')}">
         </span>
-    </h5>
+    </h4>
+    <p class="mt-2" style="font-size: 20px; font-family: 'Calibri Light'"  th:text="#{index_text}">
+    At Perfume Shop, we believe in the power of scent to evoke emotions,
+    create memories, and enhance the everyday moments of life.
+    Our passion for perfumes goes beyond the bottles.
+    It's about curating an olfactory experience that resonates with your unique style and personality.
+    </p>
+    <a class="btn btn-info"
+       th:text="#{index_view_products}"
+       th:href="@{/products/all}">View our Products</a>
+
+    <a class="btn btn-primary"
+       th:text="#{index_view_brands}"
+       th:href="@{/brands}">View our Products</a>
 </div>
 <footer th:replace="~{fragments/footer}"></footer>
 </body>

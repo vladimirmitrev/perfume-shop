@@ -10,14 +10,14 @@
     <nav th:replace="~{fragments/navbar}">Navbar</nav>
 </div>
 <div class="contact-container text-center">
-    <h3 class="mt-5">Contact Us</h3>
+    <h3 class="mt-5" th:text="#{navbar_contact_us}">Contact Us</h3>
     <div class="row mb-5 mt-5">
         <div class="col-md-3">
             <div class="dbox w-100 text-center">
                 <div class="icon d-flex align-items-center justify-content-center">
                     <span class="fa fa-map-marker"></span>
                 </div>
-                <div class="text">
+                <div class="text" th:text="#{contact_us_address}">
                     <p><span>Address:</span>Sofia 1000</p>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                     <span class="fa fa-phone"></span>
                 </div>
                 <div class="text">
-                    <p><span>Phone:</span> <a href="tel://1234567920">+359888123456</a></p>
+                   <a href="tel://+359888123456" th:text="#{contact_us_phone}">+359888123456</a>
                 </div>
             </div>
         </div>
@@ -51,33 +51,33 @@
                     <span class="fa fa-globe"></span>
                 </div>
                 <div class="text">
-                    <p><span>Website</span> <a
+                    <p><span>Website</span></p> <p> <a
                             target="_blank" href="https://perfumeshop.net">perfumeshop.net</a>
                     </p>
                 </div>
             </div>
         </div>
     </div>
-    <p class="fw-bold">We'd love to hear from you! Please fill out the form below to get in touch.</p>
+    <p class="fw-bold" th:text="#{contact_us_fill_form}">We'd love to hear from you! Please fill out the form below to get in touch.</p>
 
     <form class="contact-form">
         <div class="contact-form-group">
-            <label class="contact-label" for="name">Your Name:</label>
+            <label class="contact-label" for="name" th:text="#{contact_us_name}">Your Name:</label>
             <input class="contact-input" type="text" id="name" name="name" required>
         </div>
 
         <div class="contact-form-group">
-            <label class="contact-label" for="email">Your Email:</label>
+            <label class="contact-label" for="email" th:text="#{contact_us_email}">Your Email:</label>
             <input class="contact-input" type="email" id="email" name="email" required>
         </div>
 
         <div class="contact-form-group">
-            <label class="contact-label" for="message">Your Message:</label>
+            <label class="contact-label" for="message" th:text="#{contact_us_message}">Your Message:</label>
             <textarea class="contact-input" id="message" name="message" rows="4" required></textarea>
         </div>
 
         <div class="contact-form-group">
-            <button class="send-message-btn" type="submit">Send Message</button>
+            <button class="send-message-btn" type="submit" th:text="#{contact_us_send}">Send Message</button>
         </div>
     </form>
 </div>

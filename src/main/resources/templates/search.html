@@ -13,15 +13,18 @@
 
 <div class="container-fluid d-flex flex-column justify-content-center">
     <div class="d-flex justify-content-center flex-column align-items-center">
-        <h5 class="text-left">Search for products</h5>
+        <div class="d-flex gap-2">
+            <h5 class="text-left" th:text="#{products_search}">Search for products</h5>
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
         <form class="d-flex justify-content-center align-items-center gap-1" th:action="@{/search}" method="get">
             <input class="form-control" type="text" name="query"/>
-            <button class="btn btn-primary" type="submit">Search</button>
+            <button class="btn btn-primary" type="submit" th:text="#{button_search}">Search</button>
         </form>
     </div>
     <div>
-        <h4 th:if="${#lists.isEmpty(searchResults)}" class="text-center text-black mt-5">No results found.</h4>
-        <h4 th:unless="${#lists.isEmpty(searchResults)}" class="text-center text-black mt-5">Products found</h4>
+        <h4 th:if="${#lists.isEmpty(searchResults)}" class="text-center text-black mt-5" th:text="#{products_search_no_found}">No results found.</h4>
+        <h4 th:unless="${#lists.isEmpty(searchResults)}" class="text-center text-black mt-5" th:text="#{products_search_found}">Products found</h4>
         <div th:if="${not #lists.isEmpty(searchResults)}"
              class="offers row mx-auto d-flex flex-row justify-content-center">
             <!--            <span th:text="${product.brand} + ' ' + ${product.name} + ' ' + ${product.description}"></span>-->
@@ -43,12 +46,12 @@
                     </li>
                 </ul>
                 <div class="card-body">
-                    <a class="card-link text-decoration-none fw-bold fs-6" href="#"
-                       th:href="@{/products/{productId}(productId=*{product.id})}">View product details</a>
+                    <a class="btn btn-warning form-control view-details" href="#"
+                       th:href="@{/products/{productId}(productId=*{product.id})}" th:text="#{products_view_details}">View details</a>
                     <form
                             th:action="@{/cart/add/{id}(id=${product.id})}"
                             th:method="post">
-                        <button type="submit" class="btn btn-info mt-3">Аdd to cart</button>
+                        <button type="submit" class="btn btn-info mt-3 form-control add-to-cart" th:text="#{products_add_to_cart}">Аdd to cart</button>
                     </form>
                 </div>
             </div>

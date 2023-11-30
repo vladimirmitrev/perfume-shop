@@ -23,24 +23,24 @@
         <div class="d-flex flex-column justify-content-center">
             <div>
                 <h6>Name</h6>
-                <p th:text="|${userProfile.firstName} ${userProfile.lastName}|" class="text-muted"
+                <p th:text="|${userProfile.firstName} ${userProfile.lastName}|" class="text-primary"
                    style="font-weight: 500">123 456 789</p>
             </div>
             <div>
                 <h6>Email</h6>
-                <p th:text="${userProfile.email}" class="text-muted" style="font-weight: 500">
+                <p th:text="${userProfile.email}" class="text-primary" style="font-weight: 500">
                     info@example.com</p>
             </div>
 
             <div>
                 <h6>Phone</h6>
-                <p th:text="${userProfile.phoneNumber}" class="text-muted" style="font-weight: 500">123
+                <p th:text="${userProfile.phoneNumber}" class="text-primary" style="font-weight: 500">123
                     456 789</p>
             </div>
             <a sec:authorize="hasRole('ADMIN')" th:href="@{/users/all}">
                 <button class="btn btn-info rounded-3" type="submit">Back to all users</button>
             </a>
-            <a sec:authorize="!hasRole('ADMIN')" th:href="@{/users/edit/{id}(id=${userProfile.id})}">
+            <a sec:authorize="!hasRole('ADMIN')" hidden="" th:href="@{/users/edit/{id}(id=${userProfile.id})}">
                 <button class="btn btn-warning rounded-3 text-center" disabled type="submit"
                         style="text-decoration: none; "
                 >Edit Profile
@@ -50,9 +50,9 @@
         </div>
         <!--        <hr class="mt-0 mb-4">-->
         <div class="d-flex mt-2 justify-content-center">
-            <a href="#"><i class="fab fa-facebook-f fa-lg me-3"></i></a>
-            <a href="#"><i class="fab fa-twitter fa-lg me-3"></i></a>
-            <a href="#"><i class="fab fa-instagram fa-lg"></i></a>
+            <a href="https://www.facebook.com/"><i class="fab fa-facebook-f fa-lg me-3"></i></a>
+            <a href="https://www.twitter.com"><i class="fa-brands fa-x-twitter fa-lg me-2"></i></a>
+            <a href="https://www.instagram.com"><i class="fab fa-instagram fa-lg"></i></a>
         </div>
     </div>
 </div>

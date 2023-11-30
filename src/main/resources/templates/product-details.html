@@ -31,7 +31,7 @@
                 <form
                         th:action="@{/cart/add/{id}(id=${id})}"
                         th:method="post">
-                    <button type="submit" class="btn btn-info">Аdd to cart</button>
+                    <button type="submit" class="btn btn-info add-to-cart">Аdd to cart</button>
                 </form>
                 <a class="btn btn-warning" sec:authorize="hasAnyRole('ADMIN', 'EMPLOYEE')" th:href="@{/products/edit/{id}(id=${id})}">
                     Edit product

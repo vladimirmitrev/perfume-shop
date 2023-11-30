@@ -167,19 +167,17 @@ public class ProductController {
                                   RedirectAttributes redirectAttributes,
                                   @AuthenticationPrincipal PerfumeShopUserDetails userDetails) throws IOException {
 
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("editProductModel", editProductModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.editProductModel",
+                    bindingResult);
+            return "redirect:/products/edit/{id}";
+        }
+
         ProductViewDTO editProductModel2 =
                 productService.findProductById(id).orElseThrow(() ->
                         new ObjectNotFoundException("Offer with ID " + id + "not found"));
 
-
-//        if (bindingResult.hasErrors()) {
-//            redirectAttributes.addFlashAttribute("editProductModel", editProductModel);
-//            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addProductModel",
-//                    bindingResult);
-//
-//
-//            return "redirect:/products/edit/{id}";
-//        }
 
         productService.editProduct(editProductModel, userDetails, id);
 

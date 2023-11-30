@@ -18,7 +18,7 @@
             <div class="form-group col-md-6 mb-3">
                 <label class="text-center text-black font-weight-bold mb-1" for="brand">Brand</label>
                <div>
-                   <input type="text" id="brand"
+                   <input type="text" readonly id="brand"
                           name="brand"
                           th:field="*{brand}"
                           th:errorclass="is-invalid"
@@ -47,6 +47,7 @@
                 <input
                         id="category"
                         name="category"
+                        readonly
                         th:errorclass="is-invalid"
                         th:field="*{category}"
                         class="form-control">
@@ -59,6 +60,7 @@
                 <label class="text-center text-black font-weight-bold mb-1" for="milliliters">Size</label>
                 <input id="milliliters"
                         name="milliliters"
+                        readonly
                         th:errorclass="is-invalid"
                         th:field="*{milliliters}"
                         class="form-control">

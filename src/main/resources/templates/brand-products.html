@@ -48,12 +48,12 @@
                 </li>
             </ul>
             <div class="card-body">
-                <a class="card-link text-decoration-none fw-bold fs-6" href="#"
-                   th:href="@{/products/details/{productId}(productId=*{product.id})}">View product details</a>
+                <a class="btn btn-warning btn-sm form-control view-details" style="font-size: 14px" href="#"
+                   th:href="@{/products/details/{productId}(productId=*{product.id})}" th:text="#{products_view_details}">View details</a>
                 <form
                         th:action="@{/cart/add/{id}(id=${product.id})}"
                         th:method="post">
-                    <button type="submit" class="btn btn-info mt-3">Аdd to cart</button>
+                    <button type="submit" class="btn btn-info mt-3 form-control add-to-cart" th:text="#{products_add_to_cart}">Аdd to cart</button>
                 </form>
             </div>
         </div>

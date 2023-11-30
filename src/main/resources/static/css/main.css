@@ -157,9 +157,10 @@ form.main-form {
 .profile-box {
     width: 20rem;
     height: 30rem;
-    background-image: linear-gradient(to bottom right, rgb(120 224 239 / 80%), rgb(250 223 109 / 80%));
+    background-image: linear-gradient(to bottom right, rgba(184, 245, 253, 0.8), rgba(248, 232, 175, 0.8));
+    /*background: aliceblue;*/
     padding-top: 1rem;
-    border-radius: 3rem;
+    border-radius: 2rem;
     margin-top: 2rem;
 }
 .orders-table {
@@ -228,4 +229,22 @@ form.main-form {
     display: block;
     font-weight: bold;
     margin-bottom: 5px;
+}
+.add-to-cart {
+    font-size: 14px;
+    background-color: rgba(80, 211, 14, 0.8);
+    border-color: transparent;
+}
+.view-details {
+    font-size: 14px;
+    background-color: rgba(255, 152, 76, 0.8);
+    border-color: transparent;
+}
+.register-btn {
+    background-color: #0dcaf0;
+    border-color: transparent;
+}
+.login-btn {
+    background-color: #FFCA2C;
+    border-color: transparent;
 }
