@@ -11,7 +11,7 @@
     <nav th:replace="~{fragments/navbar}">Navbar</nav>
 </div>
 
-<div class="container text-center flex-column justify-content-center profile-box" th:object="${userProfile}">
+<div class="container text-center flex-column justify-content-center profile-box pb-5" th:object="${userProfile}">
     <h5 class="text-center text-black mt-5" th:text="#{navbar_my_profile}">My profile</h5>
     <img
             th:src="@{/images/user-icon.png}"
@@ -42,7 +42,7 @@
                     456 789</p>
             </div>
             <a sec:authorize="hasRole('ADMIN')" th:href="@{/users/all}">
-                <button class="btn btn-info rounded-3" type="submit">Back to all users</button>
+                <button class="btn btn-info rounded-3" type="submit" th:text="#{users_back_button}">Back to all users</button>
             </a>
             <a sec:authorize="!hasRole('ADMIN')" hidden="" th:href="@{/users/edit/{id}(id=${userProfile.id})}">
                 <button class="btn btn-warning rounded-3 text-center" disabled type="submit"

@@ -14,21 +14,21 @@
     <div    th:if="${emptyCart}" class="text-center text-danger py-5">
         <h5 th:text="${emptyCart}"></h5>
         <a th:href="@{/products/all}">
-            <button type="button" class="btn btn-primary btn-lg btn-default md-btn-flat mt-2 mr-3">Back to shopping
+            <button type="button" class="btn btn-primary btn-lg btn-default md-btn-flat mt-2 mr-3" th:text="#{cart_back_to_shopping}">Back to shopping
             </button>
         </a>
     </div>
     <div    th:if="${emptyCartNull}" class="text-center text-danger py-5">
         <h5 th:text="${emptyCartNull}"></h5>
         <a th:href="@{/products/all}">
-            <button type="button" class="btn btn-primary btn-lg btn-default md-btn-flat mt-2 mr-3">Back to shopping
+            <button type="button" class="btn btn-primary btn-lg btn-default md-btn-flat mt-2 mr-3" th:text="#{cart_back_to_shopping}">Back to shopping
             </button>
         </a>
     </div>
     <!-- Shopping cart table -->
     <div class="card" th:if="${shoppingCart.totalPrice != 0}">
         <div class="card-header">
-            <h2>Shopping Cart</h2>
+            <h2 th:text="#{cart_title}">Shopping Cart</h2>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -36,11 +36,11 @@
                     <thead>
                     <tr>
                         <!-- Set columns width -->
-                        <th class="text-center py-3 px-4 fw-bold" style="min-width: 400px;">Product Name &amp; Details
+                        <th class="text-center py-3 px-4 fw-bold" style="min-width: 400px;" th:text="#{cart_product_name}">Product Name &amp; Details
                         </th>
-                        <th class="text-right py-3 px-4" style="width: 100px;">Price</th>
-                        <th class="text-center py-3 px-4" style="width: 120px;">Quantity</th>
-                        <th class="text-right py-3 px-4" style="width: 100px;">Total</th>
+                        <th class="text-right py-3 px-4" style="width: 100px;" th:text="#{cart_price}">Price</th>
+                        <th class="text-center py-3 px-4" style="width: 120px;" th:text="#{cart_quantity}">Quantity</th>
+                        <th class="text-right py-3 px-4" style="width: 100px;" th:text="#{cart_total}">Total</th>
                         <th class="text-center align-middle py-3 px-0" style="width: 40px;"><a href="#"
                                                                                                class="shop-tooltip float-none text-light"
                                                                                                title=""
@@ -59,12 +59,9 @@
                                        title="View product details" class="product-details d-block fw-bold "
                                        th:text="|${cartItem.product.brand.name} ${cartItem.product.name}|">Product 1</a>
                                     <small>
-                                        <span class="text-muted"
-                                              th:text="|Category: ${cartItem.product.category.name.value}|">Category:</span>
-                                        <span class="ui-product-color ui-product-color-sm align-text-bottom"
-                                              style="background:#e81e2c;"></span> &nbsp;
-                                        <span class="text-muted"
-                                              th:text="|Size: ${cartItem.product.milliliters.value}|">Size: </span>&nbsp;
+                                        <div class="text-muted"> <span th:text="#{cart_product_category}"> Category:</span> [(${cartItem.product.category.name.value})]
+                                           | <span th:text="#{cart_product_size}"> Size:</span> [(${cartItem.product.milliliters.value})]
+                                        </div>
                                     </small>
                                 </div>
                             </div>
@@ -84,13 +81,13 @@
                                 <button type="submit" name="action" value="update"
                                         title="Update item in cart"
                                         class="btn rounded-3 btn-warning"
-                                        data-original-title="Update">Update
+                                        data-original-title="Update" th:text="#{cart_update}">Update
                                 </button>
                             </td>
                             <td class="text-center align-middle">
                                 <button type="submit" name="action" value="delete"
                                         class="btn rounded-3 btn-danger"
-                                        title="Remove item from cart" data-original-title="Remove">Remove
+                                        title="Remove item from cart" data-original-title="Remove" th:text="#{cart_remove}">Remove
                                 </button>
                             </td>
                         </form>
@@ -104,25 +101,25 @@
             <div class="d-flex flex-wrap justify-content-between align-items-center pb-4" th:object="${shoppingCart}">
                 <div>
                     <div class="mt-4">
-                        <label class="text-muted font-weight-normal">Discount code</label>
+                        <label class="text-muted font-weight-normal" th:text="#{cart_discount_code}">Discount code</label>
                         <input type="text" placeholder="Discount code" class="form-control" disabled value="TOTAL5">
                     </div>
                 </div>
                 <div class="total-price-calc text-end">
                     <div class="row text-right mt-4 mx-5">
-                        <label class="text-muted font-weight-normal m-0 fw-bold">Products price</label>
+                        <label class="text-muted font-weight-normal m-0 fw-bold" th:text="#{cart_products_price}">Products price</label>
                         <div class="text-large"><strong th:text="|€${shoppingCart.totalPrice}|">$</strong></div>
                     </div>
                     <div class="row text-right mt-4 mx-5">
-                        <label class="text-muted font-weight-normal m-0 fw-bold">Discount</label>
+                        <label class="text-muted font-weight-normal m-0 fw-bold" th:text="#{cart_discount}">Discount</label>
                         <div class="text-large "><strong th:text="|- 5%|">$</strong></div>
                     </div>
                     <div class="row text-right mt-4 mx-5">
-                        <label class="text-muted font-weight-normal m-0 fw-bold">Shipping and handling</label>
+                        <label class="text-muted font-weight-normal m-0 fw-bold" th:text="#{cart_shipping}">Shipping and handling</label>
                         <div class="text-large "><strong th:text="|+€7.99|">$</strong></div>
                     </div>
                     <div class="row text-right mt-4 mx-5">
-                        <label class="text-muted font-weight-normal m-0 fw-bold">Total price</label>
+                        <label class="text-muted font-weight-normal m-0 fw-bold" th:text="#{cart_total_price}">Total price</label>
                         <div class="text-large text-success fw-bold"><strong
                                 th:text="|€ ${shoppingCart.totalPrice - (shoppingCart.totalPrice * 5 / 100) + 7.99}|">$</strong></div>
                     </div>
@@ -133,10 +130,10 @@
 
             <div class="checkout-btn">
                 <a th:href="@{/products/all}">
-                    <button type="button" class="btn btn-lg btn-info text-black">Back to shopping</button>
+                    <button type="button" class="btn btn-lg btn-info text-black" th:text="#{cart_back_to_shopping}">Back to shopping</button>
                 </a>
                 <a th:href="@{/order-checkout}">
-                    <button type="button" class="btn btn-lg btn-success mx-5">Checkout</button>
+                    <button type="button" class="btn btn-lg btn-success mx-5" th:text="#{cart_checkout}">Checkout</button>
                 </a>
 
             </div>

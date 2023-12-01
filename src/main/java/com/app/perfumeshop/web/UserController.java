@@ -2,6 +2,8 @@ package com.app.perfumeshop.web;
 
 import com.app.perfumeshop.model.dto.UserRegisterDTO;
 import com.app.perfumeshop.model.dto.user.UserViewDTO;
+import com.app.perfumeshop.model.entity.User;
+import com.app.perfumeshop.repository.UserRepository;
 import com.app.perfumeshop.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -17,9 +19,12 @@ import java.security.Principal;
 public class UserController {
 
     private final UserService userService;
+    private final UserRepository userRepository;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService,
+                          UserRepository userRepository) {
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     @ModelAttribute("userModel")
@@ -80,9 +85,9 @@ public class UserController {
         return "user-profile";
     }
 
-    @GetMapping("/profile/{id}")
+    @GetMapping("/details-profile/{id}")
     public String viewUserProfileById(@PathVariable("id") Long id,
-                                      Model model) {
+                                      Model model, Principal principal) {
 
         UserViewDTO userProfile = userService.findUserById(id);
 

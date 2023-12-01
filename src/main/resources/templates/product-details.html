@@ -11,7 +11,7 @@
     <nav th:replace="~{fragments/navbar}">Navbar</nav>
 </div>
 <div  th:object="${product}" class="container-fluid">
-    <h2 class="text-center text-black mt-5">Product details</h2>
+    <h2 class="text-center text-black mt-5" th:text="#{product_details}">Product details</h2>
     <div class="offers row mx-auto d-flex justify-content-center">
         <div class="offer card col-sm-2 col-md-3  col-lg-4 m-1 p-4" >
             <img th:src="*{imageUrl}" class="card-img-top" style="max-width: 250px"  alt="Product image">
@@ -21,25 +21,26 @@
             </div>
             <ul class="product-details list-group list-group-flush">
                 <li class="list-group-item">
-                    <div class="card-text">• Category: <span th:text="${product.getCategory().value}"></span></div>
-                    <div class="card-text">• Size: <span th:text="${product.getMilliliters().value}"></span></div>
-                    <div class="card-text">• Description: <span th:text="*{description}"></span> </div>
-                    <div class="card-text fw-bold">• Price: €<span th:text="*{price}"></span></div>
+                    <div class="card-text"> <span th:text="#{products_category}">• Category:</span> [(${product.getCategory().value})]</div>
+                    <div class="card-text"> <span th:text="#{products_size}">• Size:</span> [(${product.getMilliliters().value})]</div>
+                    <div class="card-text"> <span th:text="#{products_description}">• Description:</span> [(${product.description})]</div>
+                    <div class="card-text fw-bold"> <span th:text="#{products_price}">• Price:</span> € [(${product.price})]</div>
                 </li>
+
             </ul>
             <div class="card-body d-flex justify-content-between flex-row" >
                 <form
                         th:action="@{/cart/add/{id}(id=${id})}"
                         th:method="post">
-                    <button type="submit" class="btn btn-info add-to-cart">Аdd to cart</button>
+                    <button type="submit" class="btn btn-info add-to-cart" th:text="#{products_add_to_cart}">Аdd to cart</button>
                 </form>
-                <a class="btn btn-warning" sec:authorize="hasAnyRole('ADMIN', 'EMPLOYEE')" th:href="@{/products/edit/{id}(id=${id})}">
+                <a class="btn btn-warning" sec:authorize="hasAnyRole('ADMIN', 'EMPLOYEE')" th:href="@{/products/edit/{id}(id=${id})}" th:text="#{products_edit}">
                     Edit product
                 </a>
                 <form
                         th:action="@{/products/delete/{id}(id=${id})}"
                         th:method="post">
-                    <button type="submit" disabled class="btn btn-danger" sec:authorize="hasAnyRole('ADMIN', 'EMPLOYEE')">Delete</button>
+                    <button hidden="" type="submit" disabled class="btn btn-danger" sec:authorize="hasAnyRole('ADMIN', 'EMPLOYEE')">Delete</button>
                 </form>
             </div>
         </div>

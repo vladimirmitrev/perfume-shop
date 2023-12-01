@@ -6,12 +6,12 @@
 </head>
 <body>
 <div th:replace="fragments/navbar">Navbar</div>
-<div class="container-fluid">
-    <h5 class="text-center text-black mt-5">
-       403 Forbidden! UUUUPS!!!! You have no permission to see this page.
 
-        Why don't you <a th:href="@{/products/all}">find</a> for something else here?
-    </h5>
+<div class="container d-flex flex-column justify-content-center align-items-center">
+<!--    <h4>UUUUPS!!!! The site that you are looking for is forbbiden!</h4>-->
+    <a th:href="@{/index}">
+    <img class="forbidden-img" src="/images/403Forbidden.png">
+    </a>
 </div>
 <footer th:replace="~{fragments/footer}"></footer>
 </body>

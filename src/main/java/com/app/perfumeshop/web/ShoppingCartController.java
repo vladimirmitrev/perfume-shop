@@ -34,11 +34,11 @@ public class ShoppingCartController {
         ShoppingCart shoppingCart = shoppingCartService.findByUserId(user.getId());
 
         if (shoppingCart == null) {
-            model.addAttribute("emptyCartNull", "Your shopping cart is empty");
+            model.addAttribute("emptyCartNull", "Your shopping cart is empty(Твоята количка е празна)");
             return "redirect:/products/all";
         }
         if (shoppingCart.getTotalPrice().compareTo(BigDecimal.ZERO) == 0) {
-            model.addAttribute("emptyCart", "Your shopping cart is empty");
+            model.addAttribute("emptyCart", "Your shopping cart is empty(Твоята количка е празна)");
         }
 
 //        if (shoppingCart != null && shoppingCart.getTotalPrice().compareTo(BigDecimal.ZERO) != 0 ) {

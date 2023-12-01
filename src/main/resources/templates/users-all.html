@@ -11,17 +11,17 @@
 </div>
 
 <div class="container-fluid">
-    <h2 class="text-center text-black mt-5">All users</h2>
+    <h2 class="text-center text-black mt-5" th:text="#{users_all}">All users</h2>
     <div class="row">
         <div class="table-main table-responsive">
             <table class="table orders-table" style="margin-top: 10px;">
                 <thead>
                 <tr style="font-weight: bold">
-                    <th scope="col" class="text-center">Username</th>
-                    <th scope="col" class="text-center">Email</th>
-                    <th scope="col" class="text-center">Profile</th>
-                    <th scope="col" class="text-center">User roles</th>
-                    <th scope="col" class="text-center">Change role</th>
+                    <th scope="col" class="text-center" th:text="#{users_username}">Username</th>
+                    <th scope="col" class="text-center" th:text="#{users_email}">Email</th>
+                    <th scope="col" class="text-center" th:text="#{users_profile}">Profile</th>
+                    <th scope="col" class="text-center" th:text="#{users_roles}">User roles</th>
+                    <th scope="col" class="text-center" th:text="#{users_change_role}">Change role</th>
                 </tr>
 
                 </thead>
@@ -38,14 +38,14 @@
 
                     <td style="text-align: center;">
                         <a type="button" class="button-detail"
-                           th:href="@{/users/profile/{id}(id=${user.id})}">View user profile</a>
+                           th:href="@{/users/details-profile/{id}(id=${user.id})}" th:text="#{users_profile_link}">View user profile</a>
                     </td>
 
                     <td th:text="*{#strings.listJoin(getRolesNames(),', ')}" class="text-center fw-bold"></td>
 
                     <td style="text-align: center;">
                         <a type="button" class="button-detail"
-                           th:href="@{/users/change-role/{id}(id=${user.id})}">Change user roles</a>
+                           th:href="@{/users/change-role/{id}(id=${user.id})}" th:text="#{users_change_role_link}">Change user roles</a>
                     </td>
                 </tr>
                 </tbody>

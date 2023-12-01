@@ -156,7 +156,7 @@ form.main-form {
 
 .profile-box {
     width: 20rem;
-    height: 30rem;
+    height: 31rem;
     background-image: linear-gradient(to bottom right, rgba(184, 245, 253, 0.8), rgba(248, 232, 175, 0.8));
     /*background: aliceblue;*/
     padding-top: 1rem;
@@ -248,4 +248,6 @@ form.main-form {
     background-color: #FFCA2C;
     border-color: transparent;
 }
-
+.forbidden-img {
+    max-width: 50rem;
+}
