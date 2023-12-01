@@ -247,7 +247,12 @@ form.main-form {
 .login-btn {
     background-color: #FFCA2C;
     border-color: transparent;
+    width: 20rem;
 }
 .forbidden-img {
     max-width: 50rem;
+    border-radius: 10rem;
+}
+[name="query"] {
+    width: 20rem;
 }

@@ -12,7 +12,7 @@
 
 <div class="container px-3 my-5 clearfix">
     <div    th:if="${emptyCart}" class="text-center text-danger py-5">
-        <h5 th:text="${emptyCart}"></h5>
+        <h4 th:text="#{cart_empty_cart}"></h4>
         <a th:href="@{/products/all}">
             <button type="button" class="btn btn-primary btn-lg btn-default md-btn-flat mt-2 mr-3" th:text="#{cart_back_to_shopping}">Back to shopping
             </button>

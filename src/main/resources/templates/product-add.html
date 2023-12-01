@@ -9,7 +9,7 @@
     <nav th:replace="~{fragments/navbar}">Navbar</nav>
 </div>
 <div class="container">
-    <h2 class="text-center">Upload Product</h2>
+    <h2 class="text-center" th:text="#{products_upload}">Upload Product</h2>
     <form th:action="@{/products/add}"
           th:method="post"
           th:object="${addProductModel}"
@@ -18,7 +18,7 @@
         <div class="row">
 
             <div class="form-group col-md-6 mb-3">
-                <label class="text-center text-black font-weight-bold mt-2" for="brand">Brand</label>
+                <label class="text-center text-black font-weight-bold mt-2" for="brand" th:text="#{products_upload_brand}">Brand</label>
                 <select id="brand"
                         name="brand"
                         th:errorclass="is-invalid"
@@ -35,13 +35,13 @@
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label class="text-black font-weight-bold mt-2" for="name">Name</label>
+                <label class="text-black font-weight-bold mt-2" for="name" th:text="#{products_upload_name}">Name</label>
                 <input id="name"
                        name="name"
                        th:field="*{name}"
                        th:errorclass="is-invalid"
                        type="text" class="form-control mt-2"
-                       placeholder="Name"></input>
+                       th:placeholder="#{products_upload_name}"></input>
                 <p class="invalid-feedback errors alert alert-danger">
                     Model is required.
                 </p>
@@ -49,7 +49,7 @@
         </div>
         <div class="row">
             <div class="form-group col-md-6 mb-3">
-                <label class="text-center text-black font-weight-bold mt-2" for="category">Category</label>
+                <label class="text-center text-black font-weight-bold mt-2" for="category" th:text="#{products_upload_category}">Category</label>
                 <select
                         id="category"
                         name="category"
@@ -68,7 +68,7 @@
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label class="text-center text-black font-weight-bold mt-2" for="milliliters">Size</label>
+                <label class="text-center text-black font-weight-bold mt-2" for="milliliters" th:text="#{products_upload_size}">Size</label>
                 <select id="milliliters"
                         name="milliliters"
                         th:errorclass="is-invalid"
@@ -86,22 +86,22 @@
             </div>
         </div>
         <div class="form-group col-md-6 mb-3">
-            <label for="price" class="font-weight-bold mt-2">Price</label>
+            <label for="price" class="font-weight-bold mt-2" th:text="#{products_upload_price}">Price</label>
             <input  th:field="*{price}"
                     th:errorclass="is-invalid"
                     id="price" type="number" class="form-control mt-2" min="10"
-                    placeholder="Suggested price"/>
+                    th:placeholder="#{products_upload_price}"/>
             <p  class="invalid-feedback errors alert alert-danger">
                 Price is required.
             </p>
         </div>
         <div class="form-group">
-            <label class="text-black font-weight-bold mt-2" for="description">Description</label>
+            <label class="text-black font-weight-bold mt-2" for="description" th:text="#{products_upload_description}">Description</label>
             <textarea id="description"
                       th:field="*{description}"
                       th:errorclass="is-invalid"
                       type="textarea" class="form-control mt-2" rows="3"
-                      placeholder="Description"></textarea>
+                      th:placeholder="#{products_upload_description}"></textarea>
             <p class="invalid-feedback errors alert alert-danger">
                 Description is required.
             </p>
@@ -118,14 +118,14 @@
 <!--                Product image URL is required.-->
 <!--            </p>-->
 <!--        </div>-->
-        <div class="form-group">
-            <p>Product photo</p>
+        <div class="form-group mt-3">
+            <p th:text="#{products_upload_photo}">Product photo</p>
             <div class="col-md-4 d-flex">
                 <div class="custom-file">
                     <input type="file" class="form-control-file" name="photo"
                            accept="image/*"
                            id="imgInput"/>
-                    <label class="custom-file-label" for="imgInput">Choose file image</label>
+                    <label class="custom-file-label" for="imgInput" th:text="#{products_upload_choose_file}">Choose file image</label>
                 </div>
                 <div class="form-group">
                     <img id="imagePreview" height="150px" width="150px"
@@ -136,7 +136,7 @@
         <div class="row">
             <div class="col col-md-4">
                 <div class="button-holder d-flex">
-                    <input type="submit" class="btn btn-info btn-lg mt-4 mb-2" value="Add product"/>
+                    <button type="submit" class="btn btn-info btn-lg mt-4 mb-2" th:text="#{products_upload_add}">Add</button>
                 </div>
             </div>
         </div>

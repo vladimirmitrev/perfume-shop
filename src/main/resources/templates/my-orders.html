@@ -42,9 +42,9 @@
                         </td>
                         <td class="price-pr">
 <!--                            <p th:text="${order.status}"></p>-->
-                            <p th:if="${order.status.name() == 'CANCELLED'}" class="text-danger">CANCELLED</p>
-                            <p th:if="${order.status.name() == 'SHIPPED'}" class="text-success">SHIPPED</p>
-                            <p th:if="${order.status.name() == 'PROCESSING'}" class="text-black">PROCESSING</p>
+                            <p th:if="${order.status.name() == 'CANCELLED'}" class="text-danger" th:text="#{orders_details_status_cancel}">CANCELLED</p>
+                            <p th:if="${order.status.name() == 'SHIPPED'}" class="text-success" th:text="#{orders_details_status_shipped}">SHIPPED</p>
+                            <p th:if="${order.status.name() == 'PROCESSING'}" class="text-primary" th:text="#{orders_details_status_processing}" >PROCESSING</p>
                         </td>
                         <td class="total-pr">
                             <p th:text="|€ ${order.totalPrice}|" style="color: green"></p>

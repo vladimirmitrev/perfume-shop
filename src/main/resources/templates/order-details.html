@@ -50,9 +50,9 @@
                             <span class="text-primary fw-bold h5" th:text="${#dates.format(order.createdOn, 'dd-MM-yyyy')}"></span>
                             <h6 class="mt-4" th:text="#{orders_details_status}"><b>Order status</b></h6>
                             <div class="text-success fw-bold h5">
-                            <p th:if="${order.status.name() == 'CANCELLED'}" class="text-danger">CANCELLED</p>
-                            <p th:if="${order.status.name() == 'SHIPPED'}" class="text-success">SHIPPED</p>
-                            <p th:if="${order.status.name() == 'PROCESSING'}" class="text-secondary">PROCESSING</p>
+                                <p th:if="${order.status.name() == 'CANCELLED'}" class="text-danger" th:text="#{orders_details_status_cancel}">CANCELLED</p>
+                                <p th:if="${order.status.name() == 'SHIPPED'}" class="text-success" th:text="#{orders_details_status_shipped}">SHIPPED</p>
+                                <p th:if="${order.status.name() == 'PROCESSING'}" class="text-primary" th:text="#{orders_details_status_processing}" >PROCESSING</p>
                             </div>
                         <div class="mt-4 d-flex gap-5">
                             <a th:href="@{/my-orders}" class="ml-auto btn btn-warning btn-lg" th:text="#{orders_details_back_btn}">Back to my orders</a>
