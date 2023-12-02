@@ -1,5 +1,7 @@
 package com.app.perfumeshop.service;
 
+import com.app.perfumeshop.exception.UserNotFoundException;
+import com.app.perfumeshop.exception.UserRoleNotFoundException;
 import com.app.perfumeshop.model.entity.User;
 import com.app.perfumeshop.model.entity.UserRole;
 import com.app.perfumeshop.model.enums.UserRoleEnum;
@@ -23,7 +25,7 @@ public class UserRoleService {
         return this.userRoleRepository
                 .findByUserRole(role)
                 .orElseThrow(() ->
-                        new UsernameNotFoundException("There is no such role " + role));
+                        new UserRoleNotFoundException("There is no such role " + role));
         //TODO make a custom message exception
     }
     public void removeRole(Long userId) {

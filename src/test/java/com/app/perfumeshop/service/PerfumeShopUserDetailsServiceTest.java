@@ -19,6 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -27,6 +28,8 @@ class PerfumeShopUserDetailsServiceTest {
     @Mock
     private UserRepository mockUserRepo;
 
+    @Mock
+    private Collection<GrantedAuthority> authorities;
     private PerfumeShopUserDetailsService toTest;
 
     @BeforeEach
@@ -97,5 +100,46 @@ class PerfumeShopUserDetailsServiceTest {
                 () -> toTest.loadUserByUsername("non-existant@example.com")
         );
     }
+    @Test
+    public void testIsCredentialsNonExpired() {
+
+        PerfumeShopUserDetails userDetails = new PerfumeShopUserDetails(
+                1L, "password", "username", "John", "Doe", authorities);
+
+        boolean isCredentialsNonExpired = userDetails.isCredentialsNonExpired();
+
+        assertTrue(isCredentialsNonExpired);
+    }
+    @Test
+    public void testIsAccountNonExpired() {
+
+        PerfumeShopUserDetails userDetails = new PerfumeShopUserDetails(
+                1L, "password", "username", "John", "Doe", authorities);
+
+        boolean isAccountNonExpired = userDetails.isAccountNonExpired();
+
+        assertTrue(isAccountNonExpired);
+    }
+    @Test
+    public void testIsAccountNonLocked() {
+
+        PerfumeShopUserDetails userDetails = new PerfumeShopUserDetails(
+                1L, "password", "username", "John", "Doe", authorities);
+
+        boolean isAccountNonLocked = userDetails.isAccountNonLocked();
+
+        assertTrue(isAccountNonLocked);
+    }
+    @Test
+    public void testIsEnabled() {
+
+        PerfumeShopUserDetails userDetails = new PerfumeShopUserDetails(
+                1L, "password", "username", "John", "Doe", authorities);
+
+        boolean isEnabled = userDetails.isEnabled();
+
+        assertTrue(isEnabled);
+    }
+
 
 }
