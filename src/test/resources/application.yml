@@ -1,0 +1,21 @@
+app:
+  admin:
+    username: admin23
+    password: password23
+perfumeshop:
+  remember.me.key: password23
+  default.admin.pass: password23
+  default.admin.phone: 0888123456
+spring:
+  sql:
+    init:
+      mode: never
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+#    defer-datasource-initialization: true
+#    open-in-view: false
+cloudinary:
+  api.key: "test"
+  cloud.name: "test"
+  api.secret: "test"
