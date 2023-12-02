@@ -28,7 +28,7 @@
 
                 <tbody>
 
-                <tr th:each="user: ${users}" th:object="${user}" th:if="${user.id != 1}">
+                <tr th:each="user: ${users}" th:object="${user}">
 
                     <th scope="row" th:text="*{username}" class="text-center"
                        >1
