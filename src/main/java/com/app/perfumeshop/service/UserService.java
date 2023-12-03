@@ -1,6 +1,8 @@
 package com.app.perfumeshop.service;
 
 import com.app.perfumeshop.exception.ObjectNotFoundException;
+import com.app.perfumeshop.exception.UserNotFoundException;
+import com.app.perfumeshop.exception.UserRoleNotFoundException;
 import com.app.perfumeshop.model.dto.UserRegisterDTO;
 import com.app.perfumeshop.model.dto.user.UserViewDTO;
 import com.app.perfumeshop.model.entity.User;
@@ -107,7 +109,7 @@ public class UserService {
 
         return userRepository.findUserByEmail(email)
                 .map(userMapper::userEntityToUserDto)
-                .orElseThrow(() -> new ObjectNotFoundException("User with this email " + email + "is not found!"));
+                .orElseThrow(() -> new UserNotFoundException("User with this email " + email + "is not found!"));
     }
 
     public User getUserById(Long id) {

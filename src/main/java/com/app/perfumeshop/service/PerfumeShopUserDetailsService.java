@@ -1,5 +1,6 @@
 package com.app.perfumeshop.service;
 
+import com.app.perfumeshop.exception.UserNotFoundException;
 import com.app.perfumeshop.model.entity.User;
 import com.app.perfumeshop.model.entity.UserRole;
 import com.app.perfumeshop.model.user.PerfumeShopUserDetails;
@@ -28,7 +29,7 @@ public class PerfumeShopUserDetailsService implements UserDetailsService {
                 .findUserByEmail(email)
                 .map(this::mapUser)
                 .orElseThrow(() ->
-                        new UsernameNotFoundException("User with email " + email + " was not found!"));
+                        new UserNotFoundException("User with email " + email + " was not found!"));
     }
 
     private UserDetails mapUser(User user) {

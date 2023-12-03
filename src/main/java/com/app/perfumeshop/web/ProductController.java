@@ -129,7 +129,7 @@ public class ProductController {
 
         ProductViewDTO product =
                 productService.findProductById(id).orElseThrow(() ->
-                        new ObjectNotFoundException("Offer with ID " + id + "not found"));
+                        new ObjectNotFoundException("Product with ID " + id + "not found"));
 
         model.addAttribute("product", product);
 

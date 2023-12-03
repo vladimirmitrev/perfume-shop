@@ -1,5 +1,6 @@
 package com.app.perfumeshop.service;
 
+import com.app.perfumeshop.exception.UserNotFoundException;
 import com.app.perfumeshop.model.entity.User;
 import com.app.perfumeshop.model.entity.UserRole;
 import com.app.perfumeshop.model.enums.UserRoleEnum;
@@ -96,7 +97,7 @@ class PerfumeShopUserDetailsServiceTest {
 
         // act && assert
         Assertions.assertThrows(
-                UsernameNotFoundException.class,
+                UserNotFoundException.class,
                 () -> toTest.loadUserByUsername("non-existant@example.com")
         );
     }

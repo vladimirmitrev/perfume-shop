@@ -68,13 +68,13 @@ public class SecurityConfiguration {
                             .logoutSuccessUrl("/")
                             .invalidateHttpSession(true);
                 }
-//        ).rememberMe(
-//                rememberMe -> {
-//                    rememberMe
-//                            .key(rememberMeKey)
-//                            .rememberMeParameter("rememberme")
-//                            .rememberMeCookieName("rememberme");
-//                }
+        ).rememberMe(
+                rememberMe -> {
+                    rememberMe
+                            .key(rememberMeKey)
+                            .rememberMeParameter("rememberme")
+                            .rememberMeCookieName("rememberme");
+                }
         ).build();
     }
     @Bean
