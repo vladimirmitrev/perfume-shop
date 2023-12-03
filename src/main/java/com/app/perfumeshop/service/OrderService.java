@@ -4,7 +4,6 @@ import com.app.perfumeshop.model.dto.order.OrderCheckoutDTO;
 import com.app.perfumeshop.model.entity.Order;
 import com.app.perfumeshop.model.entity.OrderDetail;
 import com.app.perfumeshop.model.entity.ShoppingCart;
-import com.app.perfumeshop.model.entity.User;
 import com.app.perfumeshop.model.enums.OrderStatusEnum;
 import com.app.perfumeshop.repository.OrderDetailRepository;
 import com.app.perfumeshop.repository.OrderRepository;
@@ -72,14 +71,8 @@ public class OrderService {
 
         order.setOrderDetailList(orderDetailList);
 
-//        User user = userRepository.findById(shoppingCart.getCustomer().getId()).get();
-//
-//        List<ShoppingCart> carts = shoppingCartRepository.findByCustomer(user);
-//
-//        carts.forEach(cart -> shoppingCartRepository.deleteById(cart.getId()));
-        ;
         shoppingCartService.clearCurrentCartById(shoppingCart.getId());
-        shoppingCartService.deleteCartById(shoppingCart.getId());
+//        shoppingCartService.deleteCartById(shoppingCart.getId());
 
         return orderRepository.save(order);
     }
@@ -92,33 +85,23 @@ public class OrderService {
     }
 
     public void shippedOrder(Long id) {
-
         Order order = orderRepository.findById(id).get();
-
         order.setShipped(true)
                 .setStatus(OrderStatusEnum.SHIPPED);
-
         orderRepository.save(order);
     }
 
     public List<Order> getAllOrders() {
-
         return orderRepository.findAll();
     }
-
     @Transactional
     public void deleteAllCanceledOrders() {
-
         List<Order> cancelledOrders = orderRepository.findAllByOrderByStatus(OrderStatusEnum.CANCELLED);
-
         cancelledOrders.stream().forEach(order -> {
             orderRepository.deleteById(order.getId());
         });
-//        orderRepository.deleteAllCanceledOrders(OrderStatusEnum.CANCELLED);
     }
-
     public Order findOrderById(Long id) {
-
         return orderRepository.findById(id).get();
     }
 }
