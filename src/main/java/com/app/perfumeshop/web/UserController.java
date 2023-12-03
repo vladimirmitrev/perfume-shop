@@ -68,10 +68,8 @@ public class UserController {
     @GetMapping("/profile")
     public String myProfile(Model model,
                             Principal principal) {
-
         model.addAttribute("userProfile", userService.findByEmail(principal.getName()));
 //
-
         return "user-profile";
     }
 

@@ -121,7 +121,6 @@ public class TestDataUtils {
     public Product createTestProduct(Brand brand, Category category, User user) {
 
         Product product = new Product();
-        product.setId(1L);
         product
                 .setBrand(brand)
                 .setName("Number 5Test")

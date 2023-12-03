@@ -96,19 +96,4 @@ public class ShoppingCartController {
 
         return "redirect:/cart";
     }
-
-//    @PatchMapping("/cart/remove/{id}")
-//    public String removeFromCart(@PathVariable("id") Long id,
-//                                 Principal principal,
-//                                 Model model) {
-//
-//        User user = userService.findByEmail(principal.getName());
-//        Product product = productService.findProductById(id).get();
-//        ShoppingCart shoppingCart = shoppingCartService.removeItemFromCart(product, user);
-//
-//        model.addAttribute("shoppingCart", shoppingCart);
-//
-//
-//        return "redirect:/cart";
-//    }
 }

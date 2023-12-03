@@ -1,5 +1,6 @@
 package com.app.perfumeshop.web;
 
+import com.app.perfumeshop.model.dto.user.UserViewDTO;
 import com.app.perfumeshop.model.entity.User;
 import com.app.perfumeshop.repository.UserRepository;
 import com.app.perfumeshop.service.UserService;
@@ -14,6 +15,7 @@ import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
@@ -117,5 +119,17 @@ class UserControllerTestIT {
                 .andExpect(redirectedUrl( "http://localhost/users/login"));
     }
 
+    @Test
+    @WithMockUser(username = "admin", roles = "ADMIN")
+    public void testViewUserProfileById_NotFound() throws Exception {
 
+        Long userId = 1L;
+        UserViewDTO mockUserProfile = new UserViewDTO();
+        when(userService.findUserById(userId)).thenReturn(mockUserProfile);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/users/details-profile/{id}", userId))
+                .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+                .andExpect(MockMvcResultMatchers.view().name("user-profile"))
+                .andExpect(MockMvcResultMatchers.model().attribute("userProfile", mockUserProfile));
+    }
 }

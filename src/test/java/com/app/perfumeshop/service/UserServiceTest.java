@@ -1,7 +1,10 @@
 package com.app.perfumeshop.service;
 
+import com.app.perfumeshop.model.dto.UserRegisterDTO;
 import com.app.perfumeshop.model.dto.user.UserViewDTO;
 import com.app.perfumeshop.model.entity.User;
+import com.app.perfumeshop.model.entity.UserRole;
+import com.app.perfumeshop.model.enums.UserRoleEnum;
 import com.app.perfumeshop.model.mapper.UserMapper;
 import com.app.perfumeshop.repository.UserRepository;
 import org.junit.jupiter.api.Test;
@@ -10,6 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
@@ -30,6 +34,34 @@ public class UserServiceTest {
     private UserMapper userMapper;
 
 
+    @Mock
+    private UserRoleService userRoleService;
+
+    @Mock
+    private PasswordEncoder passwordEncoder;
+
+    @Test
+    public void testRegisterUser() {
+
+        UserRegisterDTO userRegisterDTO = new UserRegisterDTO();
+        userRegisterDTO.setUsername("testUser");
+        userRegisterDTO.setPassword("testPassword");
+
+        UserRole userRole = new UserRole();
+        Mockito.when(userRoleService.getRole(UserRoleEnum.USER)).thenReturn(userRole);
+
+        User newUser = new User();
+        Mockito.when(userMapper.userDtoToUserEntity(userRegisterDTO)).thenReturn(newUser);
+
+        Mockito.when(passwordEncoder.encode(userRegisterDTO.getPassword())).thenReturn("hashedPassword");
+
+        userService.registerUser(userRegisterDTO);
+
+        Mockito.verify(userRoleService, Mockito.times(1)).getRole(UserRoleEnum.USER);
+        Mockito.verify(userMapper, Mockito.times(1)).userDtoToUserEntity(userRegisterDTO);
+        Mockito.verify(passwordEncoder, Mockito.times(1)).encode(userRegisterDTO.getPassword());
+        Mockito.verify(userRepository, Mockito.times(1)).saveAndFlush(Mockito.any(User.class));
+    }
     @Test
     public void testFindByEmail() {
 
