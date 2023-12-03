@@ -109,7 +109,24 @@ public class TestDataUtils {
         return userRepository.save(user);
     }
 
-    public ShoppingCart createShoppingCart(User customer, int totalItems) {
+    public ShoppingCart createShoppingCart1(User customer, int totalItems) {
+        ShoppingCart shoppingCart = new ShoppingCart();
+        shoppingCart.setTotalItems(totalItems);
+        shoppingCart.setCustomer(customer);
+        shoppingCartRepository.save(shoppingCart);
+
+        return shoppingCart;
+    }
+    public ShoppingCart createShoppingCart2(User customer, int totalItems) {
+        ShoppingCart shoppingCart = new ShoppingCart();
+        shoppingCart.setId(44L);
+        shoppingCart.setTotalItems(totalItems);
+        shoppingCart.setCustomer(customer);
+        shoppingCartRepository.save(shoppingCart);
+
+        return shoppingCart;
+    }
+    public ShoppingCart createShoppingCart3(User customer, int totalItems) {
         ShoppingCart shoppingCart = new ShoppingCart();
         shoppingCart.setTotalItems(totalItems);
         shoppingCart.setCustomer(customer);
@@ -133,9 +150,21 @@ public class TestDataUtils {
         return productRepository.save(product);
     }
 
-    public Brand createTestBrand() {
+    public Brand createTestBrand1() {
         Brand brand = new Brand().
-                setName("ChanelTest");
+                setName("ChanelTest1");
+
+        return brandRepository.save(brand);
+    }
+    public Brand createTestBrand2() {
+        Brand brand = new Brand().
+                setName("ChanelTest2");
+
+        return brandRepository.save(brand);
+    }
+    public Brand createTestBrand3() {
+        Brand brand = new Brand().
+                setName("ChanelTest3");
 
         return brandRepository.save(brand);
     }

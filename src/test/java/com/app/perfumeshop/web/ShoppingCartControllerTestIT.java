@@ -47,9 +47,9 @@ public class ShoppingCartControllerTestIT {
     @Test
     @WithMockUser(username = "test@test.com", roles = "USER")
     public void testShoppingCart() throws Exception {
-        User testUser = testDataUtils.createTestUser("test@test.com", "testUser");
+        User testUser = testDataUtils.createTestUser("test55@test.com", "testUserShopCart");
         testUser.setId(1L);
-        ShoppingCart shoppingCart = testDataUtils.createShoppingCart(testUser, 1);
+        ShoppingCart shoppingCart = testDataUtils.createShoppingCart3(testUser, 1);
         shoppingCart.setTotalPrice(BigDecimal.TEN);
         when(userService.findByEmail("test@test.com")).thenReturn(testUser);
         when(shoppingCartService.findByUserId(testUser.getId())).thenReturn(shoppingCart);
@@ -64,8 +64,8 @@ public class ShoppingCartControllerTestIT {
     @WithMockUser(username = "test@test.com", roles = "USER")
     public void testAddToCart() throws Exception {
         Category category = testDataUtils.createTestCategory();
-        Brand brand = testDataUtils.createTestBrand();
-        User testUser = testDataUtils.createTestUser("test@test.com", "testUser");
+        Brand brand = testDataUtils.createTestBrand2();
+        User testUser = testDataUtils.createTestUser("test324324@test.com", "testUser444");
         Product product = testDataUtils.createTestProduct(brand, category, testUser);
         product.setId(1L);
         testUser.setId(1L);
@@ -82,12 +82,12 @@ public class ShoppingCartControllerTestIT {
     @WithMockUser(username = "test@test.com", roles = "USER")
     public void testUpdateCart() throws Exception {
         Category category = testDataUtils.createTestCategory();
-        Brand brand = testDataUtils.createTestBrand();
+        Brand brand = testDataUtils.createTestBrand1();
         User testUser = testDataUtils.createTestUser("test@test.com", "testUser");
         Product product = testDataUtils.createTestProduct(brand, category, testUser);
         product.setId(1L);
         testUser.setId(1L);
-        ShoppingCart shoppingCart = testDataUtils.createShoppingCart(testUser, 1);
+        ShoppingCart shoppingCart = testDataUtils.createShoppingCart1(testUser, 1);
         shoppingCart.setTotalPrice(BigDecimal.TEN);
 
         when(userService.findByEmail("test@test.com")).thenReturn(testUser);
@@ -107,12 +107,12 @@ public class ShoppingCartControllerTestIT {
     public void testRemoveFromCart() throws Exception {
         // Arrange
         Category category = testDataUtils.createTestCategory();
-        Brand brand = testDataUtils.createTestBrand();
-        User testUser = testDataUtils.createTestUser("test@test.com", "testUser");
+        Brand brand = testDataUtils.createTestBrand3();
+        User testUser = testDataUtils.createTestUser("test24235@test.com", "testUser");
         Product product = testDataUtils.createTestProduct(brand, category, testUser);
         product.setId(1L);
         testUser.setId(1L);
-        ShoppingCart shoppingCart = testDataUtils.createShoppingCart(testUser,2);
+        ShoppingCart shoppingCart = testDataUtils.createShoppingCart2(testUser,2);
         shoppingCart.setTotalPrice(BigDecimal.TEN);
         CartItem cartItem = new CartItem();
         cartItem.setProduct(product);

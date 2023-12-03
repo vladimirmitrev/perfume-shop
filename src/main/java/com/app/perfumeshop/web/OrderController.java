@@ -10,6 +10,7 @@ import com.app.perfumeshop.service.ShoppingCartService;
 import com.app.perfumeshop.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -116,6 +117,7 @@ public class OrderController {
         return "redirect:/my-orders";
     }
 
+//    @PreAuthorize("hasAnyRole('ADMIN', 'EMPLOYEE')")
     @RequestMapping(value = "/cancel-order", method = {RequestMethod.POST}, params = "action=cancel")
     public String cancelOrder(@RequestParam("id") Long id,
                               RedirectAttributes attributes,
@@ -137,9 +139,7 @@ public class OrderController {
         orderService.cancelOrder(id);
         attributes.addFlashAttribute("success", "Order was canceled successfully!");
 
-
-
-        return "redirect:/my-orders";
+        return "redirect:/orders-all";
     }
 
     @RequestMapping(value = "/cancel-customer-order", method = {RequestMethod.POST}, params = "action=cancel")
