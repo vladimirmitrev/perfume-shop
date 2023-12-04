@@ -30,33 +30,4 @@ public class BrandsService {
     public String getBrandNameById(Long id) {
         return brandRepository.findById(id).get().getName();
     }
-
-//    public List<BrandDTO> getAllBrands() {
-//
-//        List<BrandDTO> allBrands = brandRepository.findAll()
-//                .stream()
-//                .map(this::mapBrand)
-//                .toList();
-//
-//        return allBrands;
-//    }
-//
-//    private BrandDTO mapBrand(Brand brand) {
-//
-//        List<ModelViewDTO> models = brand.getModels()
-//                .stream()
-//                .map(this::mapModel)
-//                .toList();
-//
-//        return new BrandDTO()
-//                .setModels(models)
-//                .setName(brand.getName());
-//    }
-//
-//    private ModelViewDTO mapModel(Model model) {
-//            return new ModelViewDTO()
-//                    .setId(model.getId())
-//                    .setName(model.getName());
-//
-//    }
 }

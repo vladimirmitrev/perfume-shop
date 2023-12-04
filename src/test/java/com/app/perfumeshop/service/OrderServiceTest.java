@@ -205,4 +205,30 @@ public class OrderServiceTest {
         verify(mockOrderDetailList, times(1)).add(any(OrderDetail.class));
         verify(orderRepository, times(1)).save(any(Order.class));
     }
+    @Test
+    void testFindOrderDetailById() {
+        OrderDetailRepository orderDetailRepository = mock(OrderDetailRepository.class);
+
+        OrderDetailService yourServiceClass = new OrderDetailService(orderDetailRepository);
+
+        Long orderId = 1L;
+        Order order = new Order();
+        order.setId(orderId);
+
+        OrderDetail orderDetail1 = new OrderDetail();
+        orderDetail1.setId(1L);
+        orderDetail1.setOrder(order);
+
+        OrderDetail orderDetail2 = new OrderDetail();
+        orderDetail2.setId(2L);
+        orderDetail2.setOrder(order);
+
+        when(orderDetailRepository.findByOrder_Id(orderId)).thenReturn(List.of(orderDetail1, orderDetail2));
+
+        List<OrderDetail> result = yourServiceClass.findOrderById(orderId);
+
+        verify(orderDetailRepository, times(1)).findByOrder_Id(orderId);
+        assertEquals(2, result.size());
+
+    }
 }

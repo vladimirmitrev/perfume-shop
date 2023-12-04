@@ -15,6 +15,7 @@ import com.app.perfumeshop.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -116,7 +117,7 @@ public class ProductController {
             return "redirect:/products/add";
         }
 
-        productService.addProduct(addProductModel, userDetails);
+        productService.addProduct(addProductModel);
 
         return "redirect:/products/all";
     }
@@ -179,21 +180,27 @@ public class ProductController {
                         new ObjectNotFoundException("Offer with ID " + id + "not found"));
 
 
-        productService.editProduct(editProductModel, userDetails, id);
+        productService.editProduct(editProductModel, id);
 
         return "redirect:/products/all";
     }
 
     @GetMapping("/search")
-    public String search(@RequestParam(name = "query", required = false) String query, Model model) {
+    public String search(@RequestParam(name = "query", required = false) String query, Model model,
+                         @PageableDefault(
+                                 sort = "name",
+                                 direction = Sort.Direction.ASC,
+                                 page = 0,
+                                 size = 10) Pageable pageable) {
 
-        List<ProductViewDTO> searchResults = new ArrayList<>();
+        Page<ProductViewDTO> searchResults = null;
 
         if (query != null && !query.isEmpty()) {
-            searchResults = productService.searchProducts(query);
+            searchResults = productService.searchProducts(query, pageable);
         }
 
         model.addAttribute("searchResults", searchResults);
+
 
         return "search";
     }

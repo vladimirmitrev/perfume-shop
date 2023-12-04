@@ -18,7 +18,7 @@ public class AddProductDTO {
     private String name;
 //    @NotEmpty
     @NotNull(message = "Please choose a file")
-
+    @NotEmpty(message = "Please choose a file")
     private MultipartFile photo;
     @NotNull(message = "Please choose category")
     private CategoryNameEnum category;

@@ -43,13 +43,14 @@ public class ProductService {
     }
 
 
-    private String getImage(MultipartFile file) throws IOException {
-        String pictureUrl = "";
-        if (file != null) {
-            pictureUrl = this.cloudinaryService.uploadImage(file);
-        }
-        return pictureUrl;
-    }
+
+//    private String getImage(MultipartFile file) throws IOException {
+//        String pictureUrl = "";
+//        if (file != null) {
+//            pictureUrl = this.cloudinaryService.uploadImage(file);
+//        }
+//        return pictureUrl;
+//    }
 //    public Page<OfferDetailDTO> getAllOffers(Pageable pageable) {
 ////        return offerRepository.
 ////                findAll(pageable).
@@ -58,7 +59,6 @@ public class ProductService {
 ////    }
 
     public Page<ProductViewDTO> getAllProducts(Pageable pageable) {
-
         return productRepository.findAll(pageable)
                 .map(product -> {
                     ProductViewDTO productViewDTO = new ProductViewDTO();
@@ -70,7 +70,6 @@ public class ProductService {
                     productViewDTO.setImageUrl(product.getImageUrl());
                     productViewDTO.setDescription(product.getDescription());
                     productViewDTO.setPrice(product.getPrice());
-
                     return productViewDTO;
                 });
     }
@@ -79,16 +78,13 @@ public class ProductService {
 //                .toList();
 
 
-    public void addProduct(AddProductDTO addProductDTO, PerfumeShopUserDetails userDetails) throws IOException {
+    public void addProduct(AddProductDTO addProductDTO) throws IOException {
         Brand brand = brandRepository
                 .findByName(addProductDTO.getBrand());
-
         Category category = categoryRepository
                 .findByName(addProductDTO.getCategory());
-
         MultipartFile photo = addProductDTO.getPhoto();
         String imageUrl = cloudinaryService.uploadImage(photo);
-
         Product product = new Product();
         product.setBrand(brand);
         product.setName(addProductDTO.getName())
@@ -97,18 +93,14 @@ public class ProductService {
                 .setMilliliters(addProductDTO.getMilliliters())
                 .setPrice(addProductDTO.getPrice())
                 .setImageUrl(imageUrl);
-
         productRepository.save(product);
     }
-    public void editProduct(EditProductDTO editProductDTO, PerfumeShopUserDetails userDetails, Long productId) throws IOException {
+    public void editProduct(EditProductDTO editProductDTO, Long productId) throws IOException {
         Brand brand = brandRepository
                 .findByName(editProductDTO.getBrand());
-
         Category category = categoryRepository
                 .findByName(editProductDTO.getCategory());
-
-        Product product = findById(productId);
-
+        Product product = getProductById(productId);
         product.setBrand(brand);
         product.setName(editProductDTO.getName())
                 .setCategory(category)
@@ -116,16 +108,12 @@ public class ProductService {
                 .setMilliliters(editProductDTO.getMilliliters())
                 .setPrice(editProductDTO.getPrice())
                 .setImageUrl(editProductDTO.getImageUrl());
-
         productRepository.save(product);
     }
-
     private Product findById(Long productId) {
         return productRepository.findById(productId).get();
     }
-
     public Optional<ProductViewDTO> findProductById(Long id) {
-
 
         return productRepository.findById(id)
                 .map(product -> {
@@ -138,68 +126,24 @@ public class ProductService {
                             .setPrice(product.getPrice())
                             .setMilliliters(product.getMilliliters())
                             .setImageUrl(product.getImageUrl());
-
                     return productViewDTO;
                 });
-
-        //        return productRepository
-//        .findById(id)
-//        .map(productMapper::productEntityToProductViewDTO);
     }
-
     @Transactional
     public void deleteProductById(Long id) {
         productRepository.deleteById(id);
-
     }
 
     public Product getProductById(Long productId) {
-
         return productRepository.findById(productId).get();
     }
-
-
-    public List<ProductViewDTO> searchProducts(String keyword) {
-        List<ProductViewDTO> products =
-                productRepository.searchProductsByBrandOrNameOrDescription(keyword).stream().map(
-                        (product -> {
-                            ProductViewDTO productViewDTO = new ProductViewDTO();
-                            productViewDTO.setName(product.getName());
-                            productViewDTO.setBrand(product.getBrand().getName());
-                            productViewDTO.setId(product.getId());
-                            productViewDTO.setCategory(product.getCategory().getName());
-                            productViewDTO.setMilliliters(product.getMilliliters());
-                            productViewDTO.setImageUrl(product.getImageUrl());
-                            productViewDTO.setDescription(product.getDescription());
-                            productViewDTO.setPrice(product.getPrice());
-
-                            return productViewDTO;
-                        })).toList();
-        return products;
+    public Page<ProductViewDTO> searchProducts(String keyword, Pageable pageable) {
+        return productRepository.searchProductsByBrandOrNameOrDescription(keyword, pageable)
+                        .map(productMapper::productEntityToProductViewDTO);
     }
 
     public Page<ProductViewDTO> getAllProductByBrandId(Long id, Pageable pageable) {
         return productRepository.findProductsByBrand_Id(id, pageable)
                 .map(productMapper::productEntityToProductViewDTO);
     }
-
-//    public Page<ProductViewDTO> pageProducts(int pageNo) {
-//        Pageable pageable = PageRequest.of(pageNo, 5);
-//        Page<ProductViewDTO> productPages =
-//                productRepository.pageProduct(pageable)
-//                        .map(product -> {
-//                            ProductViewDTO productViewDTO = new ProductViewDTO();
-//                            productViewDTO.setName(product.getName());
-//                            productViewDTO.setBrand(product.getBrand().getName());
-//                            productViewDTO.setId(product.getId());
-//                            productViewDTO.setCategory(product.getCategory().getName());
-//                            productViewDTO.setMilliliters(product.getMilliliters());
-//                            productViewDTO.setImageUrl(product.getImageUrl());
-//                            productViewDTO.setDescription(product.getDescription());
-//                            productViewDTO.setPrice(product.getPrice());
-//
-//                            return productViewDTO;
-//                        });
-//        return productPages;
-//    }
 }

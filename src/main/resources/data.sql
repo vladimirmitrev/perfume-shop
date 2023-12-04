@@ -44,8 +44,9 @@ VALUES (1, 'Armani'),
 
 INSERT INTO products (id, name, price, milliliters, description, category_id, brand_id, image_url)
 VALUES (1, 'Code', 77.00, 'FIFTY','Very good smell', 1, 1, 'https://res.cloudinary.com/dvj9qondf/image/upload/v1699350342/Perfumes/nsxrpyiwhdsg3l5lihhc.jpg'),
-       (2, 'Invictus', 177.00, 'HUNDRED', 'Amazing smell', 1, 3, 'https://res.cloudinary.com/dvj9qondf/image/upload/v1699346924/Perfumes/vhnjlmxqdzyznnw64uo0.jpg'),
-       (3, 'Number 5', 277.00, 'TWO_HUNDRED','Great smell', 2, 2, 'https://res.cloudinary.com/dvj9qondf/image/upload/v1699346989/Perfumes/pea5pgi3mw9l0wtvfgvp.jpg');
+       (2, 'Invictus', 88.00, 'HUNDRED', 'Amazing smell', 1, 3, 'https://res.cloudinary.com/dvj9qondf/image/upload/v1699346924/Perfumes/vhnjlmxqdzyznnw64uo0.jpg'),
+       (3, 'One Million', 99.00, 'HUNDRED', 'Amazing smell', 1, 3, 'https://res.cloudinary.com/dvj9qondf/image/upload/v1700411994/Perfumes/pywwejdmjdgm3q8r9njt.jpg'),
+       (4, 'Number 5', 149.00, 'TWO_HUNDRED','Great smell', 2, 2, 'https://res.cloudinary.com/dvj9qondf/image/upload/v1699346989/Perfumes/pea5pgi3mw9l0wtvfgvp.jpg');
 
 # INSERT INTO products(id, model_id)
 # VALUES (1,1),
