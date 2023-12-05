@@ -199,13 +199,11 @@ public class ProductController {
                                      sort = "name",
                                      direction = Sort.Direction.ASC,
                                      page = 0,
-                                     size = 10) Pageable pageable) {
+                                     size = 100) Pageable pageable) {
 
         Page<ProductViewDTO> searchResults = productService.searchProducts(query, pageable);
 
-        if (searchResults == null) {
-            model.addAttribute("noProductsFound", "No products found");
-        } else if (searchResults.isEmpty()) {
+        if (searchResults == null || searchResults.isEmpty()) {
             model.addAttribute("noProductsFound", "No products found");
         }
         model.addAttribute("searchResults", searchResults);

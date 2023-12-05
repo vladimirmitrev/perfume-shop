@@ -81,7 +81,7 @@
 <!--    </nav>-->
 <!--    <nav>-->
 <!--        <ul class="pagination">-->
-<!--            <li class="page-item" th:classappend="${products.hasNext() ? '' : 'disabled'}">-->
+<!--            <li class="page-item" th:classappend="${searchResults.hasNext() ? '' : 'disabled'}">-->
 <!--                <a th:if="${searchResults.hasNext()}"-->
 <!--                   th:href="@{/search(size=${searchResults.getSize()},page=${searchResults.getNumber() + 1})}"-->
 <!--                   class="page-link" href="#" th:text="#{page_next}">Next</a>-->
@@ -92,7 +92,7 @@
 <!--    </nav>-->
 <!--    <nav>-->
 <!--        <ul class="pagination">-->
-<!--            <li class="page-item" th:classappend="${products.isLast()} ? 'disabled' : ''">-->
+<!--            <li class="page-item" th:classappend="${searchResults.isLast()} ? 'disabled' : ''">-->
 <!--                <a th:unless="${searchResults.isLast()}"-->
 <!--                   th:href="@{/search(size=${searchResults.getSize()},page=${searchResults.getTotalPages() - 1})}"-->
 <!--                   class="page-link" href="#" th:text="#{page_last}">Last</a>-->
