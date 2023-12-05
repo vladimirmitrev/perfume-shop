@@ -26,7 +26,6 @@ public class BrandController {
     @GetMapping("/brands")
     public String viewBrandsPage() {
 
-
         return "brands";
     }
 
@@ -41,11 +40,8 @@ public class BrandController {
 
         Page<ProductViewDTO> products = productService.getAllProductByBrandId(id, pageable);
         String brandName = brandsService.getBrandNameById(id);
-
         model.addAttribute("products", products);
         model.addAttribute("brand", brandName);
-
         return "brand-products";
     }
-
 }
