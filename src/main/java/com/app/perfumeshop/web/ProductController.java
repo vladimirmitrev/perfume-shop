@@ -71,10 +71,10 @@ public class ProductController {
         }
 
         Page<ProductViewDTO> products = productService.getAllProducts(pageable);
-        model.addAttribute("products", products );
+        model.addAttribute("products", products);
 
-        if (products.getSize() == 0) {
-            model.addAttribute("emptyShop", "Your shop is empty");
+        if (products.isEmpty()) {
+            model.addAttribute("emptyShop", "Shop is empty");
         }
         return "products";
     }
@@ -186,21 +186,29 @@ public class ProductController {
     }
 
     @GetMapping("/search")
-    public String search(@RequestParam(name = "query", required = false) String query, Model model,
-                         @PageableDefault(
-                                 sort = "name",
-                                 direction = Sort.Direction.ASC,
-                                 page = 0,
-                                 size = 10) Pageable pageable) {
+    public String searchGet(Model model) {
 
-        Page<ProductViewDTO> searchResults = null;
+        model.addAttribute("noProductsFound", "No products found");
 
-        if (query != null && !query.isEmpty()) {
-            searchResults = productService.searchProducts(query, pageable);
+        return "search";
+    }
+
+    @PostMapping("/search")
+    public String searchPost(@RequestParam(name = "query", required = false) String query, Model model,
+                             @PageableDefault(
+                                     sort = "name",
+                                     direction = Sort.Direction.ASC,
+                                     page = 0,
+                                     size = 10) Pageable pageable) {
+
+        Page<ProductViewDTO> searchResults = productService.searchProducts(query, pageable);
+
+        if (searchResults == null) {
+            model.addAttribute("noProductsFound", "No products found");
+        } else if (searchResults.isEmpty()) {
+            model.addAttribute("noProductsFound", "No products found");
         }
-
         model.addAttribute("searchResults", searchResults);
-
 
         return "search";
     }

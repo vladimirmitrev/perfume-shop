@@ -113,7 +113,7 @@
                           th:method="POST">
                         <div class="mb-1">
                             <label for="address" th:text="#{checkout_address}">Address *</label>
-                            <input type="text" class="form-control"
+                            <input type="text" class="form-control must-fill"
                                    id="address"
                                    name="address"
                                    th:field="${shippingInfo.address}"
@@ -126,7 +126,7 @@
                                 />
                             </div>
                             <label for="city" th:text="#{checkout_city}">City *</label>
-                            <input type="text" class="form-control"
+                            <input type="text" class="form-control must-fill"
                                    id="city"
                                    name="city"
                                    th:field="${shippingInfo.city}"
@@ -139,7 +139,7 @@
                                 />
                             </div>
                             <label for="postCode" th:text="#{checkout_post_code}">Postal Code *</label>
-                            <input type="text" class="form-control"
+                            <input type="text" class="form-control must-fill"
                                    id="postCode"
                                    name="postCode"
                                    th:field="${shippingInfo.postCode}"
@@ -162,7 +162,7 @@
                                     id="courier"
                                     name="courier"
                                     th:errorclass="is-invalid"
-                                    class="form-control mt-2">
+                                    class="form-control mt-2 must-fill">
                                 <option value="">- Select courier -</option>
                                 <option th:each="c : ${T(com.app.perfumeshop.model.enums.CourierNameEnum).values()}"
                                         th:text="${c}"

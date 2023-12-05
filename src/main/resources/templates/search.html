@@ -17,14 +17,14 @@
             <h5 class="text-left" th:text="#{products_search}">Search for products</h5>
             <i class="fa-solid fa-magnifying-glass"></i>
         </div>
-        <form class="d-flex justify-content-center align-items-center gap-1" th:action="@{/search}" method="get">
-            <input class="form-control" type="text" name="query" th:placeholder="#{type_something}"/>
+        <form class="d-flex justify-content-center align-items-center gap-1" th:action="@{/search}" method="post">
+            <input class="form-control" type="text" name="query" required th:placeholder="#{type_something}"/>
             <button class="btn btn-primary" type="submit" th:text="#{button_search}">Search</button>
         </form>
     </div>
     <div>
-        <h4 th:if="${#lists.isEmpty(searchResults)}" class="text-center text-black mt-5" th:text="#{products_search_no_found}">No results found.</h4>
-        <h4 th:unless="${#lists.isEmpty(searchResults)}" class="text-center text-black mt-5" th:text="#{products_search_found}">Products found</h4>
+        <h4 th:if="${noProductsFound}" class="text-center text-black mt-5" th:text="#{products_search_no_found}">No results found.</h4>
+        <h4 th:unless="${noProductsFound}" class="text-center text-black mt-5" th:text="#{products_search_found}">Products found</h4>
         <div th:if="${not #lists.isEmpty(searchResults)}"
              class="offers row mx-auto d-flex flex-row justify-content-center">
             <!--            <span th:text="${product.brand} + ' ' + ${product.name} + ' ' + ${product.description}"></span>-->

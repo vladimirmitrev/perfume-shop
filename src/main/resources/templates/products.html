@@ -13,9 +13,9 @@
 
 <div class="container-fluid">
     <div th:if="${emptyShop}" class="text-center text-danger py-5">
-        <h5 th:text="${emptyShop}"></h5>
+        <h5 th:text="#{products_shop_empty}"></h5>
         <a sec:authorize="hasAnyRole('ADMIN', 'EMPLOYEE')" th:href="@{/products/add}">
-            <button type="button" class="btn btn-primary btn-lg btn-default md-btn-flat mt-2 mr-3">Add products
+            <button type="button" class="btn btn-primary btn-lg btn-default md-btn-flat mt-2 mr-3" th:text="#{navbar_add_product}">Add products
             </button>
         </a>
     </div>
@@ -24,8 +24,8 @@
             <h5 class="text-left" th:text="#{products_search}">Search for products</h5>
             <i class="fa-solid fa-magnifying-glass"></i>
         </div>
-        <form class="d-flex justify-content-center align-items-center gap-1" th:action="@{/search}" method="get">
-            <input class="form-control" type="text" name="query" th:placeholder="#{type_something}"/>
+        <form class="d-flex justify-content-center align-items-center gap-1" th:action="@{/search}" method="post">
+            <input class="form-control" type="text" name="query" required th:placeholder="#{type_something}"/>
             <button class="btn btn-primary" type="submit" th:text="#{button_search}">Search</button>
         </form>
     </div>
