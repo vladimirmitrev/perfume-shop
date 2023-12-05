@@ -30,7 +30,8 @@ public class UserRoleService {
     }
     public void removeRole(Long userId) {
 
-        User user = userRepository.findById(userId).get();
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException("User not found with ID: " + userId));
 
         user.getUserRoles().removeIf(userRole -> userRole.getUserRole().name().equals("EMPLOYEE"));
 
@@ -38,10 +39,9 @@ public class UserRoleService {
     }
     public void addRole(Long userId) {
 
-        User user = userRepository.findById(userId).get();
-
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException("User not found with ID: " + userId));
         user.getUserRoles().add(userRoleRepository.findByUserRole(UserRoleEnum.EMPLOYEE).get());
-
         userRepository.save(user);
     }
 }
