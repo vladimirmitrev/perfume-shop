@@ -1,12 +1,15 @@
 package com.app.perfumeshop.web;
 
 import com.app.perfumeshop.model.entity.*;
+import com.app.perfumeshop.repository.ShoppingCartRepository;
 import com.app.perfumeshop.service.ProductService;
 import com.app.perfumeshop.service.ShoppingCartService;
 import com.app.perfumeshop.service.UserService;
 import com.app.perfumeshop.util.TestDataUtils;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -39,17 +42,23 @@ public class ShoppingCartControllerTestIT {
 
     @Autowired
     private TestDataUtils testDataUtils;
+    @MockBean
+    private ShoppingCartRepository mockShoppingCartRepository;
 
     @BeforeEach
     void setUp() {
 
     }
+//    @AfterEach
+//    void cleanUp() {
+//        mockShoppingCartRepository.deleteAll();
+//    }
     @Test
     @WithMockUser(username = "test@test.com", roles = "USER")
     public void testShoppingCart() throws Exception {
         User testUser = testDataUtils.createTestUser("test55@test.com", "testUserShopCart");
         testUser.setId(1L);
-        ShoppingCart shoppingCart = testDataUtils.createShoppingCart3(testUser, 1);
+        ShoppingCart shoppingCart = testDataUtils.createShoppingCart4(testUser, 1);
         shoppingCart.setTotalPrice(BigDecimal.TEN);
         when(userService.findByEmail("test@test.com")).thenReturn(testUser);
         when(shoppingCartService.findByUserId(testUser.getId())).thenReturn(shoppingCart);
@@ -108,7 +117,7 @@ public class ShoppingCartControllerTestIT {
         // Arrange
         Category category = testDataUtils.createTestCategory();
         Brand brand = testDataUtils.createTestBrand3();
-        User testUser = testDataUtils.createTestUser("test24235@test.com", "testUser");
+        User testUser = testDataUtils.createTestUser("test24235@test.com", "testUser67");
         Product product = testDataUtils.createTestProduct(brand, category, testUser);
         product.setId(1L);
         testUser.setId(1L);

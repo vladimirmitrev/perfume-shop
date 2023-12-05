@@ -5,10 +5,12 @@ import com.app.perfumeshop.exception.UserNotFoundException;
 import com.app.perfumeshop.exception.UserRoleNotFoundException;
 import com.app.perfumeshop.model.dto.UserRegisterDTO;
 import com.app.perfumeshop.model.dto.user.UserViewDTO;
+import com.app.perfumeshop.model.entity.Order;
 import com.app.perfumeshop.model.entity.User;
 import com.app.perfumeshop.model.entity.UserRole;
 import com.app.perfumeshop.model.enums.UserRoleEnum;
 import com.app.perfumeshop.model.mapper.UserMapper;
+import com.app.perfumeshop.repository.OrderRepository;
 import com.app.perfumeshop.repository.UserRepository;
 import com.app.perfumeshop.repository.UserRoleRepository;
 import org.modelmapper.ModelMapper;
@@ -33,15 +35,18 @@ public class UserService {
     @Value("${perfumeshop.default.admin.phone}")
     public String hiddenAdminPhone;
     private final ModelMapper modelMapper;
+    private final OrderRepository orderRepository;
 
     public UserService(UserRepository userRepository, UserRoleRepository userRoleRepository, PasswordEncoder passwordEncoder, UserMapper userMapper, UserRoleService userRoleService,
-                       ModelMapper modelMapper) {
+                       ModelMapper modelMapper,
+                       OrderRepository orderRepository) {
         this.userRepository = userRepository;
         this.userRoleRepository = userRoleRepository;
         this.passwordEncoder = passwordEncoder;
         this.userMapper = userMapper;
         this.userRoleService = userRoleService;
         this.modelMapper = modelMapper;
+        this.orderRepository = orderRepository;
     }
 
     public void init() {
@@ -112,4 +117,7 @@ public class UserService {
                 .orElseThrow(() -> new UserNotFoundException("User with this email " + email + "is not found!"));
     }
 
+//    public List<Order> getOrders(User user) {
+//        return orderService.findByCustomerId(user.getId());
+//    }
 }

@@ -19,6 +19,8 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             " WHERE o.status = :status")
     List<Order> findAllByOrderByStatus(@Param("status") OrderStatusEnum status);
 
+    List<Order> findByCustomerId(Long id);
+
     //    @Modifying
 //    @Transactional
 //    @Query("DELETE FROM Order o" +

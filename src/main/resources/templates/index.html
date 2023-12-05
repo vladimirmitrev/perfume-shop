@@ -14,7 +14,7 @@
 <div class="container-fluid col-md-6 text-center d-flex flex-column align-items-center gap-3">
     <h4 class="text-center text-black mt-5" style="font-family: 'Calibri'">
         <span sec:authorize="isAuthenticated()"
-              th:text="#{index_welcome(${#authentication.principal.fullName})}">
+              th:text="#{index_welcome(${#authentication.principal.username})}">
         </span>
 
         <span sec:authorize="!isAuthenticated()"

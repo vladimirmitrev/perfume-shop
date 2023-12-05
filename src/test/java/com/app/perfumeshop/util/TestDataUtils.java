@@ -1,5 +1,6 @@
 package com.app.perfumeshop.util;
 
+import com.app.perfumeshop.model.dto.user.UserViewDTO;
 import com.app.perfumeshop.model.entity.*;
 import com.app.perfumeshop.model.enums.CategoryNameEnum;
 import com.app.perfumeshop.model.enums.OrderStatusEnum;
@@ -111,6 +112,7 @@ public class TestDataUtils {
 
     public ShoppingCart createShoppingCart1(User customer, int totalItems) {
         ShoppingCart shoppingCart = new ShoppingCart();
+        shoppingCart.setId(123L);
         shoppingCart.setTotalItems(totalItems);
         shoppingCart.setCustomer(customer);
         shoppingCartRepository.save(shoppingCart);
@@ -119,7 +121,7 @@ public class TestDataUtils {
     }
     public ShoppingCart createShoppingCart2(User customer, int totalItems) {
         ShoppingCart shoppingCart = new ShoppingCart();
-        shoppingCart.setId(44L);
+        shoppingCart.setId(454L);
         shoppingCart.setTotalItems(totalItems);
         shoppingCart.setCustomer(customer);
         shoppingCartRepository.save(shoppingCart);
@@ -128,6 +130,16 @@ public class TestDataUtils {
     }
     public ShoppingCart createShoppingCart3(User customer, int totalItems) {
         ShoppingCart shoppingCart = new ShoppingCart();
+        shoppingCart.setId(77L);
+        shoppingCart.setTotalItems(totalItems);
+        shoppingCart.setCustomer(customer);
+        shoppingCartRepository.save(shoppingCart);
+
+        return shoppingCart;
+    }
+    public ShoppingCart createShoppingCart4(User customer, int totalItems) {
+        ShoppingCart shoppingCart = new ShoppingCart();
+        shoppingCart.setId(143L);
         shoppingCart.setTotalItems(totalItems);
         shoppingCart.setCustomer(customer);
         shoppingCartRepository.save(shoppingCart);
