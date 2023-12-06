@@ -31,11 +31,13 @@
                     </thead>
                     <tbody>
                     <tr th:each="order : ${orders}">
-                        <td class="user-email">
-                            <span th:text="${order.getCustomer().email}"></span>
+                        <td class="user-email fw-bold">
+<!--                            <span th:text="${order.getCustomer().email}"></span>-->
+                            <a type="button" class="button-detail link-primary" th:title="#{users_view_profile}"
+                               th:href="@{/users/details-profile/{id}(id=${order.getCustomer().getId()})}" th:text="${order.getCustomer().email}">User email</a>
                         </td>
                         <td class="order-number fw-bold">
-                            <a th:href="@{/order-details/{id}(id=${order.id})}" th:text="|#907732${order.getId()}|" title="View Order Details"></a>
+                            <a class="link-info" th:href="@{/order-details/{id}(id=${order.id})}" th:text="|#907732${order.getId()}|" th:title="#{users_view_order}"></a>
                         </td>
                         <td class="order-date text-blue">
                             <b><span th:text="${#dates.format(order.createdOn, 'dd-MM-yyyy')}"></span></b>
@@ -68,7 +70,7 @@
                                         th:if="${order.status.name() != 'SHIPPED' and order.status.name() != 'CANCELLED'}"
                                         type="submit" name="action" value="ship"
                                         title="Order shipped"
-                                        class="btn btn-sm btn-success">Shipped
+                                        class="btn btn-sm btn-success" th:text="#{orders_details_shipped_button}">Shipped
                                 </button>
                             </form>
                             <form th:method="POST"
@@ -78,7 +80,7 @@
                                         sec:authorize="hasAnyRole('ADMIN', 'EMPLOYEE')"
                                         type="submit" name="action" value="cancel"
                                         title="Cancel order"
-                                        class="btn btn-sm btn-danger">Cancel
+                                        class="btn btn-sm btn-danger" th:text="#{orders_details_cancel_button}">Cancel
                                 </button>
                             </form>
                         </td>

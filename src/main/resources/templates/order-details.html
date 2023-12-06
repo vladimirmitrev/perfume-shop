@@ -16,46 +16,53 @@
                 <h3 class="mb-4" th:text="|#{orders_details_order_number}${order.id}|">2</h3>
             </div>
             <div class="col-sm-12 col-lg-12 mb-3 d-flex gap-5">
-                    <input type="hidden" name="id" th:value="${id}">
-                    <div class="col-md-6 col-lg-6">
-                        <div class="odr-box">
-                            <div class="rounded p-2 bg-light order-items">
-                                <div class="media mb-2 border-bottom" th:each="order : ${orderDetail}">
-                                    <div class="media-body"><img class="order-image"
-                                                                 th:src="${order.product.imageUrl}"></img>
-                                        <a th:href="@{/products/details/{productId}(productId=${order.product.id})}"
-                                           th:text="|${order.product.brand.getName().toString()} ${order.product.name}|"
-                                        title="View product details"></a>
-                                        <div class="small text-muted"> <span th:text="#{products_price}"> Price:</span> € [(${order.product.price})]
-                                        </div>
+                <input type="hidden" name="id" th:value="${id}">
+                <div class="col-md-6 col-lg-6">
+                    <div class="odr-box">
+                        <div class="rounded p-2 bg-light order-items">
+                            <div class="media mb-2 border-bottom" th:each="order : ${orderDetail}">
+                                <div class="media-body"><img class="order-image"
+                                                             th:src="${order.product.imageUrl}"></img>
+                                    <a th:href="@{/products/details/{productId}(productId=${order.product.id})}"
+                                       th:text="|${order.product.brand.getName().toString()} ${order.product.name}|"
+                                       title="View product details"></a>
+                                    <div class="small text-muted"><span th:text="#{products_price}"> Price:</span> €
+                                        [(${order.product.price})]
                                     </div>
                                 </div>
                             </div>
-                            <div class="d-flex gr-total justify-content-between mt-3">
-                                <h4 th:text="#{orders_details_total_price}">Total price</h4>
-                                <div class="ml-auto h5 text-success fw-bold"
-                                     th:text="|€ ${order.totalPrice}|"></div>
-                            </div>
                         </div>
+                        <div class="d-flex gr-total justify-content-between mt-3">
+                            <h4 th:text="#{orders_details_total_price}">Total price</h4>
+                            <div class="ml-auto h5 text-success fw-bold"
+                                 th:text="|€ ${order.totalPrice}|"></div>
+                        </div>
+                        <a th:href="@{/my-orders}" class="ml-auto btn btn-warning btn-lg mt-3"
+                           th:text="#{orders_details_back_btn}">Back to my orders</a>
                     </div>
-                    <div class="col-md-6 col-lg-6 order-box">
-                        <div class="title-left">
-                            <h6 class="mt-4" th:text="#{orders_details_shipping_address}"><b>Shipping address</b></h6>
-                            <span class="text-danger fw-bold" th:text="|${order.shippingAddress}, ${order.city}, ${order.postCode}|"></span>
-                            <h6 class="mt-4" th:text="#{orders_details_phone}"><b>Customer phone number</b></h6>
-                            <span class="text-danger fw-bold h5" th:text="${order.customer.phoneNumber}">08888</span>
-                            <h6 class="mt-4" th:text="#{orders_details_courier}"><b>Preferred shipping courier</b></h6>
-                            <span class="text-success fw-bold h5" th:text="${order.courier}"></span>
-                            <h6 class="mt-4" th:text="#{orders_details_date}"><b>Date of purchase</b></h6>
-                            <span class="text-primary fw-bold h5" th:text="${#dates.format(order.createdOn, 'dd-MM-yyyy')}"></span>
-                            <h6 class="mt-4" th:text="#{orders_details_status}"><b>Order status</b></h6>
-                            <div class="text-success fw-bold h5">
-                                <p th:if="${order.status.name() == 'CANCELLED'}" class="text-danger" th:text="#{orders_details_status_cancel}">CANCELLED</p>
-                                <p th:if="${order.status.name() == 'SHIPPED'}" class="text-success" th:text="#{orders_details_status_shipped}">SHIPPED</p>
-                                <p th:if="${order.status.name() == 'PROCESSING'}" class="text-primary" th:text="#{orders_details_status_processing}" >PROCESSING</p>
-                            </div>
+                </div>
+                <div class="col-md-6 col-lg-6 order-box">
+                    <div class="title-left">
+                        <h6 class="mt-4" th:text="#{orders_details_shipping_address}"><b>Shipping address</b></h6>
+                        <span class="text-danger fw-bold"
+                              th:text="|${order.shippingAddress}, ${order.city}, ${order.postCode}|"></span>
+                        <h6 class="mt-4" th:text="#{orders_details_phone}"><b>Customer phone number</b></h6>
+                        <span class="text-danger fw-bold h5" th:text="${order.customer.phoneNumber}">08888</span>
+                        <h6 class="mt-4" th:text="#{orders_details_courier}"><b>Preferred shipping courier</b></h6>
+                        <span class="text-success fw-bold h5" th:text="${order.courier}"></span>
+                        <h6 class="mt-4" th:text="#{orders_details_date}"><b>Date of purchase</b></h6>
+                        <span class="text-primary fw-bold h5"
+                              th:text="${#dates.format(order.createdOn, 'dd-MM-yyyy')}"></span>
+                        <h6 class="mt-4" th:text="#{orders_details_status}"><b>Order status</b></h6>
+                        <div class="text-success fw-bold h5">
+                            <p th:if="${order.status.name() == 'CANCELLED'}" class="text-danger"
+                               th:text="#{orders_details_status_cancel}">CANCELLED</p>
+                            <p th:if="${order.status.name() == 'SHIPPED'}" class="text-success"
+                               th:text="#{orders_details_status_shipped}">SHIPPED</p>
+                            <p th:if="${order.status.name() == 'PROCESSING'}" class="text-primary"
+                               th:text="#{orders_details_status_processing}">PROCESSING</p>
+                        </div>
                         <div class="mt-4 d-flex gap-5">
-                            <a th:href="@{/my-orders}" class="ml-auto btn btn-warning btn-lg" th:text="#{orders_details_back_btn}">Back to my orders</a>
                             <form th:method="POST"
                                   th:action="@{/cancel-order}">
                                 <input type="hidden" name="id" th:value="${order.id}">
@@ -63,16 +70,28 @@
                                         sec:authorize="hasAnyRole('ADMIN', 'EMPLOYEE')"
                                         type="submit" name="action" value="cancel"
                                         title="Cancel order"
-                                        class="btn btn-lg btn-danger">Cancel order
+                                        class="btn btn-lg btn-danger" th:text="#{orders_details_cancel_button}">Cancel
+                                    order
+                                </button>
+                            </form>
+                            <form th:method="POST"
+                                  th:action="@{/ship-order}">
+                                <input type="hidden" name="id" th:value="${order.id}">
+                                <button th:if="${order.status.name() != 'SHIPPED' and order.status.name() != 'CANCELLED'}"
+                                        sec:authorize="hasAnyRole('ADMIN', 'EMPLOYEE')"
+                                        type="submit" name="action" value="ship"
+                                        title="Ship order"
+                                        class="btn btn-lg btn-success" th:text="#{orders_details_shipped_button}">
+                                    Shipped
                                 </button>
                             </form>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<footer th:replace="~{fragments/footer}"></footer>
+    <footer th:replace="~{fragments/footer}"></footer>
 </body>
 </html>
