@@ -54,7 +54,7 @@ class OrderControllerTestIT {
     @Test
     @WithMockUser(username = "test@test.com", roles = "USER")
     public void testViewMyOrders() throws Exception {
-        User testUser2 = testDataUtils.createTestUser("test@test.com", "testUserMyOrders1");
+        User testUser2 = testDataUtils.createTestUser("test7567657@test.com", "testUserMyOrders1666");
         Order order1 = testDataUtils.createTestOrder(testUser2);
         Order order2 = testDataUtils.createTestOrder(testUser2);
 
@@ -70,7 +70,7 @@ class OrderControllerTestIT {
     @Test
     @WithMockUser(username = "test@test.com", roles = {"EMPLOYEE", "ADMIN"})
     public void testOrdersAllEndpoint() throws Exception {
-        User user1 = testDataUtils.createTestUser("test2@test.com", "testUserMyOrders2");
+        User user1 = testDataUtils.createTestUser("test876342@test.com", "testUserMyOrders2");
         Order order1 = testDataUtils.createTestOrder(user1);
         Order order2 = testDataUtils.createTestOrder(user1);
 
@@ -106,7 +106,7 @@ class OrderControllerTestIT {
     @Test
     @WithMockUser(username = "test@test.com", roles = {"EMPLOYEE", "ADMIN"})
     public void testCancelCustomerOrder() throws Exception {
-        User user = testDataUtils.createTestUser("abv@abv.bg", "testUser");
+        User user = testDataUtils.createTestUser("abv345@abv.bg", "testUser67899");
         Order order = testDataUtils.createTestOrder(user);
         order.setId(1L);
         Long orderId = order.getId();
@@ -143,7 +143,7 @@ class OrderControllerTestIT {
     @WithMockUser(username = "test@test.com", roles = "USER")
     public void testOrderDetails() throws Exception {
         Long orderId = 1L;
-        User testUser234234 = testDataUtils.createTestUser("test3424@test.com", "testUser234234");
+        User testUser234234 = testDataUtils.createTestUser("test3428884@test.com", "testUser223334234");
         Order mockOrder = testDataUtils.createTestOrder(testUser234234);
         List<OrderDetail> mockOrderDetails = new ArrayList<>();
         when(orderService.findOrderById(orderId)).thenReturn(mockOrder);

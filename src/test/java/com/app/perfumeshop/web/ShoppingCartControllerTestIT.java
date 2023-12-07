@@ -2,6 +2,7 @@ package com.app.perfumeshop.web;
 
 import com.app.perfumeshop.model.entity.*;
 import com.app.perfumeshop.repository.ShoppingCartRepository;
+import com.app.perfumeshop.repository.UserRepository;
 import com.app.perfumeshop.service.ProductService;
 import com.app.perfumeshop.service.ShoppingCartService;
 import com.app.perfumeshop.service.UserService;
@@ -44,19 +45,17 @@ public class ShoppingCartControllerTestIT {
     private TestDataUtils testDataUtils;
     @MockBean
     private ShoppingCartRepository mockShoppingCartRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @BeforeEach
     void setUp() {
 
     }
-//    @AfterEach
-//    void cleanUp() {
-//        mockShoppingCartRepository.deleteAll();
-//    }
     @Test
     @WithMockUser(username = "test@test.com", roles = "USER")
     public void testShoppingCart() throws Exception {
-        User testUser = testDataUtils.createTestUser("test55@test.com", "testUserShopCart");
+        User testUser = testDataUtils.createTestUser("test55978@test.com", "testUserShopCart5");
         testUser.setId(1L);
         ShoppingCart shoppingCart = testDataUtils.createShoppingCart4(testUser, 1);
         shoppingCart.setTotalPrice(BigDecimal.TEN);
@@ -73,7 +72,7 @@ public class ShoppingCartControllerTestIT {
     @WithMockUser(username = "test@test.com", roles = "USER")
     public void testAddToCart() throws Exception {
         Category category = testDataUtils.createTestCategory();
-        Brand brand = testDataUtils.createTestBrand2();
+        Brand brand = testDataUtils.createTestBrand1("Paco6456546");
         User testUser = testDataUtils.createTestUser("test324324@test.com", "testUser444");
         Product product = testDataUtils.createTestProduct(brand, category, testUser);
         product.setId(1L);
@@ -91,7 +90,7 @@ public class ShoppingCartControllerTestIT {
     @WithMockUser(username = "test@test.com", roles = "USER")
     public void testUpdateCart() throws Exception {
         Category category = testDataUtils.createTestCategory();
-        Brand brand = testDataUtils.createTestBrand1();
+        Brand brand = testDataUtils.createTestBrand1("Chanel32342");
         User testUser = testDataUtils.createTestUser("test@test.com", "testUser");
         Product product = testDataUtils.createTestProduct(brand, category, testUser);
         product.setId(1L);

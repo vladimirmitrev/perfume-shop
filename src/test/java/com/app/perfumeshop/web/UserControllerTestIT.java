@@ -99,7 +99,7 @@ class UserControllerTestIT {
     @Test
     @WithMockUser(username = "test@example.com")
     void testProfileView_LoggedIn() throws Exception {
-        User principal = testDataUtils.createTestUser("test@example.com", "user");
+        User principal = testDataUtils.createTestUser("test777@example.com", "user6878");
 
         when(userService.findByEmail("test@example.com")).thenReturn(principal);
 

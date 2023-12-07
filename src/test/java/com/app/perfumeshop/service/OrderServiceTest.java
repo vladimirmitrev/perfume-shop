@@ -85,7 +85,7 @@ public class OrderServiceTest {
     }
     @Test
     void testCancelOrder() {
-        User testUser = testDataUtils.createTestUser("test1@test.com", "testUserCancel");
+        User testUser = testDataUtils.createTestUser("test178897@test.com", "testUserCancel");
         ShoppingCart shoppingCart = testDataUtils.createShoppingCart1(testUser, 1);
         shoppingCart.setId(1L);
         Long orderId = 1L;
@@ -104,7 +104,7 @@ public class OrderServiceTest {
     }
     @Test
     void testShippedOrder() {
-        User testUser = testDataUtils.createTestUser("test2@test.com", "testUserShipped");
+        User testUser = testDataUtils.createTestUser("test24565@test.com", "testUserShipped");
         ShoppingCart shoppingCart = testDataUtils.createShoppingCart1(testUser, 1);
         shoppingCart.setId(1L);
         Long orderId = 1L;

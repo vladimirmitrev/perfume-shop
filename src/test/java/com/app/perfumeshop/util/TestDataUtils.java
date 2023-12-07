@@ -162,15 +162,9 @@ public class TestDataUtils {
         return productRepository.save(product);
     }
 
-    public Brand createTestBrand1() {
+    public Brand createTestBrand1(String name) {
         Brand brand = new Brand().
-                setName("ChanelTest1");
-
-        return brandRepository.save(brand);
-    }
-    public Brand createTestBrand2() {
-        Brand brand = new Brand().
-                setName("ChanelTest2");
+                setName(name);
 
         return brandRepository.save(brand);
     }
