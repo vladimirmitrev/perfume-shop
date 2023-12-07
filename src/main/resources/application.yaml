@@ -2,15 +2,14 @@ spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/perfume-shop-app-db?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
-    username: ${DB_DEF_USER:root}
-    password: ${DB_DEF_PASS:12345}
+    username: ${MY_SQL_USER:root}
+    password: ${MY_SQL_PASSWORD:12345}
   sql:
     init:
       mode: never
   jpa:
     hibernate:
       ddl-auto: update
-#      ddl-auto: update
     open-in-view: false
     properties:
       hibernate:
@@ -30,17 +29,17 @@ logging:
         type:
           descriptor: WARN
       nodeValue: WARN
-server:
-  port: 8087
+#server:
+#  port: 8087
 #mail:
 #  host: "localhost"
 #  port: 1025
-#  username: "task-management-sytem@tms-group.bg"
+#  username: ""
 #  password: ""
 perfumeshop:
-  remember.me.key: ${REMEBER_ME_KEY:pass1234}
-  default.admin.pass: ${DEFAULT_ADMIN_PASS:pass1234}
-  default.admin.phone: ${DEFAULT_ADMIN_PHONE:0888123456}
+  remember.me.key: ${REMEMBER_ME_KEY}
+  default.admin.pass: ${DEFAULT_ADMIN_PASS}
+  default.admin.phone: ${DEFAULT_ADMIN_PHONE}
 cloudinary:
   api.key: "463111485397821"
   cloud.name: "dvj9qondf"

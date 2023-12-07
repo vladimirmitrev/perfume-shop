@@ -2,7 +2,7 @@ const csrfHeaderName = document.head.querySelector('[name=_csrf_header]').conten
 const csrfHeaderValue = document.head.querySelector('[name=_csrf]').content;
 const brandsSection = document.querySelector('[name="brand-section"]');
 
-fetch('http://localhost:8087/api/all-brands')
+fetch('/api/all-brands')
 .then((response) => response.json())
 .then((body) => {
     for(brand of body) {

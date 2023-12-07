@@ -19,6 +19,7 @@ public class SecurityConfiguration {
                                  String rememberMeKey) {
         this.rememberMeKey = rememberMeKey;
     }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.authorizeHttpRequests(
@@ -34,18 +35,16 @@ public class SecurityConfiguration {
                                 "/about-us",
                                 "/contact-us",
                                 "/maintenance",
-                                "/error").permitAll()
-                        .requestMatchers("/products/all",
+                                "/error",
+                                "/products/all",
                                 "/products/details/**",
                                 "/brands",
                                 "/api/all-brands",
                                 "/brand-products/**",
                                 "/search").permitAll()
-                        .requestMatchers("/products/add", "/products/edit/**","/products/delete/**","/orders-all", "/cancel-order", "/cancel-customer-order").hasAnyRole(UserRoleEnum.ADMIN.name(), UserRoleEnum.EMPLOYEE.name())
-                        .requestMatchers("/users/all", "/users/change-role/**","/users/details-profile/**").hasAnyRole(UserRoleEnum.ADMIN.name())
+                        .requestMatchers("/products/add", "/products/edit/**", "/products/delete/**", "/orders-all", "/cancel-order", "/cancel-customer-order").hasAnyRole(UserRoleEnum.ADMIN.name(), UserRoleEnum.EMPLOYEE.name())
+                        .requestMatchers("/users/all", "/users/change-role/**", "/users/details-profile/**").hasAnyRole(UserRoleEnum.ADMIN.name())
 //                        .requestMatchers("/my-orders").hasRole(UserRoleEnum.USER.name())
-//                        .requestMatchers(HttpMethod.GET, "/product/**").permitAll()
-//                        .requestMatchers("/brands").hasRole(UserRoleEnum.ADMIN.name())
                         // all other requests are authenticated.
                         .anyRequest().authenticated()
         ).formLogin(
@@ -77,6 +76,7 @@ public class SecurityConfiguration {
                 }
         ).build();
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

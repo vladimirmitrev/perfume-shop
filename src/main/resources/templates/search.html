@@ -45,7 +45,7 @@
                 </ul>
                 <div class="card-body">
                     <a class="btn btn-warning form-control view-details" href="#"
-                       th:href="@{/products/{productId}(productId=*{product.id})}" th:text="#{products_view_details}">View details</a>
+                       th:href="@{/products/details/{productId}(productId=*{product.id})}" th:text="#{products_view_details}">View details</a>
                     <form
                             th:action="@{/cart/add/{id}(id=${product.id})}"
                             th:method="post">
