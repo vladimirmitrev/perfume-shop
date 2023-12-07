@@ -43,6 +43,9 @@
                 </div>
                 <div class="col-md-6 col-lg-6 order-box">
                     <div class="title-left">
+                        <h6 class="mt-4" th:text="#{orders_details_customer_name}"><b>Name</b></h6>
+                        <span class="text-secondary fw-bold"
+                              th:text="|${order.customer.lastName} ${order.customer.lastName}|"></span>
                         <h6 class="mt-4" th:text="#{orders_details_shipping_address}"><b>Shipping address</b></h6>
                         <span class="text-danger fw-bold"
                               th:text="|${order.shippingAddress}, ${order.city}, ${order.postCode}|"></span>
