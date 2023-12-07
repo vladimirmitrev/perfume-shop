@@ -271,3 +271,6 @@ form.main-form {
     top: 0;
     position: absolute;
 }
+.maintenance-div {
+    padding-top: 10px;
+}

@@ -6,12 +6,39 @@
 <head th:replace="~{fragments/head}">
 </head>
 <body>
-
-<div class="container-fluid">
-    <h2 class="text-center text-white mt-5">
+<nav>
+    <div>
+        <ul>
+        <li class="nav-item mt-5">
+            <form th:method="get">
+                <label class="text-black" th:text="#{navbar_language}" for="lang"></label>
+                <select
+                        onchange="this.form.submit()"
+                        id="lang"
+                        name="lang">
+                    <option value="en_US" th:selected="${#locale.toString()} == 'en_US'">English</option>
+                    <option value="bg_BG" th:selected="${#locale.toString()} == 'bg_BG'">Български</option>
+                </select>
+            </form>
+        </li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid d-flex flex-column gap-3 justify-content-center align-items-center maintenance-div">
+    <h2 class="text-center text-black" th:text="#{index_maintenance}">
         We currently are doing maintenance!
         Please come back soon!
     </h2>
+    <a class="btn btn-info btn-lg"
+       th:title="#{homepage_button}"
+       th:text="#{homepage_button}"
+       th:href="@{/}">Go back to homepage
+    </a>
+    <div>
+        <a th:href="@{/index}" th:title="#{homepage_button}">
+            <img class="forbidden-img" src="/images/maintenance.jpg">
+        </a>
+    </div>
 </div>
 <footer th:replace="~{fragments/footer}"></footer>
 </body>
