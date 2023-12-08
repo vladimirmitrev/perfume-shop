@@ -17,7 +17,7 @@
     </button>
 
     <div class="collapse navbar-collapse mt-2" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto col-12 justify-content-between">
+        <ul class="navbar-nav mr-auto col-12 justify-content-between d-flex gap-3">
             <li class="nav-item">
                 <a class="nav-link text-black"
                    th:text="#{navbar_all_brands}"
@@ -83,26 +83,25 @@
 
                 <li class="nav-item" sec:authorize="isAuthenticated()">
                     <div class="form-inline my-2 my-lg-0 px-3">
-                        <div class="text-black">
+                        <div class="text-primary">
                             <th:block th:text="#{navbar_welcome(${#authentication.principal.username})}">Welcome
                             </th:block>
-                            !
                         </div>
                         <form
                                 th:action="@{/users/logout}"
                                 th:method="post">
-                            <input class="btn btn-warning text-black btn-link nav-link btn-sm" type="submit" th:value="#{navbar_logout}">
+                            <input class="btn btn-warning text-black btn-link nav-link logout-nav-btn" type="submit" th:value="#{navbar_logout}">
                         </form>
                     </div>
                 </li>
             </th:block>
             <th:block sec:authorize="!isAuthenticated()">
-                <li class="nav-item">
+                <li class="nav-item register-nav-btn">
                     <a class="btn btn-info nav-link text-black"
                        th:text="#{navbar_register}"
                        th:href="@{/users/register}">Register</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item login-nav-btn">
                     <a class="btn btn-warning nav-link text-black"
                        th:text="#{navbar_login}"
                        th:href="@{/users/login}">Login</a>

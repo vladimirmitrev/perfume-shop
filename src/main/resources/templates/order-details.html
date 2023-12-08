@@ -37,15 +37,17 @@
                             <div class="ml-auto h5 text-success fw-bold"
                                  th:text="|€ ${order.totalPrice}|"></div>
                         </div>
-                        <a th:href="@{/my-orders}" class="ml-auto btn btn-warning btn-lg mt-3"
+                        <a sec:authorize="hasRole('USER')" th:href="@{/my-orders}" class="ml-auto btn btn-warning btn-lg mt-3"
                            th:text="#{orders_details_back_btn}">Back to my orders</a>
+                        <a sec:authorize="hasAnyRole('ADMIN', 'EMPLOYEE')" th:href="@{/orders-all}" class="ml-auto btn btn-warning btn-lg mt-3"
+                           th:text="#{orders_details_all_back_btn}">Back to all orders</a>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-6 order-box">
                     <div class="title-left">
                         <h6 class="mt-4" th:text="#{orders_details_customer_name}"><b>Name</b></h6>
-                        <span class="text-secondary fw-bold"
-                              th:text="|${order.customer.lastName} ${order.customer.lastName}|"></span>
+                        <span class="fw-bold"
+                              th:text="|${order.customer.firstName} ${order.customer.lastName}|"></span>
                         <h6 class="mt-4" th:text="#{orders_details_shipping_address}"><b>Shipping address</b></h6>
                         <span class="text-danger fw-bold"
                               th:text="|${order.shippingAddress}, ${order.city}, ${order.postCode}|"></span>

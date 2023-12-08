@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/head}">
 </head>
 <body>
@@ -10,29 +11,31 @@
     <h2 class="text-center text-black" th:text="#{navbar_login}">Login</h2>
     <form th:method="post"
           th:action="@{/users/login}"
-          class="main-form mx-auto col-md-4 d-flex flex-column justify-content-center">
+          class="main-form mx-auto col-md-4 d-flex flex-column justify-content-center py-3">
         <div class="form-group">
-            <label for="email" class="text-black font-weight-bold mt-2" th:text="#{register_email}">Email</label>
+            <label for="email" class="text-black fw-bold mt-2 ps-1" th:text="#{register_email}">Email</label>
             <input id="email"
                    name="email"
                    th:value="${email}"
                    type="text"
-                   class="form-control mt-2"
+                   class="form-control mt-1"
                    th:placeholder="#{register_email}"/>
         </div>
         <div class="form-group">
-            <label for="password" class="text-black font-weight-bold mt-2" th:text="#{register_password}">Password</label>
+            <label for="password" class="text-black fw-bold mt-2 ps-1"
+                   th:text="#{register_password}">Password</label>
             <input id="password"
                    name="password"
                    type="password" min="2"
-                   max="20" class="form-control mt-2"
+                   max="20" class="form-control mt-1"
                    th:placeholder="#{register_password}"/>
         </div>
         <div class="form-group">
             <input id="rememberme"
                    name="rememberme"
                    type="checkbox"/>
-            <label for="rememberme" class="text-black font-weight-bold mt-2" th:text="#{remember_me}">Remember me</label>
+            <label for="rememberme" class="text-black fw-bold mt-2" th:text="#{remember_me}">Remember
+                me</label>
         </div>
         <p th:if="${bad_credentials}" class="errors alert alert-danger small mt-2">
             Invalid username or password.
@@ -40,13 +43,24 @@
         <div class="row">
             <div class="col col-md-4">
                 <div class="button-holder d-flex">
-                    <button type="submit" class="btn btn-info form-control mt-2 mb-2 login-btn" th:text="#{navbar_login}">Login</button>
+                    <button type="submit" class="btn form-control mt-2 mb-2 login-btn"
+                            th:text="#{navbar_login}">Login
+                    </button>
 
                 </div>
             </div>
         </div>
+        <div class="d-flex gap-1">
+            <div th:text="#{login_not_registered}">
+            </div>
+            <div><a class="fw-bold link-primary px-1"
+                    th:text="#{register_here}"
+                    th:href="@{/users/register}">Here</a></div>
+        </div>
+
     </form>
+
 </div>
-    <footer th:replace="~{fragments/footer}"></footer>
+<footer th:replace="~{fragments/footer}"></footer>
 </body>
 </html>

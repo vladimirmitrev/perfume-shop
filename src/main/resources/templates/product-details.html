@@ -21,10 +21,14 @@
             </div>
             <ul class="product-details list-group list-group-flush">
                 <li class="list-group-item">
-                    <div class="card-text"> <span th:text="#{products_category}">• Category:</span> [(${product.getCategory().value})]</div>
-                    <div class="card-text"> <span th:text="#{products_size}">• Size:</span> [(${product.getMilliliters().value})]</div>
-                    <div class="card-text"> <span th:text="#{products_description}">• Description:</span> [(${product.description})]</div>
-                    <div class="card-text fw-bold"> <span th:text="#{products_price}">• Price:</span> € [(${product.price})]</div>
+                    <div class="card-text fw-bold"> <span th:text="#{products_category}">• Category:</span>
+                        <span th:if="${product.category.name() == 'WOMEN'}" class="fw-bold text-danger" th:text="| ${product.getCategory().value}|"></span>
+                        <span th:if="${product.category.name() == 'MEN'}" class="fw-bold text-primary" th:text="| ${product.getCategory().value}|"></span>
+                        <span th:if="${product.category.name() == 'UNISEX'}" class="fw-bold text-info" th:text="| ${product.getCategory().value}|"></span>
+                    </div>
+                    <div class="card-text fw-bold"> <span th:text="#{products_size}">• Size:</span><span class="fw-bold text-muted" th:text="| ${product.getMilliliters().value}|"></span></div>
+                    <div class="card-text fw-bold"> <span class="fw-bold" th:text="#{products_description}">• Description:</span> <span class="fw-bold description-text" th:text="| ${product.description}|"></span></div>
+                    <div class="card-text fw-bold"> <span th:text="#{products_price}">• Price:</span> <span class="fw-bold text-success" th:text="| € ${product.price}|"></span></div>
                 </li>
 
             </ul>

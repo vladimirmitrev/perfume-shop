@@ -42,8 +42,10 @@ public class SecurityConfiguration {
                                 "/api/all-brands",
                                 "/brand-products/**",
                                 "/search").permitAll()
-                        .requestMatchers("/products/add", "/products/edit/**", "/products/delete/**", "/orders-all", "/cancel-order", "/cancel-customer-order").hasAnyRole(UserRoleEnum.ADMIN.name(), UserRoleEnum.EMPLOYEE.name())
-                        .requestMatchers("/users/all", "/users/change-role/**", "/users/details-profile/**").hasAnyRole(UserRoleEnum.ADMIN.name())
+                        .requestMatchers("/products/add", "/products/edit/**",
+                                "/products/delete/**", "/orders-all", "/cancel-order",
+                                "/cancel-customer-order", "/users/details-profile/**").hasAnyRole(UserRoleEnum.ADMIN.name(), UserRoleEnum.EMPLOYEE.name())
+                        .requestMatchers("/users/all", "/users/change-role/**").hasAnyRole(UserRoleEnum.ADMIN.name())
 //                        .requestMatchers("/my-orders").hasRole(UserRoleEnum.USER.name())
                         // all other requests are authenticated.
                         .anyRequest().authenticated()

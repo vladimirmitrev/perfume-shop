@@ -35,6 +35,7 @@
 <!--                            <span th:text="${order.getCustomer().email}"></span>-->
                             <a type="button" class="button-detail link-primary" th:title="#{users_view_profile}"
                                th:href="@{/users/details-profile/{id}(id=${order.getCustomer().getId()})}" th:text="${order.getCustomer().email}">User email</a>
+
                         </td>
                         <td class="order-number fw-bold">
                             <a class="link-info" th:href="@{/order-details/{id}(id=${order.id})}" th:text="|#907732${order.getId()}|" th:title="#{users_view_order}"></a>

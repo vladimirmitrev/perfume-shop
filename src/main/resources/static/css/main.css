@@ -180,6 +180,7 @@ form.main-form {
 }
 .place-order-btn {
     background-color: #8aff4b;
+    border: transparent;
 }
 /*.invalid {*/
 /*    border-color: red;*/
@@ -245,13 +246,22 @@ form.main-form {
     border-color: transparent;
 }
 .register-btn {
-    background-color: #0dcaf0;
+    background-color: #9024e1;
     border-color: transparent;
+    color: white;
+    border-radius: 1rem;
+}
+.register-btn:hover {
+    background-color: #0df033;
 }
 .login-btn {
     background-color: #FFCA2C;
     border-color: transparent;
     width: 20rem;
+    border-radius: 1rem;
+}
+.login-btn:hover {
+    background-color: #0df033;
 }
 .forbidden-img {
     max-width: 50rem;
@@ -273,4 +283,34 @@ form.main-form {
 }
 .maintenance-div {
     padding-top: 10px;
+}
+.description-text {
+    color: #550ca4;
+}
+.login-nav-btn, .register-nav-btn {
+    width: 10rem;
+    border-radius: 1rem;
+}
+.logout-nav-btn {
+    border-radius: 1rem;
+    width: 6rem;
+}
+.btn {
+    border-radius: 1rem;
+}
+.index-btn {
+    padding: 1.5rem;
+    border-radius: 2rem;
+}
+.index-brands {
+    background-color: #4bda2b;
+    border: transparent;
+}
+.index-products {
+    background-color: #a821a8;
+    color: white;
+    border: transparent;
+}
+.index-brands:hover {
+    background-color: #ffe07b;
 }
