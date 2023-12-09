@@ -86,8 +86,9 @@ td, th {
 .checkout-btn {
     display: flex;
     justify-content: space-between;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
 }
-
 .product-details {
     color: black;
     /*text-decoration: none;*/
@@ -141,12 +142,16 @@ form.main-form {
     padding: 10px 30px;
     border-radius: 2rem;
     width: 25rem;
+    /*border: 1px solid black;*/
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.7);
 }
 .add-product-form {
     background-image: linear-gradient(to bottom right, rgba(139, 187, 224, 0.74), rgb(250 223 109 / 80%));
     padding: 10px 30px;
     border-radius: 2rem;
     width:45rem;
+    /*border: 1px solid black;*/
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.7);
 }
 
 .register-input {
@@ -166,6 +171,8 @@ form.main-form {
     border-radius: 3rem;
     padding: 3rem;
     margin-top: 1rem;
+    /*border: 1px solid black;*/
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.7);
 }
 
 .order-details-container {
@@ -179,6 +186,10 @@ form.main-form {
 
 .checkout-image {
     max-width: 2rem;
+}
+.card {
+    /*border: 1px solid black;*/
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.7);
 }
 
 .order-box {
@@ -200,12 +211,16 @@ form.main-form {
     padding-top: 1rem;
     border-radius: 2rem;
     margin-top: 2rem;
+    /*border: 1px solid black;*/
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.7);
 }
 
 .orders-table {
     background: aliceblue;
     border-radius: 1rem;
     padding: 1rem;
+    /*box-shadow: 0 3px 10px rgb(0 0 0 / 0.7);*/
+    /*overflow: inherit;*/
 }
 
 /*.orders-table td {*/
