@@ -18,7 +18,7 @@
             <i class="fa-solid fa-magnifying-glass"></i>
         </div>
         <form class="d-flex justify-content-center align-items-center gap-1" th:action="@{/search}" method="post">
-            <input class="form-control" type="text" name="query" required th:placeholder="#{type_something}"/>
+            <input class="form-control search-input" type="text" name="query" required th:placeholder="#{type_something}"/>
             <button class="btn btn-primary" type="submit" th:text="#{button_search}">Search</button>
         </form>
     </div>
@@ -28,9 +28,9 @@
         <div th:if="${not #lists.isEmpty(searchResults)}"
              class="offers row mx-auto d-flex flex-row justify-content-center">
             <!--            <span th:text="${product.brand} + ' ' + ${product.name} + ' ' + ${product.description}"></span>-->
-            <div th:each="product : ${searchResults}" class="offer card col-sm-6 col-md-3  col-lg-2 m-1 p-0 mx-2">
+            <div th:each="product : ${searchResults}" class="offer card col-sm-6 col-md-3  col-lg-2 m-1 p-4 mx-2">
                 <div class="card-img-top-wrapper">
-                    <img class="card-img-top px-5 py-5" th:src="${product.imageUrl}" alt="Product image">
+                    <img class="card-img-top" th:src="${product.imageUrl}" alt="Product image">
                 </div>
                 <div class="card-body pb-1">
                     <h5 class="card-title">

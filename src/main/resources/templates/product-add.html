@@ -14,15 +14,15 @@
           th:method="post"
           th:object="${addProductModel}"
           enctype="multipart/form-data"
-          class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+          class="mx-auto col-md-8 d-flex flex-column justify-content-center add-product-form">
         <div class="row">
 
             <div class="form-group col-md-6 mb-3">
-                <label class="text-center text-black font-weight-bold mt-2" for="brand" th:text="#{products_upload_brand}">Brand</label>
+                <label class="text-center text-black fw-bold mt-2" for="brand" th:text="#{products_upload_brand}">Brand</label>
                 <select id="brand"
                         name="brand"
                         th:errorclass="is-invalid"
-                        class="form-control mt-2">
+                        class="form-control mt-2 register-input">
                     <option value="">- Select a brand -</option>
                         <option class="fw-bold" th:each="brand : ${brands}"
                                 th:text="${brand.name}"
@@ -30,31 +30,31 @@
                                 th:selected="${brand.name} == *{brand}">Brand>
                         </option>
                 </select>
-                <p class="invalid-feedback errors alert alert-danger">
+                <p class="invalid-feedback errors alert alert-info">
                     Perfume brand is required.
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label class="text-black font-weight-bold mt-2" for="name" th:text="#{products_upload_name}">Name</label>
+                <label class="text-black fw-bold mt-2" for="name" th:text="#{products_upload_name}">Name</label>
                 <input id="name"
                        name="name"
                        th:field="*{name}"
                        th:errorclass="is-invalid"
-                       type="text" class="form-control mt-2"
+                       type="text" class="form-control mt-2 register-input"
                        th:placeholder="#{products_upload_name}"></input>
-                <p class="invalid-feedback errors alert alert-danger">
+                <p class="invalid-feedback errors alert alert-info">
                     Model is required.
                 </p>
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-6 mb-3">
-                <label class="text-center text-black font-weight-bold mt-2" for="category" th:text="#{products_upload_category}">Category</label>
+                <label class="text-center text-black fw-bold mt-2" for="category" th:text="#{products_upload_category}">Category</label>
                 <select
                         id="category"
                         name="category"
                         th:errorclass="is-invalid"
-                        class="form-control mt-2">
+                        class="form-control mt-2 register-input">
                     <option value="">- Select category type -</option>
                     <option th:each="c : ${T(com.app.perfumeshop.model.enums.CategoryNameEnum).values()}"
                             th:text="${c}"
@@ -63,16 +63,16 @@
                         Category type
                     </option>
                 </select>
-                <p class="invalid-feedback errors alert alert-danger">
+                <p class="invalid-feedback errors alert alert-info">
                     Category type is required.
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label class="text-center text-black font-weight-bold mt-2" for="milliliters" th:text="#{products_upload_size}">Size</label>
+                <label class="text-center text-black fw-bold mt-2" for="milliliters" th:text="#{products_upload_size}">Size</label>
                 <select id="milliliters"
                         name="milliliters"
                         th:errorclass="is-invalid"
-                        class="form-control mt-2">
+                        class="form-control mt-2 register-input">
                     <option value="">- Select size -</option>
                     <option th:each="m : ${T(com.app.perfumeshop.model.enums.SizeEnum).values()}"
                             th:text="${m}"
@@ -80,45 +80,45 @@
                             th:selected="${m} == *{milliliters}"> Size type
                     </option>
                 </select>
-                <p class="invalid-feedback errors alert alert-danger">
+                <p class="invalid-feedback errors alert alert-info">
                     Product size is required.
                 </p>
             </div>
         </div>
         <div class="form-group col-md-6 mb-3">
-            <label for="price" class="font-weight-bold mt-2" th:text="#{products_upload_price}">Price</label>
+            <label for="price" class="fw-bold mt-2" th:text="#{products_upload_price}">Price</label>
             <input  th:field="*{price}"
                     th:errorclass="is-invalid"
-                    id="price" type="number" class="form-control mt-2" min="10"
+                    id="price" type="number" class="form-control mt-2 register-input" min="10"
                     th:placeholder="#{products_upload_price}"/>
-            <p  class="invalid-feedback errors alert alert-danger">
+            <p  class="invalid-feedback errors alert alert-info">
                 Price is required.
             </p>
         </div>
         <div class="form-group">
-            <label class="text-black font-weight-bold mt-2" for="description" th:text="#{products_upload_description}">Description</label>
+            <label class="text-black fw-bold mt-2" for="description" th:text="#{products_upload_description}">Description</label>
             <textarea id="description"
                       th:field="*{description}"
                       th:errorclass="is-invalid"
-                      type="textarea" class="form-control mt-2" rows="3"
+                      type="textarea" class="form-control mt-2 register-input" rows="3"
                       th:placeholder="#{products_upload_description}"></textarea>
-            <p class="invalid-feedback errors alert alert-danger">
+            <p class="invalid-feedback errors alert alert-info">
                 Description is required.
             </p>
         </div>
 <!--        <div class="form-group">-->
-<!--            <label class="text-black font-weight-bold mt-2" for="imageUrl">Image URL</label>-->
+<!--            <label class="text-black fw-bold mt-2" for="imageUrl">Image URL</label>-->
 <!--            <input id="imageUrl"-->
 <!--                   th:field="*{imageUrl}"-->
 <!--                   th:errorclass="is-invalid"-->
 <!--                   required-->
 <!--                   type="url" class="form-control mt-2"-->
 <!--                   placeholder="Put product image URL here">-->
-<!--            <p class="invalid-feedback errors alert alert-danger">-->
+<!--            <p class="invalid-feedback errors alert alert-info">-->
 <!--                Product image URL is required.-->
 <!--            </p>-->
 <!--        </div>-->
-        <div class="form-group mt-3">
+        <div class="form-group mt-3 fw-bold">
             <p th:text="#{products_upload_photo}">Product photo</p>
             <div class="col-md-4 d-flex">
                 <div class="custom-file">
@@ -136,7 +136,7 @@
         </div>
         <div class="row">
             <div class="col col-md-4">
-                <div class="button-holder d-flex">
+                <div class="button-holder-two d-flex">
                     <button type="submit" class="btn btn-info btn-lg mt-4 mb-2" th:text="#{products_upload_add}">Add</button>
                 </div>
             </div>

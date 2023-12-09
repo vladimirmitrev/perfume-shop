@@ -37,23 +37,34 @@ td, th {
     padding: 3px 8px;
 }
 
-.card.offer, .product-details .list-group-item {
-    border-radius: 1rem;
-    max-width: 25rem;
-    /*background: transparent;*/
-    /*background-image: linear-gradient(to bottom right, rgba(220, 220, 220, 0.9), rgba(255, 255, 255, 0.9));*/
+.card.offer{
+    border-radius: 2rem;
+    /*width: 30rem;*/
+    /*max-width: 25rem;*/
+    /*background-color: aliceblue;*/
 }
+.product-details-card {
+    width: 30rem;
+}
+.product-details-back-btn {
+    width: 14rem;
+}
+/*.product-details .list-group-item {*/
+/*    border-radius: 1rem;*/
+/*    !*width: 30rem;*!*/
+/*    !*max-width: 25rem;*!*/
+/*}*/
 
 .card-img-top-wrapper {
-    height: 150px;
+    height: 8rem;
+    width: 8rem;
     overflow: hidden;
 }
 
-form.main-form {
-    background-image: linear-gradient(to bottom right, rgba(70, 70, 70, 0.8), rgba(10, 10, 10, 0.8));
-    padding: 10px 30px;
-    border-radius: 20px;
-}
+/*form.main-form {*/
+/*    background-image: linear-gradient(to bottom right, rgba(70, 70, 70, 0.8), rgba(10, 10, 10, 0.8));*/
+/*    */
+/*}*/
 
 .field-error {
     background: white url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="red" d="M569.517 440.013C587.975 472.007 564.806 512 527.94 512H48.054c-36.937 0-59.999-40.055-41.577-71.987L246.423 23.985c18.467-32.009 64.72-31.951 83.154 0l239.94 416.028zM288 354c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"/></svg> ') no-repeat top right/30px 30px;
@@ -83,9 +94,9 @@ form.main-form {
     margin-top: 10px;
 }
 
-.card-img-top {
-    padding: 1rem;
-}
+/*.card-img-top {*/
+/*    padding: 1rem;*/
+/*}*/
 
 .pagination {
     padding: 0 5px;
@@ -126,14 +137,37 @@ textarea:required {
 }
 
 form.main-form {
-    background-image: linear-gradient(to bottom right, rgb(120 224 239 / 80%), rgb(250 223 109 / 80%));
+    background-image: linear-gradient(to bottom right, rgba(139, 187, 224, 0.74), rgb(250 223 109 / 80%));
+    padding: 10px 30px;
+    border-radius: 2rem;
+    width: 25rem;
+}
+.add-product-form {
+    background-image: linear-gradient(to bottom right, rgba(139, 187, 224, 0.74), rgb(250 223 109 / 80%));
+    padding: 10px 30px;
+    border-radius: 2rem;
+    width:45rem;
 }
 
+.register-input {
+    border-radius: 1rem;
+}
+
+.order-input {
+    border-radius: 1rem;
+}
+.search-input {
+    border-radius: 1rem;
+}
+
+
 .order-container {
-    background-image: linear-gradient(to bottom right, rgb(120 224 239 / 80%), rgb(250 223 109 / 80%));
+    background-image: linear-gradient(to bottom right, rgba(139, 187, 224, 0.74), rgb(250 223 109 / 80%));
     border-radius: 3rem;
     padding: 3rem;
+    margin-top: 1rem;
 }
+
 .order-details-container {
     background-image: linear-gradient(to bottom right, rgba(199, 222, 239, 0.87), rgba(173, 224, 139, 0.74));
     /*background-color: #c8e1fa;*/
@@ -161,40 +195,47 @@ form.main-form {
 .profile-box {
     width: 20rem;
     height: 31rem;
-    background-image: linear-gradient(to bottom right, rgba(184, 245, 253, 0.8), rgba(248, 232, 175, 0.8));
+    background-image: linear-gradient(to bottom right, rgba(139, 187, 224, 0.74), rgba(248, 232, 175, 0.8));
     /*background: aliceblue;*/
     padding-top: 1rem;
     border-radius: 2rem;
     margin-top: 2rem;
 }
+
 .orders-table {
     background: aliceblue;
     border-radius: 1rem;
     padding: 1rem;
 }
+
 /*.orders-table td {*/
 /*    margin-top: 40px;*/
 /*}*/
 .navbar-nav .nav-link {
     padding: 5px 10px;
 }
+
 .place-order-btn {
     background-color: #8aff4b;
     border: transparent;
 }
+
 /*.invalid {*/
 /*    border-color: red;*/
 /*}*/
 .order-image {
     width: 100px;
 }
+
 .order-items {
     overflow: auto;
     max-height: 22rem;
 }
+
 .about-us-final {
     color: rgb(39, 28, 193);
 }
+
 .send-message-btn {
     padding: 10px 20px;
     background-color: #4CAF50;
@@ -209,12 +250,14 @@ form.main-form {
 .send-message-btn:hover {
     background-color: #45a049;
 }
+
 .contact-input {
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
     border-radius: 10px;
 }
+
 .contact-container {
     max-width: 40rem;
     margin: 0 auto;
@@ -235,45 +278,55 @@ form.main-form {
     font-weight: bold;
     margin-bottom: 5px;
 }
+
 .add-to-cart {
     font-size: 14px;
     background-color: rgba(80, 211, 14, 0.8);
     border-color: transparent;
 }
+
 .view-details {
     font-size: 14px;
     background-color: rgba(255, 152, 76, 0.8);
     border-color: transparent;
 }
+
 .register-btn {
     background-color: #9024e1;
     border-color: transparent;
     color: white;
     border-radius: 1rem;
 }
+
 .register-btn:hover {
     background-color: #0df033;
 }
+
 .login-btn {
     background-color: #FFCA2C;
     border-color: transparent;
     width: 20rem;
     border-radius: 1rem;
 }
+
 .login-btn:hover {
     background-color: #0df033;
 }
+
 .forbidden-img {
     max-width: 50rem;
     border-radius: 10rem;
 }
+
 [name="query"] {
     width: 20rem;
 }
+
 .google-map {
     padding-bottom: 50%;
     position: relative;
 }
+
 .google-map iframe {
     height: 100%;
     width: 100%;
@@ -281,36 +334,57 @@ form.main-form {
     top: 0;
     position: absolute;
 }
+
 .maintenance-div {
     padding-top: 10px;
 }
+
 .description-text {
     color: #550ca4;
 }
+
 .login-nav-btn, .register-nav-btn {
     width: 10rem;
     border-radius: 1rem;
 }
+
 .logout-nav-btn {
     border-radius: 1rem;
     width: 6rem;
 }
+
 .btn {
     border-radius: 1rem;
 }
+
 .index-btn {
     padding: 1.5rem;
     border-radius: 2rem;
 }
+
 .index-brands {
     background-color: #4bda2b;
     border: transparent;
 }
+
 .index-products {
     background-color: #a821a8;
     color: white;
     border: transparent;
 }
+
 .index-brands:hover {
     background-color: #ffe07b;
+}
+
+.card {
+    border-radius: 2rem;
+    overflow: hidden;
+    /*padding: 1rem;*/
+}
+.button-holder-one {
+    width: 10rem;
+}
+.button-holder-two {
+    width: 15rem;
 }

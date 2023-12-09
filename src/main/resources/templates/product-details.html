@@ -12,8 +12,8 @@
 </div>
 <div  th:object="${product}" class="container-fluid">
     <h2 class="text-center text-black mt-5" th:text="#{product_details}">Product details</h2>
-    <div class="offers row mx-auto d-flex justify-content-center">
-        <div class="offer card col-sm-2 col-md-3  col-lg-4 m-1 p-4" >
+    <div class="offers row mx-auto d-flex justify-content-center align-items-center flex-column">
+        <div class="offer card product-details-card col-sm-2 col-md-3  col-lg-4 m-1 p-4" >
             <img th:src="*{imageUrl}" class="card-img-top" style="max-width: 250px"  alt="Product image">
 
             <div class="card-body pb-1">
@@ -48,6 +48,10 @@
                 </form>
             </div>
         </div>
+<!--        <a href="javascript:history.back()">Go Back</a>-->
+        <a class="btn btn-primary product-details-back-btn mt-2"
+           th:text="#{back_to_products}"
+           th:href="@{/products/all}">Back to products</a>
     </div>
 </div>
 <footer th:replace="~{fragments/footer}"></footer>

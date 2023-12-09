@@ -13,28 +13,28 @@
     <form   th:object="${editProductModel}"
             th:action="@{/products/edit/{id}(id=${id})}"
             th:method="PATCH"
-          class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+          class="add-product-form mx-auto col-md-8 d-flex flex-column justify-content-center">
         <div class="row mt-3">
             <div class="form-group col-md-6 mb-3">
-                <label class="text-center text-black font-weight-bold" for="brand" th:text="#{products_upload_brand}">Brand</label>
+                <label class="text-center text-black fw-bold" for="brand" th:text="#{products_upload_brand}">Brand</label>
                <div>
                    <input type="text" readonly id="brand"
                           name="brand"
                           th:field="*{brand}"
                           th:errorclass="is-invalid"
-                          class="form-control">
+                          class="form-control register-input">
                </div>
                 <p class="invalid-feedback errors alert alert-danger">
                     Product brand is required.
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label class="text-black font-weight-bold mb-1" for="model" th:text="#{products_upload_name}">Model</label>
+                <label class="text-black fw-bold mb-1" for="model" th:text="#{products_upload_name}">Model</label>
                 <input id="model"
                        name="model"
                        th:field="*{name}"
                        th:errorclass="is-invalid"
-                       type="text" class="form-control"
+                       type="text" class="form-control register-input"
                        th:placeholder="#{products_upload_name}">
                 <p class="invalid-feedback errors alert alert-danger">
                     Model is required.
@@ -43,27 +43,27 @@
         </div>
         <div class="row">
             <div class="form-group col-md-6 mb-3">
-                <label class="text-center text-black font-weight-bold mb-1" for="category" th:text="#{products_upload_category}">Category</label>
+                <label class="text-center text-black fw-bold mb-1" for="category" th:text="#{products_upload_category}">Category</label>
                 <input
                         id="category"
                         name="category"
                         readonly
                         th:errorclass="is-invalid"
                         th:field="*{category}"
-                        class="form-control">
+                        class="form-control register-input">
                 </input>
                 <p class="invalid-feedback errors alert alert-danger">
                     Category type is required.
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label class="text-center text-black font-weight-bold mb-1" for="milliliters" th:text="#{products_upload_size}">Size</label>
+                <label class="text-center text-black fw-bold mb-1" for="milliliters" th:text="#{products_upload_size}">Size</label>
                 <input id="milliliters"
                         name="milliliters"
                         readonly
                         th:errorclass="is-invalid"
                         th:field="*{milliliters}"
-                        class="form-control">
+                        class="form-control register-input">
                 </input>
                 <p class="invalid-feedback errors alert alert-danger">
                     Perfume size is required.
@@ -71,35 +71,35 @@
             </div>
         </div>
         <div class="form-group col-md-6 mb-3">
-            <label for="price" class="text-black font-weight-bold mb-1" th:text="#{products_upload_price}">Price</label>
+            <label for="price" class="text-black fw-bold mb-1" th:text="#{products_upload_price}">Price</label>
             <input  th:field="*{price}"
                     name="price"
                     th:errorclass="is-invalid" min="10"
-                    id="price" type="number" class="form-control"
+                    id="price" type="number" class="form-control register-input"
                     th:placeholder="#{products_upload_price}"/>
             <p  class="invalid-feedback errors alert alert-danger">
                 Price is required.
             </p>
         </div>
         <div class="form-group">
-            <label class="text-black font-weight-bold mb-1" for="description" th:text="#{products_upload_description}">Description</label>
+            <label class="text-black fw-bold mb-1" for="description" th:text="#{products_upload_description}">Description</label>
             <textarea id="description"
                       th:field="*{description}"
                       th:errorclass="is-invalid"
                       name="description"
-                      type="textarea" class="form-control" rows="3"
+                      type="textarea" class="form-control register-input" rows="3"
                       th:placeholder="#{products_upload_description}"></textarea>
             <p class="invalid-feedback errors alert alert-danger">
                 Description is required.
             </p>
         </div>
         <div class="form-group">
-            <label class="text-black font-weight-bold mb-1 mt-3" for="imageUrl" th:text="#{products_upload_image_url}">Image URL</label>
+            <label class="text-black fw-bold mb-1 mt-3" for="imageUrl" th:text="#{products_upload_image_url}">Image URL</label>
             <input id="imageUrl"
                    th:field="*{imageUrl}"
                    th:errorclass="is-invalid"
                    name="imageUrl"
-                   type="url" class="form-control"
+                   type="url" class="form-control register-input"
                    th:placeholder="#{products_upload_image_url}">
             <p class="invalid-feedback errors alert alert-danger">
                 Product image URL is required.
@@ -108,7 +108,7 @@
 
         <div class="row">
             <div class="col col-md-4">
-                <div class="button-holder d-flex">
+                <div class="button-holder-two d-flex">
                     <button type="submit" class="btn btn-danger btn-lg mt-4 mb-3" th:text="#{products_upload_edit}">Edit product</button>
                 </div>
             </div>
