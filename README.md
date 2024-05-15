@@ -16,7 +16,7 @@ This project is multi-language e-commerce online shop for perfumes and cosmetics
 * User authentication and registration
 * Multi-language support
 * Search bar
-* Paging
+* Pagination
 * Browse and search for products
 * View product details
 * Add, edit and delete product in shopping cart
@@ -28,7 +28,6 @@ This project is multi-language e-commerce online shop for perfumes and cosmetics
 * Admin can see all registered users and change their roles
 * User-friendly interface with a responsive design
 * And more...
-* 
 ![Image Alt text](/github_images/all-products01.png?raw=true)
 ![Image Alt text](/github_images/all-products02.png?raw=true)
 ![Image Alt text](/github_images/search-products.png?raw=true)
@@ -53,7 +52,7 @@ This project is multi-language e-commerce online shop for perfumes and cosmetics
 ![Image Alt text](/github_images/contact-us.png?raw=true)
 ![Image Alt text](/github_images/all-brands.png?raw=true)
 ![Image Alt text](/github_images/product-details.png?raw=true)
-![Image Alt text](/github_images/emprty-cart.png?raw=true)
+![Image Alt text](/github_images/empty-cart.png?raw=true)
 
 
 
