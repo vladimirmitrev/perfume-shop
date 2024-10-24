@@ -1,6 +1,8 @@
 package com.app.perfumeshop.config;
 
 import com.app.perfumeshop.model.enums.UserRoleEnum;
+import com.app.perfumeshop.repository.UserRepository;
+import com.app.perfumeshop.service.PerfumeShopUserDetailsService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -14,10 +16,12 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfiguration {
 
     private final String rememberMeKey;
+    private final PerfumeShopUserDetailsService perfumeShopUserDetailsService;
 
     public SecurityConfiguration(@Value("${perfumeshop.remember.me.key}")
-                                 String rememberMeKey) {
+                                 String rememberMeKey, PerfumeShopUserDetailsService perfumeShopUserDetailsService) {
         this.rememberMeKey = rememberMeKey;
+        this.perfumeShopUserDetailsService = perfumeShopUserDetailsService;
     }
 
     @Bean
@@ -58,8 +62,10 @@ public class SecurityConfiguration {
                             // The names of the input fields (in our case in login.html)
                             .usernameParameter("email")
                             .passwordParameter("password")
-                            .defaultSuccessUrl("/")
-                            .failureForwardUrl("/users/login-error");
+                            .defaultSuccessUrl("/", true)
+//                            .failureHandler(customAuthenticationFailureHandler)
+                            .failureForwardUrl("/users/login-error")
+                            .permitAll();
                 }
         ).logout(
                 logout -> {
@@ -69,16 +75,25 @@ public class SecurityConfiguration {
                             .logoutSuccessUrl("/")
                             .invalidateHttpSession(true);
                 }
-        ).rememberMe(
+        )
+                .rememberMe(
                 rememberMe -> {
                     rememberMe
                             .key(rememberMeKey)
                             .rememberMeParameter("rememberme")
-                            .rememberMeCookieName("rememberme");
+                            .rememberMeCookieName("rememberme")
+                            .userDetailsService(perfumeShopUserDetailsService);
                 }
-        ).build();
+        )
+                .build();
     }
 
+    // If you use this like a @Bean remove @Service annotation from
+    // PerfumeShopUserDetailsService.java and remove rememberMe
+//    @Bean
+//    public PerfumeShopUserDetailsService userDetailsService(UserRepository userRepository) {
+//        return new PerfumeShopUserDetailsService(userRepository);
+//    }
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

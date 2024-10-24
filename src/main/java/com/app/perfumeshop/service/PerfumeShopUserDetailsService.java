@@ -1,6 +1,5 @@
 package com.app.perfumeshop.service;
 
-import com.app.perfumeshop.exception.UserNotFoundException;
 import com.app.perfumeshop.model.entity.User;
 import com.app.perfumeshop.model.entity.UserRole;
 import com.app.perfumeshop.model.user.PerfumeShopUserDetails;
@@ -27,25 +26,26 @@ public class PerfumeShopUserDetailsService implements UserDetailsService {
 
         return userRepository
                 .findUserByEmail(email)
-                .map(this::mapUser)
+                .map(PerfumeShopUserDetailsService::mapUser)
                 .orElseThrow(() ->
-                        new UserNotFoundException("User with email " + email + " was not found!"));
+                        new UsernameNotFoundException("User with email " + email + " was not found!"));
     }
 
-    private UserDetails mapUser(User user) {
+    private static UserDetails mapUser(User user) {
+
         return new PerfumeShopUserDetails(
                 user.getId(),
-                user.getPassword(),
                 user.getEmail(),
+                user.getPassword(),
                 user.getFirstName(),
                 user.getLastName(),
                 user.getUserRoles().stream()
-                        .map(this::mapAuthorities)
+                        .map(PerfumeShopUserDetailsService::mapAuthorities)
                         .toList()
         );
     }
 
-    private GrantedAuthority mapAuthorities(UserRole userRole) {
+    private static GrantedAuthority mapAuthorities(UserRole userRole) {
         return new SimpleGrantedAuthority("ROLE_" + userRole.getUserRole());
     }
 }

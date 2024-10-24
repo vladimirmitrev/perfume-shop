@@ -20,14 +20,14 @@ public class PerfumeShopUserDetails implements UserDetails {
     private final Collection<GrantedAuthority> authorities;
 
     public PerfumeShopUserDetails(Long id,
-                                  String password,
                                   String username,
+                                  String password,
                                   String firstName,
                                   String lastName,
                                   Collection<GrantedAuthority> authorities) {
         this.id = id;
-        this.password = password;
         this.username = username;
+        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.authorities = authorities;

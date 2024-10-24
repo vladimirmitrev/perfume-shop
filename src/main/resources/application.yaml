@@ -29,6 +29,8 @@ logging:
         type:
           descriptor: WARN
       nodeValue: WARN
+# Shows spring security info in console
+#    org.springframework.security: TRACE
 #server:
 #  port: 8087
 #mail:

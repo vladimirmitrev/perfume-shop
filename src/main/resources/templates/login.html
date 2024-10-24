@@ -17,9 +17,10 @@
             <input id="email"
                    name="email"
                    th:value="${email}"
-                   type="text"
+                   type="email"
                    class="form-control mt-1 register-input"
-                   th:placeholder="#{register_email}"/>
+                   th:placeholder="#{register_email}"
+                   required/>
         </div>
         <div class="form-group">
             <label for="password" class="text-black fw-bold mt-2 ps-1"
@@ -28,7 +29,8 @@
                    name="password"
                    type="password" min="2"
                    max="20" class="form-control mt-1 register-input"
-                   th:placeholder="#{register_password}"/>
+                   th:placeholder="#{register_password}"
+                   required/>
         </div>
         <div class="form-group">
             <input id="rememberme"
