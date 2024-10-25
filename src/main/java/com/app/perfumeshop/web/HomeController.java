@@ -37,19 +37,18 @@ public class HomeController {
         } else {
             session.removeAttribute("username");
         }
+
         return "index";
     }
 
     @GetMapping("/contact-us")
     public String contact() {
 
-
         return "contact-us";
     }
 
     @GetMapping("/about-us")
     public String about() {
-
 
         return "about-us";
     }

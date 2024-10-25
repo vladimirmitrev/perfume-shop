@@ -14,6 +14,7 @@ public class ScheduledService {
 
     @Scheduled(cron = "* 0 03 * * *")
     public void deleteAllCanceledOrders() {
+
         orderService.deleteAllCanceledOrders();
     }
 }

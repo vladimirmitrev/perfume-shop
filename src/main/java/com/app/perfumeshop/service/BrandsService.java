@@ -28,6 +28,7 @@ public class BrandsService {
     }
 
     public String getBrandNameById(Long id) {
+
         return brandRepository.findById(id).get().getName();
     }
 }

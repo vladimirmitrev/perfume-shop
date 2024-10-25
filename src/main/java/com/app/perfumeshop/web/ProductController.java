@@ -76,6 +76,7 @@ public class ProductController {
         if (products.isEmpty()) {
             model.addAttribute("emptyShop", "Shop is empty");
         }
+
         return "products";
     }
 
@@ -172,6 +173,7 @@ public class ProductController {
             redirectAttributes.addFlashAttribute("editProductModel", editProductModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.editProductModel",
                     bindingResult);
+
             return "redirect:/products/edit/{id}";
         }
 

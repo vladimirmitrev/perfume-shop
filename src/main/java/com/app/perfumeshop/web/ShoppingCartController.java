@@ -48,7 +48,6 @@ public class ShoppingCartController {
         session.setAttribute("totalItems", shoppingCart != null ? shoppingCart.getTotalItems() : 0);
         model.addAttribute("shoppingCart", shoppingCart);
 
-
         return "cart";
     }
 

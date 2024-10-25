@@ -42,6 +42,7 @@ public class BrandController {
         String brandName = brandsService.getBrandNameById(id);
         model.addAttribute("products", products);
         model.addAttribute("brand", brandName);
+
         return "brand-products";
     }
 }

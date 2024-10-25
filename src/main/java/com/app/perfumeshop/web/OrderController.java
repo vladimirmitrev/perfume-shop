@@ -170,6 +170,7 @@ public class OrderController {
 
         model.addAttribute("orderDetail", orderDetail);
         model.addAttribute("order", order);
+
         return "order-details";
     }
 }

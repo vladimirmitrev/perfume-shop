@@ -57,6 +57,7 @@ public class ShoppingCartService {
         shoppingCart.setCartItems(cartItemList);
         shoppingCart.setTotalItems(totalItems(cartItemList));
         shoppingCart.setTotalPrice(totalPrice(cartItemList));
+
         return shoppingCartRepository.save(shoppingCart);
     }
 
@@ -71,6 +72,7 @@ public class ShoppingCartService {
         item.setQuantity(quantity);
         BigDecimal totalPrice = product.getPrice().multiply(new BigDecimal(item.getQuantity()));
         item.setTotalPrice(totalPrice);
+
         cartItemRepository.save(item);
 
         int totalItems = totalItems(cartItems);
@@ -109,6 +111,7 @@ public class ShoppingCartService {
         if (cartItems == null) {
             return null;
         }
+
         CartItem cartItem = null;
 
         for (CartItem item : cartItems) {
@@ -116,6 +119,7 @@ public class ShoppingCartService {
                 cartItem = item;
             }
         }
+
         return cartItem;
     }
 
@@ -153,9 +157,11 @@ public class ShoppingCartService {
 
     public void clearCurrentCartById(Long id) {
         ShoppingCart cart = shoppingCartRepository.findById(id).get();
+
         cart.getCartItems().clear();
         cart.setTotalPrice(BigDecimal.valueOf(0.00));
         cart.setTotalItems(0);
+
         shoppingCartRepository.save(cart);
     }
 }

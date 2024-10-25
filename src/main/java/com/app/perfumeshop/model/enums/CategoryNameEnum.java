@@ -9,6 +9,7 @@ public enum CategoryNameEnum {
         this.value = value;
     }
     public String  getValue() {
+
         return value;
     }
 

@@ -33,6 +33,7 @@ public class UserController {
 
     @GetMapping("/login")
     public String login() {
+
         return "login";
     }
 
@@ -48,6 +49,7 @@ public class UserController {
 
     @GetMapping("/register")
     public String register() {
+
         return "register";
     }
     @PostMapping("/register")
@@ -69,7 +71,7 @@ public class UserController {
     public String myProfile(Model model,
                             Principal principal) {
         model.addAttribute("userProfile", userService.findByEmail(principal.getName()));
-//
+
         return "user-profile";
     }
 

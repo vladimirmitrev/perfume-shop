@@ -41,7 +41,9 @@ public class UserRoleService {
 
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException("User not found with ID: " + userId));
+
         user.getUserRoles().add(userRoleRepository.findByUserRole(UserRoleEnum.EMPLOYEE).get());
+
         userRepository.save(user);
     }
 }

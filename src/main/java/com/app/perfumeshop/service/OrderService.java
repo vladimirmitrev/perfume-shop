@@ -40,6 +40,7 @@ public class OrderService {
 
     @Transactional
     public Order placeOrder(ShoppingCart shoppingCart, OrderCheckoutDTO orderCheckoutDTO) {
+
         BigDecimal totalPrice = shoppingCart.getTotalPrice();
         BigDecimal discountPercentage = BigDecimal.valueOf(5);
         BigDecimal shipping = BigDecimal.valueOf(7.99);
@@ -65,7 +66,9 @@ public class OrderService {
             OrderDetail orderDetail = new OrderDetail();
             orderDetail.setOrder(order);
             orderDetail.setProduct(cartItem.getProduct());
+
             orderDetailRepository.save(orderDetail);
+
             orderDetailList.add(orderDetail);
         });
 
@@ -81,6 +84,7 @@ public class OrderService {
         Order order = orderRepository.findById(id).get();
         order.setShipped(false);
         order.setStatus(OrderStatusEnum.CANCELLED);
+
         orderRepository.save(order);
     }
 
@@ -88,10 +92,12 @@ public class OrderService {
         Order order = orderRepository.findById(id).get();
         order.setShipped(true)
                 .setStatus(OrderStatusEnum.SHIPPED);
+
         orderRepository.save(order);
     }
 
     public List<Order> getAllOrders() {
+
         return orderRepository.findAll();
     }
     @Transactional
@@ -102,6 +108,7 @@ public class OrderService {
         });
     }
     public Order findOrderById(Long id) {
+
         return orderRepository.findById(id).get();
     }
 }

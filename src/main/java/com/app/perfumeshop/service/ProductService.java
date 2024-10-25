@@ -42,8 +42,6 @@ public class ProductService {
         this.productMapper = productMapper;
     }
 
-
-
 //    private String getImage(MultipartFile file) throws IOException {
 //        String pictureUrl = "";
 //        if (file != null) {
@@ -81,10 +79,14 @@ public class ProductService {
     public void addProduct(AddProductDTO addProductDTO) throws IOException {
         Brand brand = brandRepository
                 .findByName(addProductDTO.getBrand());
+
         Category category = categoryRepository
                 .findByName(addProductDTO.getCategory());
+
         MultipartFile photo = addProductDTO.getPhoto();
+
         String imageUrl = cloudinaryService.uploadImage(photo);
+
         Product product = new Product();
         product.setBrand(brand);
         product.setName(addProductDTO.getName())
@@ -93,13 +95,17 @@ public class ProductService {
                 .setMilliliters(addProductDTO.getMilliliters())
                 .setPrice(addProductDTO.getPrice())
                 .setImageUrl(imageUrl);
+
         productRepository.save(product);
     }
+
     public void editProduct(EditProductDTO editProductDTO, Long productId) throws IOException {
         Brand brand = brandRepository
                 .findByName(editProductDTO.getBrand());
+
         Category category = categoryRepository
                 .findByName(editProductDTO.getCategory());
+
         Product product = getProductById(productId);
         product.setBrand(brand);
         product.setName(editProductDTO.getName())
@@ -108,8 +114,10 @@ public class ProductService {
                 .setMilliliters(editProductDTO.getMilliliters())
                 .setPrice(editProductDTO.getPrice())
                 .setImageUrl(editProductDTO.getImageUrl());
+
         productRepository.save(product);
     }
+
     private Product findById(Long productId) {
         return productRepository.findById(productId).get();
     }
@@ -137,6 +145,7 @@ public class ProductService {
     public Product getProductById(Long productId) {
         return productRepository.findById(productId).get();
     }
+
     public Page<ProductViewDTO> searchProducts(String keyword, Pageable pageable) {
         return productRepository.searchProductsByBrandOrNameOrDescription(keyword, pageable)
                         .map(productMapper::productEntityToProductViewDTO);

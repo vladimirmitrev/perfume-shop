@@ -12,5 +12,4 @@ public interface UserMapper {
     User userDtoToUserEntity(UserRegisterDTO userRegisterDTO);
     @Mapping(source = "userRoles", target = "roles")
     UserViewDTO userEntityToUserDto(User user);
-
 }
