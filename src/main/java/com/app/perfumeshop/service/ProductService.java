@@ -57,6 +57,7 @@ public class ProductService {
 ////    }
 
     public Page<ProductViewDTO> getAllProducts(Pageable pageable) {
+
         return productRepository.findAll(pageable)
                 .map(product -> {
                     ProductViewDTO productViewDTO = new ProductViewDTO();
@@ -68,6 +69,7 @@ public class ProductService {
                     productViewDTO.setImageUrl(product.getImageUrl());
                     productViewDTO.setDescription(product.getDescription());
                     productViewDTO.setPrice(product.getPrice());
+
                     return productViewDTO;
                 });
     }
@@ -119,6 +121,7 @@ public class ProductService {
     }
 
     private Product findById(Long productId) {
+
         return productRepository.findById(productId).get();
     }
     public Optional<ProductViewDTO> findProductById(Long id) {
@@ -134,24 +137,29 @@ public class ProductService {
                             .setPrice(product.getPrice())
                             .setMilliliters(product.getMilliliters())
                             .setImageUrl(product.getImageUrl());
+
                     return productViewDTO;
                 });
     }
     @Transactional
     public void deleteProductById(Long id) {
+
         productRepository.deleteById(id);
     }
 
     public Product getProductById(Long productId) {
+
         return productRepository.findById(productId).get();
     }
 
     public Page<ProductViewDTO> searchProducts(String keyword, Pageable pageable) {
+
         return productRepository.searchProductsByBrandOrNameOrDescription(keyword, pageable)
                         .map(productMapper::productEntityToProductViewDTO);
     }
 
     public Page<ProductViewDTO> getAllProductByBrandId(Long id, Pageable pageable) {
+
         return productRepository.findProductsByBrand_Id(id, pageable)
                 .map(productMapper::productEntityToProductViewDTO);
     }
