@@ -63,7 +63,6 @@ public class SecurityConfiguration {
                             .usernameParameter("email")
                             .passwordParameter("password")
                             .defaultSuccessUrl("/", true)
-//                            .failureHandler(customAuthenticationFailureHandler)
                             .failureForwardUrl("/users/login-error")
                             .permitAll();
                 }
