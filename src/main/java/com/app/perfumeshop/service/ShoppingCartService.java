@@ -74,11 +74,11 @@ public class ShoppingCartService {
 
         cartItemRepository.save(item);
 
-        int totalItems = calculateTotalItems(cartItems);
-        BigDecimal totalPriceBig = calculateTotalPrice(cartItems);
+        int totalItemsCount = calculateTotalItems(cartItems);
+        BigDecimal cartTotalPrice = calculateTotalPrice(cartItems);
 
-        shoppingCart.setTotalItems(totalItems);
-        shoppingCart.setTotalPrice(totalPriceBig);
+        shoppingCart.setTotalItems(totalItemsCount);
+        shoppingCart.setTotalPrice(cartTotalPrice);
 
 
         return shoppingCartRepository.save(shoppingCart);
