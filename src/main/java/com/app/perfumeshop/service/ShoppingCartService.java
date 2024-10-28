@@ -54,8 +54,8 @@ public class ShoppingCartService {
         }
 
         shoppingCart.setCartItems(cartItemList);
-        shoppingCart.setTotalItems(calculateTotalItems(cartItemList));
-        shoppingCart.setTotalPrice(calculateTotalPrice(cartItemList));
+        shoppingCart.setTotalItems(calculateCartItemsCount(cartItemList));
+        shoppingCart.setTotalPrice(calculateCartTotalPrice(cartItemList));
 
         shoppingCartRepository.save(shoppingCart);
     }
@@ -66,16 +66,16 @@ public class ShoppingCartService {
 
         List<CartItem> cartItems = shoppingCart.getCartItems();
 
-        CartItem item = findCartItem(cartItems, product.getId());
-        item.setQuantity(quantity);
+        CartItem cartItem = findCartItem(cartItems, product.getId());
+        cartItem.setQuantity(quantity);
 
-        BigDecimal totalPrice = product.getPrice().multiply(new BigDecimal(item.getQuantity()));
-        item.setTotalPrice(totalPrice);
+        BigDecimal cartItemTotalPrice = product.getPrice().multiply(new BigDecimal(cartItem.getQuantity()));
+        cartItem.setTotalPrice(cartItemTotalPrice);
 
-        cartItemRepository.save(item);
+        cartItemRepository.save(cartItem);
 
-        int totalItemsCount = calculateTotalItems(cartItems);
-        BigDecimal cartTotalPrice = calculateTotalPrice(cartItems);
+        int totalItemsCount = calculateCartItemsCount(cartItems);
+        BigDecimal cartTotalPrice = calculateCartTotalPrice(cartItems);
 
         shoppingCart.setTotalItems(totalItemsCount);
         shoppingCart.setTotalPrice(cartTotalPrice);
@@ -95,8 +95,8 @@ public class ShoppingCartService {
 
         cartItemRepository.delete(item);
 
-        BigDecimal totalPriceBig = calculateTotalPrice(cartItems);
-        int totalItems = calculateTotalItems(cartItems);
+        BigDecimal totalPriceBig = calculateCartTotalPrice(cartItems);
+        int totalItems = calculateCartItemsCount(cartItems);
 
         shoppingCart.setCartItems(cartItems);
         shoppingCart.setTotalPrice(totalPriceBig);
@@ -122,7 +122,7 @@ public class ShoppingCartService {
         return cartItem;
     }
 
-    private int calculateTotalItems(List<CartItem> cartItems) {
+    private int calculateCartItemsCount(List<CartItem> cartItems) {
         int totalItems = 0;
 
         for (CartItem item : cartItems) {
@@ -132,7 +132,7 @@ public class ShoppingCartService {
         return totalItems;
     }
 
-    private BigDecimal calculateTotalPrice(List<CartItem> cartItems) {
+    private BigDecimal calculateCartTotalPrice(List<CartItem> cartItems) {
         BigDecimal totalPrice = BigDecimal.valueOf(0.0);
 
         for (CartItem item : cartItems) {
