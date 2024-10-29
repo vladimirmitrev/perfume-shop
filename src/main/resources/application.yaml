@@ -43,6 +43,6 @@ perfumeshop:
   default.admin.pass: ${DEFAULT_ADMIN_PASS}
   default.admin.phone: ${DEFAULT_ADMIN_PHONE}
 cloudinary:
-  api.key: "463111485397821"
-  cloud.name: "dvj9qondf"
+  api.key: ${CLOUDINARY_API_KEY}
+  cloud.name: ${CLOUDINARY_CLOUD_NAME}
   api.secret: ${CLOUDINARY_API_SECRET}

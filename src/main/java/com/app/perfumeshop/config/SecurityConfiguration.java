@@ -74,8 +74,7 @@ public class SecurityConfiguration {
                             .logoutSuccessUrl("/")
                             .invalidateHttpSession(true);
                 }
-        )
-                .rememberMe(
+        ).rememberMe(
                 rememberMe -> {
                     rememberMe
                             .key(rememberMeKey)
